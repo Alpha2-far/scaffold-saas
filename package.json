@@ -1,7 +1,8 @@
 {
-  "name": "design-os",
+  "name": "scaffold",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Scaffold™ — Visual Workspace & Pre-Code Intelligence Layer for AI Developers",
   "type": "module",
   "scripts": {
     "dev": "vite",
