@@ -8,7 +8,7 @@ First, identify the target section and verify that `spec.md` exists for it.
 
 Read `/product/product-roadmap.md` to get the list of available sections.
 
-If there's only one section, auto-select it. If there are multiple sections, use the AskUserQuestion tool to ask which section the user wants to generate data for.
+If there's only one section, auto-select it. If there are multiple sections, **ASK** which section the user wants to generate data for, using the interrogation rule from `/product-vision` §0.3 — the question tool your host provides (`AskUserQuestion`, `ask_question`), or a formatted numbered list if it has none.
 
 Then check if `product/sections/[section-id]/spec.md` exists. If it doesn't:
 

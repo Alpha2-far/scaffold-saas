@@ -50,7 +50,7 @@ Based on [Product Name], I'd suggest:
 
 What feels right for your product?"
 
-Use AskUserQuestion to gather their preferences if they're unsure:
+**ASK** to gather their preferences if they're unsure, using the interrogation rule from `/product-vision` §0.3 — the question tool your host provides (`AskUserQuestion`, `ask_question`), or a formatted numbered list if it has none:
 
 - "What vibe are you going for? Professional, playful, modern, minimal?"
 - "Any colors you definitely want to avoid?"

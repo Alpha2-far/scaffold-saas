@@ -9,7 +9,7 @@ import { DataCard } from '@/components/DataCard'
 import { StepIndicator, type StepStatus } from '@/components/StepIndicator'
 import { loadProductData } from '@/lib/product-loader'
 import { loadSectionData } from '@/lib/section-loader'
-import { ChevronRight, Layout, Image, Download, ArrowRight, LayoutList } from 'lucide-react'
+import { ChevronRight, Layout, Download, ArrowRight, LayoutList } from 'lucide-react'
 
 /**
  * Determine the status of each step based on what data exists
@@ -147,29 +147,7 @@ export function SectionPage() {
         {/* Step 4: Screenshots */}
         <StepIndicator step={4} status={stepStatuses[3]} isLast={!requiredStepsComplete}>
           {!sectionData?.screenshots || sectionData.screenshots.length === 0 ? (
-            <Card className="border-stone-200 dark:border-stone-700 shadow-sm border-dashed">
-              <CardContent className="py-8">
-                <div className="flex flex-col items-center text-center max-w-sm mx-auto">
-                  <div className="w-10 h-10 rounded-full bg-stone-100 dark:bg-stone-800 flex items-center justify-center mb-3">
-                    <Image className="w-5 h-5 text-stone-400 dark:text-stone-500" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-base font-medium text-stone-600 dark:text-stone-400 mb-1">
-                    No screenshots captured yet
-                  </h3>
-                  <p className="text-sm text-stone-500 dark:text-stone-400 mb-4">
-                    Capture screenshots of your screen designs for documentation
-                  </p>
-                  <div className="bg-stone-100 dark:bg-stone-800 rounded-md px-4 py-2.5 w-full">
-                    <p className="text-xs text-stone-500 dark:text-stone-400 mb-0.5">
-                      Run in Claude Code:
-                    </p>
-                    <code className="text-sm font-mono text-stone-700 dark:text-stone-300">
-                      /screenshot-design
-                    </code>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <EmptyState type="screenshots" />
           ) : (
             <Card className="border-stone-200 dark:border-stone-700 shadow-sm">
               <CardHeader className="pb-4">

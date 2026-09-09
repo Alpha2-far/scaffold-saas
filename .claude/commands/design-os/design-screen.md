@@ -2,13 +2,40 @@
 
 You are helping the user create a screen design for a section of their product. The screen design will be a props-based React component that can be exported and integrated into any React codebase.
 
+---
+
+## 0. Interrogation rule (`ASK`)
+
+Throughout this command, **`ASK`** means: *present a decision with discrete options and wait for the answer.* Resolve it against whatever host you are running in, first available mechanism wins:
+
+| Host | Mechanism |
+|---|---|
+| Claude Code / Claude apps | the `AskUserQuestion` tool |
+| Antigravity | the `ask_question` tool |
+| Cursor, Codex, plain terminal, any host with no question tool | a chat message containing a formatted numbered list |
+
+Numbered-list fallback format:
+
+```
+1. Option A — one-line reason
+2. Option B — one-line reason
+
+Reply with a number, or tell me something else.
+```
+
+Detect what your host actually offers once, at the start, then stay consistent. **Never invent or assume a tool.**
+
+This is the same rule as `/product-vision` §0.3, restated here so this command runs unchanged in Claude Code, Antigravity, Cursor and Codex.
+
+---
+
 ## Step 1: Check Prerequisites
 
 First, identify the target section and verify that `spec.md`, `data.json`, and `types.ts` all exist.
 
 Read `/product/product-roadmap.md` to get the list of available sections.
 
-If there's only one section, auto-select it. If there are multiple sections, use the AskUserQuestion tool to ask which section the user wants to create a screen design for.
+If there's only one section, auto-select it. If there are multiple sections, `ASK` which section the user wants to create a screen design for.
 
 Then verify all required files exist:
 
@@ -53,6 +80,15 @@ Read and analyze all three files:
 2. **data.json** - Understand the data structure and sample content
 3. **types.ts** - Understand the TypeScript interfaces and available callbacks
 
+Then read the V1 boundary, which is not in any of them:
+
+4. **`/product/product-overview.md` → `## Out of Scope (V1)`** — call this list **`CUT_LIST`**
+5. **`/product/prd.md` → `## Out of Scope — V1 matrix`** — if the file exists, this is the source of truth; the overview block is its mirror
+
+If neither exists, `CUT_LIST` is empty and you design against the spec alone. Never invent a boundary to fill the gap.
+
+`CUT_LIST` binds the UI, not just the prose. A screen is where a cut capability sneaks back in — as an "Export" button, a "Share" icon, a "Sign in with Google" tile, a billing tab in a settings nav. Step 6 enforces it.
+
 Identify what views are needed based on the spec. Common patterns:
 
 - List/dashboard view (showing multiple items)
@@ -61,7 +97,7 @@ Identify what views are needed based on the spec. Common patterns:
 
 ## Step 4: Clarify the Screen Design Scope
 
-If the spec implies multiple views, use the AskUserQuestion tool to confirm which view to build first:
+If the spec implies multiple views, `ASK` which view to build first:
 
 "The specification suggests a few different views for **[Section Title]**:
 
@@ -160,6 +196,25 @@ export function InvoiceList({
 - No features not specified in the spec
 - No routing logic - callbacks handle navigation intent
 - No navigation elements (shell handles navigation)
+- **No UI serving anything on `CUT_LIST`** — see below
+
+### The out-of-scope rule for UI
+
+Do not add a component, control, affordance, or piece of copy that serves a capability on `CUT_LIST`. This holds even when it would obviously improve the screen, and even when it costs one line. Concretely, and this is where it actually happens:
+
+- No button, icon, menu item, or tab for a cut capability — no "Share", no "Export to PDF", no "Invite teammate", no billing tab, no "Sign in with Google", if those are cut.
+- No **disabled** or "coming soon" version of one either. A greyed-out control is a promise the V1 product does not keep, and the implementing agent reads it as work to wire up.
+- No prop or callback in the component signature for a cut action. `types.ts` is the contract handed to the coding agent; an `onShare?` there is a feature request.
+- No empty state, tooltip, or placeholder that instructs the user toward a cut capability.
+
+Designing *around* a cut is fine and often the right answer — a screen that simply doesn't have the feature, or an empty state honest about the V1 boundary.
+
+If the spec itself calls for something on `CUT_LIST`, the spec and the matrix are in conflict and you cannot resolve it by choosing one. Stop, quote both lines, and `ASK`:
+
+1. **Build the screen without it** *(recommended)* — respect the matrix, and flag the spec line for a `/shape-section` fix.
+2. **This is a real scope change** — stop and re-run `/product-vision`.
+
+Never widen scope inside a `.tsx` file. It is the last place anyone thinks to look for a product decision.
 
 ## Step 7: Create Sub-Components (If Needed)
 
@@ -307,3 +362,5 @@ If the spec indicates additional views are needed:
 - Sub-components should also be props-based for maximum portability
 - Apply design tokens when available for consistent branding
 - Screen designs render inside the shell when viewed in Design OS (if shell exists)
+- Never assume a question tool exists: `ASK` (§0) is what keeps this command portable across Claude Code, Antigravity, Cursor and Codex
+- The out-of-scope matrix binds the UI. No control, no callback, no disabled placeholder for a cut capability

@@ -49,7 +49,7 @@ Wait for their response.
 
 ## Step 3: Gather Design Details
 
-Use AskUserQuestion to clarify:
+**ASK** to clarify, using the interrogation rule from `/product-vision` §0.3 — the question tool your host provides (`AskUserQuestion`, `ask_question`), or a formatted numbered list if it has none:
 
 - "Where should the user menu (avatar, logout) appear?"
 - "Do you want the sidebar collapsible on mobile, or should it become a hamburger menu?"

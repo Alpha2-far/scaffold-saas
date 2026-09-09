@@ -1,0 +1,37 @@
+# Agent OS Standards Index
+
+css:
+  color-vocabulary:
+    description: "Fixed hue roles: stone for neutral, lime for accomplishment, amber for reversible warning, destructive token for error"
+  icons:
+    description: "lucide-react sizes and stroke weights, and storing icon components in config maps"
+  motion:
+    description: "200ms ease-out motion, animations declared in @layer utilities, tw-animate-css for Radix state"
+  two-layer-colors:
+    description: "Semantic tokens in ui/ primitives, stone/lime literals with dark: pairs everywhere else"
+
+global:
+  exportable-components:
+    description: "Props-only section components: no data imports, optional callbacks, intent not routes, no nav chrome"
+  preview-wrappers:
+    description: "The only file importing data.json; default export required, and the @/../product alias crossing"
+  section-ids:
+    description: "Section IDs are slugify(roadmap title); the transform rules and how mismatches fail silently"
+  section-structure:
+    description: "The product/ and src/ section trees, and why file depth decides what counts as a screen design"
+
+javascript:
+  content-loading:
+    description: "Build-time import.meta.glob rules for product content: root-absolute paths, eager for data, lazy for components"
+  derived-progress:
+    description: "Progress is recomputed from loaded data, never persisted; localStorage holds view preferences only"
+  empty-states:
+    description: "Every empty state renders via EmptyState and names the slash command to run"
+  loader-contract:
+    description: "Loaders return T | null and never throw; has*() checks file presence, null means no usable content"
+  markdown-parsing:
+    description: "Regex section-slicing patterns, heading contracts with the Design OS skills, and CRLF normalization"
+  page-composition:
+    description: "Flat routes, AppLayout composed per page, StepIndicator sequence, and local pure get*StepStatuses()"
+  preview-iframe:
+    description: "Page/Fullscreen twin routes, iframe isolation, theme sync, and validated lazy components"

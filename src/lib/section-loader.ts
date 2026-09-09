@@ -94,17 +94,20 @@ function extractScreenshotName(path: string): string | null {
 export function parseSpec(md: string): ParsedSpec | null {
   if (!md || !md.trim()) return null
 
+  // Normalize line endings (Windows CRLF → LF)
+  const normalizedMd = md.replace(/\r\n/g, '\n')
+
   try {
     // Extract title from first # heading
-    const titleMatch = md.match(/^#\s+(.+)$/m)
+    const titleMatch = normalizedMd.match(/^#\s+(.+)$/m)
     const title = titleMatch?.[1]?.trim() || 'Section Specification'
 
     // Extract overview - content between ## Overview and next ##
-    const overviewMatch = md.match(/## Overview\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
+    const overviewMatch = normalizedMd.match(/## Overview\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
     const overview = overviewMatch?.[1]?.trim() || ''
 
     // Extract user flows - bullet list after ## User Flows
-    const userFlowsSection = md.match(/## User Flows\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
+    const userFlowsSection = normalizedMd.match(/## User Flows\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
     const userFlows: string[] = []
 
     if (userFlowsSection?.[1]) {
@@ -118,7 +121,7 @@ export function parseSpec(md: string): ParsedSpec | null {
     }
 
     // Extract UI requirements - bullet list after ## UI Requirements
-    const uiReqSection = md.match(/## UI Requirements\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
+    const uiReqSection = normalizedMd.match(/## UI Requirements\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
     const uiRequirements: string[] = []
 
     if (uiReqSection?.[1]) {
@@ -133,7 +136,7 @@ export function parseSpec(md: string): ParsedSpec | null {
 
     // Extract configuration - check for shell: false
     // Look for "shell: false" or "- shell: false" anywhere in the document
-    const shellDisabled = /(?:^|\n)\s*-?\s*shell\s*:\s*false/i.test(md)
+    const shellDisabled = /(?:^|\n)\s*-?\s*shell\s*:\s*false/i.test(normalizedMd)
     const useShell = !shellDisabled
 
     return { title, overview, userFlows, uiRequirements, useShell }

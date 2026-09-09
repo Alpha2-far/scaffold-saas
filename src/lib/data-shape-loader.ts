@@ -33,12 +33,15 @@ const dataShapeFiles = import.meta.glob('/product/data-shape/*.md', {
 export function parseDataShape(md: string): DataShape | null {
   if (!md || !md.trim()) return null
 
+  // Normalize line endings (Windows CRLF → LF)
+  const normalizedMd = md.replace(/\r\n/g, '\n')
+
   try {
     const entities: Entity[] = []
     const relationships: string[] = []
 
     // Extract entities section
-    const entitiesSection = md.match(/## Entities\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
+    const entitiesSection = normalizedMd.match(/## Entities\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
 
     if (entitiesSection?.[1]) {
       // Match ### EntityName followed by description
@@ -52,7 +55,7 @@ export function parseDataShape(md: string): DataShape | null {
     }
 
     // Extract relationships section
-    const relationshipsSection = md.match(/## Relationships\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
+    const relationshipsSection = normalizedMd.match(/## Relationships\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
 
     if (relationshipsSection?.[1]) {
       const lines = relationshipsSection[1].split('\n')

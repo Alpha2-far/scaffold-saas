@@ -30,7 +30,7 @@ Read `/product/product-roadmap.md` to get the list of available sections, then c
 
 If only one screen design exists across all sections, auto-select it.
 
-If multiple screen designs exist, use the AskUserQuestion tool to ask which one to screenshot:
+If multiple screen designs exist, **ASK** which one to screenshot, using the interrogation rule from `/product-vision` §0.3 — the question tool your host provides (`AskUserQuestion`, `ask_question`), or a formatted numbered list if it has none:
 
 "Which screen design would you like to screenshot?"
 

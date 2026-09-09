@@ -4,7 +4,38 @@ You are helping the user create or update the general shape of their product's d
 
 ## Step 1: Check Current State
 
-First, check if `/product/data-shape/data-shape.md` exists.
+Check two things:
+
+- Does `/product/data-shape/data-shape.md` exist?
+- Does `/product/prd.md` exist? Call this **`PRD_EXISTS`**. It changes how this command behaves, because the data model is then no longer described in only one place.
+
+---
+
+## The PRD Sync Guard — apply whenever `PRD_EXISTS`
+
+When `/product-vision` ran the BM PRD engine, it described the data in **two** places at two depths: `product/data-shape/data-shape.md` (entity names, a one-line purpose each, and the relationships — what Design OS renders and what `/sample-data` names things from) and the `## Data model` block of `product/prd.md` (the same entities **plus their fields**, which is the locked contract). **The PRD is the source of truth.** Editing the data shape alone puts the two out of sync, and `/export-product` then hands your coding agent a field list that no longer matches the entities the screens were designed against.
+
+So before writing anything, say it plainly:
+
+"Heads up: you have a PRD at `product/prd.md`, and its `## Data model` section holds the locked entities and their fields. Changing the data shape here means the PRD needs updating too, or the two will disagree — and the PRD is what `/export-product` hands to your coding agent."
+
+Then ASK, using the interrogation rule from `/product-vision` §0.3 — the question tool your host provides (`AskUserQuestion`, `ask_question`), or a formatted numbered list if it has none:
+
+1. **Update both files** *(recommended)* — edit the data shape and the PRD's `## Data model` block together.
+2. **Data shape only** — leave the PRD alone and accept the drift.
+3. **This is a real scope change** — cancel and re-run `/product-vision`.
+
+Then act on the answer:
+
+- **Both** — make the data-shape change, then update the PRD's `## Data model` block so the entity names and relationships match exactly. Where a new entity or a renamed one needs fields, propose them in plain language and confirm before writing. Touch nothing else in the PRD — **especially not the out-of-scope matrix.**
+- **Data shape only** — make the change, then name the entities that now differ from `prd.md`, so the drift is on the record instead of being discovered at export time.
+- **Cancel** — stop and point them at `/product-vision`.
+
+**One case overrides the user's choice.** If the requested change adds an entity that exists only to support something sitting on the PRD's out-of-scope matrix, that is a scope change, not a data-shape edit. Name the matrix item it collides with and recommend `/product-vision`. Never widen locked scope through a data-shape edit.
+
+**A rename is not a local edit.** Entity names are the shared vocabulary: they appear in each section's `types.ts` and `data.json`, and in the PRD. If the user renames an entity, say which of those will need updating too — `/sample-data` regenerates per section, it does not rename retroactively.
+
+If `PRD_EXISTS` is false, skip this guard entirely.
 
 ---
 
@@ -14,6 +45,7 @@ Read:
 - `/product/data-shape/data-shape.md`
 - `/product/product-overview.md` (if it exists, for context)
 - `/product/product-roadmap.md` (if it exists, for context)
+- `/product/prd.md` — if `PRD_EXISTS`, for its `## Data model` block and its out-of-scope matrix
 
 Present the current state and ask what to change:
 
@@ -28,11 +60,16 @@ Present the current state and ask what to change:
 
 What would you like to change about the entities or relationships?"
 
-Wait for the user's response describing what they want changed. Once you receive their notes, **immediately proceed** to update `product/data-shape/data-shape.md` based on their requested changes — do not present a draft for approval.
+Wait for the user's response describing what they want changed.
+
+Then, **if `PRD_EXISTS`, run The PRD Sync Guard above before touching any file.** Otherwise **immediately proceed** to update `product/data-shape/data-shape.md` based on their requested changes — do not present a draft for approval.
 
 After updating, inform the user:
 
 "I've updated the data shape based on your feedback. Review the changes and let me know if you'd like further adjustments."
+
+[If you also updated the PRD, add: "I kept the `## Data model` block in `product/prd.md` in sync."]
+[If the user chose data-shape-only, add: "Note: `product/prd.md` still describes the previous entities — [name them]. `/export-product` hands the PRD's version to your coding agent, so these will need reconciling before you export."]
 
 Stop here — the remaining steps below are for generating a new data shape from scratch.
 
@@ -52,6 +89,8 @@ If either file is missing, let the user know:
 
 Stop here if prerequisites are missing.
 
+Also read `/product/prd.md` if it exists. A PRD with no data shape beside it is unusual — `/product-vision` writes both — so it most likely means the file was deleted. In that case the PRD's `## Data model` block still holds the agreed entities and relationships: **restore from it rather than inventing a new model**, condensing each entity's field list down to the one-line purpose this file wants. Tell the user that's what you did.
+
 ### Analyze and Generate
 
 Review the product overview and roadmap, then **immediately proceed** to create the data shape file — do not present a draft for approval.
@@ -60,6 +99,8 @@ Identify:
 - **Entity names** — The main nouns (things users create, view, or manage)
 - **Plain-language descriptions** — What each entity represents
 - **Relationships** — How entities connect to each other
+
+If the overview has an `## Out of Scope (V1)` list, **do not create entities that exist only to serve a cut item.** An entity for a feature that isn't being built is scope creep wearing a data-model costume.
 
 Create `/product/data-shape/data-shape.md` with this format:
 
@@ -110,3 +151,6 @@ Review and let me know if you'd like to adjust anything. When you're ready, run 
 - Entity names should be singular (User, Invoice, Project — not Users, Invoices)
 - Do NOT present a draft for approval — generate the file immediately and let the user review after
 - If the user requests changes after reviewing, update the file immediately
+- When `product/prd.md` exists, it is the source of truth for the data model — apply The PRD Sync Guard rather than editing the data shape in isolation
+- Field-level detail lives in the PRD's `## Data model`, never here — a wall of field bullets renders as an unreadable blob on the Data Shape card
+- Never add an entity that exists only to support an item from the PRD's out-of-scope matrix

@@ -16,6 +16,7 @@ Verify the minimum requirements exist:
 - `/product/design-system/colors.json` — Color tokens
 - `/product/design-system/typography.json` — Typography tokens
 - `src/shell/components/AppShell.tsx` — Application shell
+- `/product/prd.md` — Product requirements document with the V1 out-of-scope matrix
 
 If required files are missing:
 
@@ -34,6 +35,7 @@ If recommended files are missing, show warnings but continue:
 - [ ] Product entities — Run `/data-shape` for consistent entity naming
 - [ ] Design tokens — Run `/design-tokens` for consistent styling
 - [ ] Application shell — Run `/design-shell` for navigation structure
+- [ ] PRD & scope lock — Run `/product-vision` so the handoff carries the V1 out-of-scope matrix
 
 You can proceed without these, but they help ensure a complete handoff."
 
@@ -49,6 +51,23 @@ Read all relevant files:
 6. `/product/shell/spec.md` (if exists)
 7. For each section: `spec.md`, `data.json`, `types.ts`
 8. List screen design components in `src/sections/` and `src/shell/`
+9. `/product/prd.md` (if exists) — the full PRD and its **Out of Scope — V1 matrix**
+10. `/product/milestones/` (if exists) — the development milestone sequence written by `/product-vision`
+
+### Scope-lock detection
+
+Two conditional flags drive the scope-lock content in every step below. Resolve both now, before generating anything:
+
+- **`PRD_EXISTS`** — true if `/product/prd.md` is present. This file carries the locked V1 scope and the out-of-scope matrix.
+- **`OUT_OF_SCOPE_EXISTS`** — true if `/product/product-overview.md` contains an `## Out of Scope (V1)` section. `/product-vision` writes that mirror; a hand-written overview may not have it.
+
+If `OUT_OF_SCOPE_EXISTS`, capture that section's body **verbatim** — you transport it in Step 4.
+
+If **neither** flag is true, this product was scoped by hand or before the BM PRD engine landed. Export normally, but say so once:
+
+"Note: no PRD or out-of-scope matrix found. Your handoff will tell the implementing agent what to build, but not what *not* to build. Run `/product-vision` if you want the V1 scope lock carried into the export."
+
+Never invent an out-of-scope list to fill the gap. An invented boundary is worse than none — it reads as a decision the product owner never made.
 
 ## Step 3: Create Export Directory Structure
 
@@ -58,6 +77,7 @@ Create the `product-plan/` directory with this structure:
 product-plan/
 ├── README.md                    # Quick start guide
 ├── product-overview.md          # Product summary (always provide)
+├── prd.md                       # Full PRD + V1 out-of-scope matrix (if PRD_EXISTS)
 │
 ├── prompts/                     # Ready-to-use prompts for coding agents
 │   ├── one-shot-prompt.md       # Prompt for full implementation
@@ -112,6 +132,19 @@ Create `product-plan/product-overview.md`:
 
 [Product description from product-overview.md]
 
+## Key Features
+
+[The `## Key Features` bullet list from `product/product-overview.md`, verbatim]
+
+## Out of Scope (V1)
+
+[Include this entire section — heading included — only if `OUT_OF_SCOPE_EXISTS` or `PRD_EXISTS`. Otherwise omit it completely.]
+
+[If `OUT_OF_SCOPE_EXISTS`: the `## Out of Scope (V1)` bullet list from `product/product-overview.md`, verbatim. Same items, same reasons. Do not add, soften, or reword a single cut.]
+[Else if `PRD_EXISTS`: condense the PRD's "Out of Scope — V1 matrix" into a bullet list, one line per item, keeping each item's reason.]
+
+**Do not build anything listed above.** If a milestone appears to require one of these items, stop and raise it with the product owner rather than widening scope. The full matrix with dispositions (V2 / Later / Never) is in `prd.md`.
+
 ## Planned Sections
 
 [Ordered list of sections from roadmap with descriptions]
@@ -149,6 +182,12 @@ Build this product in milestones:
 Each milestone has a dedicated instruction document in `product-plan/instructions/`.
 ```
 
+### Step 4b: Copy the PRD
+
+If `PRD_EXISTS`, copy `product/prd.md` to `product-plan/prd.md` **verbatim** — no summarizing, no reformatting, no trimming of the out-of-scope matrix. The PRD is the scope contract, and an edited copy is a different contract.
+
+If `PRD_EXISTS` is false, skip this and omit `prd.md` from the directory tree, the README, the prompt files, and the completion message.
+
 ## Step 5: Generate Milestone Instructions
 
 Each milestone instruction file should begin with the following preamble (adapt the milestone-specific details):
@@ -173,6 +212,15 @@ Each milestone instruction file should begin with the following preamble (adapt 
 
 The components are props-based — they accept data and fire callbacks. How you architect the backend, data layer, and business logic is up to you.
 
+**Scope discipline (V1):**
+
+[Include this block only if `product-plan/prd.md` was generated.]
+
+- `prd.md` is the scope contract for this build. Read its **Out of Scope — V1 matrix** before you plan.
+- Nothing on that matrix gets built in V1 — not as a stub, not as a shortcut, not "while we're already in there".
+- Anything that appears in neither these instructions nor the PRD's in-scope list is out of scope by default.
+- A milestone that looks like it *requires* an out-of-scope item is a scoping question, not an implementation decision. Stop and raise it with the product owner.
+
 ---
 ```
 
@@ -183,7 +231,7 @@ Place in `product-plan/instructions/incremental/01-shell.md`:
 ```markdown
 # Milestone 1: Shell
 
-> **Provide alongside:** `product-overview.md`
+> **Provide alongside:** `product-overview.md`, plus `prd.md` if it was generated
 > **Prerequisites:** None
 
 [Include the preamble above]
@@ -259,7 +307,7 @@ Place in `product-plan/instructions/incremental/[NN]-[section-id].md` (starting 
 ```markdown
 # Milestone [N]: [Section Title]
 
-> **Provide alongside:** `product-overview.md`
+> **Provide alongside:** `product-overview.md`, plus `prd.md` if it was generated
 > **Prerequisites:** Milestone 1 (Shell) complete, plus any prior section milestones
 
 [Include the preamble above]
@@ -391,6 +439,15 @@ Create `product-plan/instructions/one-shot-instructions.md` by combining all mil
 - Implement loading, error, and empty states
 
 The components are props-based — they accept data and fire callbacks. How you architect the backend, data layer, and business logic is up to you.
+
+**Scope discipline (V1):**
+
+[Include this block only if `product-plan/prd.md` was generated.]
+
+- `prd.md` is the scope contract for this build. Read its **Out of Scope — V1 matrix** before you plan.
+- Nothing on that matrix gets built in V1 — not as a stub, not as a shortcut, not "while we're already in there".
+- Anything that appears in neither these instructions nor the PRD's in-scope list is out of scope by default.
+- A milestone that looks like it *requires* an out-of-scope item is a scoping question, not an implementation decision. Stop and raise it with the product owner.
 
 ---
 
@@ -816,7 +873,8 @@ I need you to implement a complete web application based on detailed UI designs 
 Please carefully read and analyze the following files:
 
 1. **@product-plan/product-overview.md** — Product summary with sections and entity overview
-2. **@product-plan/instructions/one-shot-instructions.md** — Complete implementation instructions for all milestones
+2. **@product-plan/prd.md** — The locked V1 scope, including the **Out of Scope — V1 matrix** *(omit this line if `prd.md` wasn't generated)*
+3. **@product-plan/instructions/one-shot-instructions.md** — Complete implementation instructions for all milestones
 
 After reading these, also review:
 - **@product-plan/design-system/** — Color and typography tokens
@@ -836,6 +894,8 @@ Review all the provided files, then ask me clarifying questions about:
 Lastly, ask me if I have any additional notes for this implementation.
 
 Once I answer your questions, create a comprehensive implementation plan before coding.
+
+**Scope rule:** treat the PRD's **Out of Scope — V1 matrix** as binding. Do not build anything on it, and do not add features that appear in neither the instructions nor the PRD's in-scope list. If the designs seem to require an out-of-scope item, raise it with me instead of building it.
 
 ```
 
@@ -861,7 +921,8 @@ I need you to implement the **SECTION_NAME** section of my application.
 Please carefully read and analyze the following files:
 
 1. **@product-plan/product-overview.md** — Product summary for overall context
-2. **@product-plan/instructions/incremental/NN-SECTION_ID.md** — Specific instructions for this section
+2. **@product-plan/prd.md** — The locked V1 scope, including the **Out of Scope — V1 matrix** *(omit this line if `prd.md` wasn't generated)*
+3. **@product-plan/instructions/incremental/NN-SECTION_ID.md** — Specific instructions for this section
 
 Also review the section assets:
 - **@product-plan/sections/SECTION_ID/README.md** — Feature overview and design intent
@@ -882,6 +943,8 @@ Lastly, ask me if I have any additional notes for this implementation.
 
 Once I answer your questions, proceed with implementation.
 
+**Scope rule:** the PRD's **Out of Scope — V1 matrix** is binding for this section too. Build what this section's instructions specify — nothing from the matrix, and nothing that appears in neither the instructions nor the PRD's in-scope list. Raise conflicts with me instead of resolving them by adding scope.
+
 ```
 
 ## Step 13: Generate README.md
@@ -899,8 +962,11 @@ This folder contains everything needed to implement [Product Name].
 - `prompts/one-shot-prompt.md` — Prompt template for full implementation
 - `prompts/section-prompt.md` — Prompt template for section-by-section implementation
 
-**Instructions:**
+**Scope & Requirements:**
 - `product-overview.md` — Product summary (provide with every implementation)
+- `prd.md` — The full PRD and the **Out of Scope — V1 matrix** *(omit this line if not generated)*
+
+**Instructions:**
 - `instructions/one-shot-instructions.md` — All milestones combined for full implementation
 - `instructions/incremental/` — Milestone-by-milestone instructions (shell, then sections)
 
@@ -909,6 +975,18 @@ This folder contains everything needed to implement [Product Name].
 - `data-shapes/` — UI data contracts (the shapes of data components expect)
 - `shell/` — Application shell components
 - `sections/` — All section components, types, sample data, and test specs
+
+## Scope — read this before you build
+
+[Include this entire section only if `prd.md` was generated.]
+
+`prd.md` is the scope contract for V1. Its **Out of Scope — V1 matrix** lists what this product deliberately does *not* do yet, each with a disposition (V2 / Later / Never) and the reason it was cut.
+
+- **Build what the instructions specify, and nothing on the matrix.** Not as a stub, not as a convenience, not because it looked like an obvious gap.
+- **Anything in neither the instructions nor the PRD's in-scope list is out of scope by default.**
+- **A milestone that appears to require an out-of-scope item is a scoping question, not an implementation decision.** Raise it with the product owner.
+
+The designs in this handoff were drawn against that locked scope. Widening it mid-build is what produces half-finished features and screens that no longer match the designs.
 
 ## How to Use This
 
@@ -992,8 +1070,11 @@ Let the user know:
 - `prompts/one-shot-prompt.md` — Prompt for full implementation
 - `prompts/section-prompt.md` — Prompt template for section-by-section
 
-**Instructions:**
+**Scope & Requirements:**
 - `product-overview.md` — Product summary (always provide with instructions)
+- `prd.md` — Full PRD with the V1 out-of-scope matrix [omit this line if not generated]
+
+**Instructions:**
 - `instructions/one-shot-instructions.md` — All milestones combined
 - `instructions/incremental/` — [N] milestone instructions (shell, then sections)
 
@@ -1021,6 +1102,7 @@ The components are props-based and portable — they accept data and callbacks, 
 
 - Always transform import paths when copying components
 - Include `product-overview.md` context with every implementation session
+- Include `prd.md` too whenever it exists — it is the only file in the handoff that says what *not* to build
 - Use the pre-written prompts — they prompt for important clarifying questions
 - Screenshots provide visual reference for fidelity checking
 - Sample data files are for testing before real APIs are built

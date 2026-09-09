@@ -43,13 +43,16 @@ const shellPreviewModules = import.meta.glob('/src/shell/*.tsx') as Record<
 export function parseShellSpec(md: string): ShellSpec | null {
   if (!md || !md.trim()) return null
 
+  // Normalize line endings (Windows CRLF → LF)
+  const normalizedMd = md.replace(/\r\n/g, '\n')
+
   try {
     // Extract overview
-    const overviewMatch = md.match(/## Overview\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
+    const overviewMatch = normalizedMd.match(/## Overview\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
     const overview = overviewMatch?.[1]?.trim() || ''
 
     // Extract navigation items
-    const navSection = md.match(/## Navigation Structure\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
+    const navSection = normalizedMd.match(/## Navigation Structure\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
     const navigationItems: string[] = []
 
     if (navSection?.[1]) {
@@ -63,7 +66,7 @@ export function parseShellSpec(md: string): ShellSpec | null {
     }
 
     // Extract layout pattern
-    const layoutMatch = md.match(/## Layout Pattern\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
+    const layoutMatch = normalizedMd.match(/## Layout Pattern\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
     const layoutPattern = layoutMatch?.[1]?.trim() || ''
 
     // Return null if we couldn't parse anything meaningful
@@ -72,7 +75,7 @@ export function parseShellSpec(md: string): ShellSpec | null {
     }
 
     return {
-      raw: md,
+      raw: normalizedMd,
       overview,
       navigationItems,
       layoutPattern,

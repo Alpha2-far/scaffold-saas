@@ -49,7 +49,11 @@ Design the persistent navigation and layout that wraps all sections.
 - `/design-screen` — Create screen designs
 - `/screenshot-design` — Capture screenshots
 
-### 5. Export (`/export-product`)
+### 5. Audit (`/product-audit`)
+Read-only conformance scan before handoff: scope-lock coherence across `prd.md` / `product-overview.md` / `product-plan/`, the Design OS parser contracts, feature coverage, and section-level scope breaches. Writes nothing — prints a `[PASS]` / `[FAIL]` table with the corrective command for each finding.
+**Output:** none (report only)
+
+### 6. Export (`/export-product`)
 Generate the complete export package with all components, types, and handoff documentation.
 **Output:** `product-plan/`
 
