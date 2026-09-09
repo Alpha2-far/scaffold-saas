@@ -49,15 +49,15 @@ function MetricTile({ icon: Icon, label, value, detail, state, mono = false }: M
     <StaggerItem className="h-full">
       <div
         className={cn(
-          'group h-full rounded-lg border border-stone-200/70 dark:border-stone-700/60',
-          'bg-white/60 dark:bg-stone-900/40 backdrop-blur-sm px-4 py-3',
+          'group h-full rounded-lg border border-stone-200/70 dark:border-slate-800/80',
+          'bg-white/60 dark:bg-[#070e28]/60 backdrop-blur-sm px-4 py-3',
           'ring-1 ring-transparent transition-[box-shadow,border-color] duration-200',
           tone.ring
         )}
       >
         <div className="flex items-center gap-2 mb-2">
-          <Icon className="w-3.5 h-3.5 text-stone-400 dark:text-stone-500" strokeWidth={1.5} />
-          <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-stone-500 dark:text-stone-400">
+          <Icon className="w-3.5 h-3.5 text-stone-400 dark:text-slate-400" strokeWidth={1.5} />
+          <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-stone-500 dark:text-slate-400">
             {label}
           </span>
           <span className={cn('ml-auto w-1.5 h-1.5 rounded-full', tone.dot)} aria-hidden="true" />
@@ -65,7 +65,7 @@ function MetricTile({ icon: Icon, label, value, detail, state, mono = false }: M
         <p className={cn('text-lg leading-none font-semibold', mono && 'font-mono text-base', tone.value)}>
           {value}
         </p>
-        <p className="mt-1.5 text-xs text-stone-500 dark:text-stone-400 truncate">{detail}</p>
+        <p className="mt-1.5 text-xs text-stone-500 dark:text-slate-400 truncate">{detail}</p>
       </div>
     </StaggerItem>
   )
@@ -78,8 +78,7 @@ interface StatusConsoleProps {
 
 /**
  * The Product page masthead: what Scaffold is, what this product is, and the
- * live state of its scope lock — read straight from the parsed markdown, so the
- * verdict here is the same verdict `/product-audit` prints in the terminal.
+ * live 4-point health verification parsed from the local product spec.
  */
 export function StatusConsole({ data, health }: StatusConsoleProps) {
   const reduce = useReducedMotion()
@@ -101,17 +100,17 @@ export function StatusConsole({ data, health }: StatusConsoleProps) {
       transition={{ duration: DURATION.slow, ease: reduce ? EASE_SOFT : EASE_OUT }}
       className={cn(
         'relative overflow-hidden rounded-2xl mb-10',
-        'border border-stone-200/80 dark:border-stone-700/50',
+        'border border-stone-200/80 dark:border-slate-800/80',
         'bg-gradient-to-b from-white/90 via-white/60 to-stone-50/30',
-        'dark:from-stone-800/70 dark:via-stone-800/40 dark:to-stone-900/30',
+        'dark:from-[#070e28]/90 dark:via-[#050a22]/70 dark:to-[#020617]/50',
         'backdrop-blur-xl shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_18px_40px_-32px_rgba(28,25,23,0.5)]',
-        'dark:shadow-[0_1px_0_0_rgba(255,255,255,0.04)_inset,0_20px_50px_-32px_rgba(0,0,0,0.8)]'
+        'dark:shadow-[0_1px_0_0_rgba(34,197,94,0.08)_inset,0_20px_50px_-32px_rgba(0,0,0,0.9)]'
       )}
     >
       {/* Accent bloom, top-right */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-24 -right-16 w-72 h-72 rounded-full bg-lime-400/10 dark:bg-lime-400/[0.07] blur-3xl"
+        className="pointer-events-none absolute -top-24 -right-16 w-72 h-72 rounded-full bg-lime-400/10 dark:bg-emerald-400/[0.12] blur-3xl"
       />
 
       {/* One-pass sheen on mount — the console "powering up" */}

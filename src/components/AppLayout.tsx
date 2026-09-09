@@ -73,9 +73,21 @@ export function AppLayout({
             /* Main page header with phase nav - full width */
             <div className="flex items-center justify-between gap-4">
               {/* Scaffold Brand Logo on left */}
-              <div className="flex items-center gap-2 shrink-0">
-                <img src="/scaffold/logo.svg" alt="Scaffold™" className="w-5 h-5 object-contain" />
-                <span className="text-xs font-semibold tracking-wider text-stone-700 dark:text-stone-300">SCAFFOLD™</span>
+              <div 
+                onClick={() => navigate('/')}
+                className="flex items-center shrink-0 cursor-pointer select-none py-1"
+                title="Scaffold™ Visual Workspace"
+              >
+                <img 
+                  src="/scaffold/scaffold-logo-light.png" 
+                  alt="Scaffold™" 
+                  className="h-8 w-auto object-contain dark:hidden" 
+                />
+                <img 
+                  src="/scaffold/scaffold-logo-dark.png" 
+                  alt="Scaffold™" 
+                  className="h-8 w-auto object-contain hidden dark:block" 
+                />
               </div>
 
               {/* Phase Navigation - centered */}
@@ -103,7 +115,7 @@ export function AppLayout({
       <footer className="py-8 flex justify-center">
         <div className="flex items-center gap-2 text-stone-400 dark:text-stone-500">
           <span className="text-xs">Powered by</span>
-          <img src="/scaffold/logo.svg" alt="Scaffold™" className="w-4 h-4 object-contain" />
+          <img src="/scaffold/scaffold-mark.png" alt="Scaffold™" className="w-4 h-auto object-contain" />
           <span className="text-xs font-medium tracking-wide">Scaffold™</span>
         </div>
       </footer>

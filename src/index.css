@@ -104,49 +104,50 @@
 }
 
 /*
-  Dark theme - Warm Stone dark palette
+  Dark theme - Official Scaffold™ Midnight Navy & Cyber Black Palette
+  Derived from the Scaffold brand guidelines: deep oceanic black-navy (#01062B), electric green & crisp white
 */
 .dark {
-  /* Backgrounds & Foregrounds - Stone dark */
-  --background: oklch(0.216 0.006 56.043); /* stone-900 #1C1917 */
-  --foreground: oklch(0.985 0.001 106.424); /* stone-50 */
-  --card: oklch(0.268 0.007 34.298); /* stone-800 #292524 */
-  --card-foreground: oklch(0.985 0.001 106.424); /* stone-50 */
-  --popover: oklch(0.268 0.007 34.298); /* stone-800 */
-  --popover-foreground: oklch(0.985 0.001 106.424); /* stone-50 */
-  /* Primary - Stone light */
-  --primary: oklch(0.923 0.003 48.717); /* stone-200 */
-  --primary-foreground: oklch(0.216 0.006 56.043); /* stone-900 */
-  /* Secondary - Stone dark */
-  --secondary: oklch(0.318 0.008 43.185); /* stone-700 */
-  --secondary-foreground: oklch(0.985 0.001 106.424); /* stone-50 */
-  /* Muted - Stone dark */
-  --muted: oklch(0.318 0.008 43.185); /* stone-700 */
-  --muted-foreground: oklch(0.709 0.01 56.259); /* stone-400 #A8A29E */
-  /* Accent - Stone dark */
-  --accent: oklch(0.318 0.008 43.185); /* stone-700 */
-  --accent-foreground: oklch(0.985 0.001 106.424); /* stone-50 */
-  /* Destructive - Rose lighter for dark mode */
-  --destructive: oklch(0.712 0.194 13.428); /* rose-400 */
-  /* Borders & Inputs - Stone dark */
-  --border: oklch(0.370 0.010 67.558); /* stone-600 */
-  --input: oklch(0.370 0.010 67.558); /* stone-600 */
-  --ring: oklch(0.553 0.013 58.071); /* stone-500 */
-  /* Chart colors - brighter for dark mode */
-  --chart-1: oklch(0.648 0.2 131.684); /* lime-500 */
-  --chart-2: oklch(0.696 0.17 162.48); /* emerald-400 */
-  --chart-3: oklch(0.769 0.188 70.08); /* amber-400 */
-  --chart-4: oklch(0.627 0.265 303.9); /* purple-500 */
-  --chart-5: oklch(0.645 0.246 16.439); /* rose-500 */
-  /* Sidebar - Stone dark */
-  --sidebar: oklch(0.268 0.007 34.298); /* stone-800 */
-  --sidebar-foreground: oklch(0.985 0.001 106.424); /* stone-50 */
-  --sidebar-primary: oklch(0.648 0.2 131.684); /* lime-500 */
-  --sidebar-primary-foreground: oklch(0.216 0.006 56.043); /* stone-900 */
-  --sidebar-accent: oklch(0.318 0.008 43.185); /* stone-700 */
-  --sidebar-accent-foreground: oklch(0.985 0.001 106.424); /* stone-50 */
-  --sidebar-border: oklch(0.370 0.010 67.558); /* stone-600 */
-  --sidebar-ring: oklch(0.553 0.013 58.071); /* stone-500 */
+  /* Backgrounds & Foregrounds - Deep Midnight Navy (#01062B / #020617) */
+  --background: oklch(0.12 0.022 260); /* Deep oceanic midnight navy #020617 */
+  --foreground: oklch(0.985 0.002 260); /* Crisp clean white */
+  --card: oklch(0.165 0.028 260); /* Deep midnight surface #080f2b */
+  --card-foreground: oklch(0.985 0.002 260);
+  --popover: oklch(0.165 0.028 260);
+  --popover-foreground: oklch(0.985 0.002 260);
+  /* Primary - Electric Lime / Neon Green from the Scaffold Logo */
+  --primary: oklch(0.72 0.19 142); /* #22c55e / #84cc16 */
+  --primary-foreground: oklch(0.12 0.022 260);
+  /* Secondary - Sleek Midnight Navy */
+  --secondary: oklch(0.20 0.035 260);
+  --secondary-foreground: oklch(0.985 0.002 260);
+  /* Muted - Cool slate */
+  --muted: oklch(0.19 0.028 260);
+  --muted-foreground: oklch(0.68 0.015 260); /* Cool slate-400 */
+  /* Accent - Cyber Green subtle glow */
+  --accent: oklch(0.22 0.04 260);
+  --accent-foreground: oklch(0.985 0.002 260);
+  /* Destructive - Crisp Rose */
+  --destructive: oklch(0.68 0.22 24);
+  /* Borders & Inputs - Precision deep slate-blue */
+  --border: oklch(0.24 0.025 260 / 0.7);
+  --input: oklch(0.24 0.025 260 / 0.7);
+  --ring: oklch(0.72 0.19 142);
+  /* Chart colors - Electric and vivid */
+  --chart-1: oklch(0.72 0.19 142); /* lime neon */
+  --chart-2: oklch(0.68 0.17 165); /* emerald */
+  --chart-3: oklch(0.75 0.18 70); /* amber */
+  --chart-4: oklch(0.65 0.24 300); /* purple */
+  --chart-5: oklch(0.65 0.24 16); /* rose */
+  /* Sidebar */
+  --sidebar: oklch(0.135 0.022 260);
+  --sidebar-foreground: oklch(0.985 0.002 260);
+  --sidebar-primary: oklch(0.72 0.19 142);
+  --sidebar-primary-foreground: oklch(0.12 0.022 260);
+  --sidebar-accent: oklch(0.19 0.028 260);
+  --sidebar-accent-foreground: oklch(0.985 0.002 260);
+  --sidebar-border: oklch(0.24 0.025 260 / 0.7);
+  --sidebar-ring: oklch(0.72 0.19 142);
 }
 
 /* Base layer styles */
