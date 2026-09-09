@@ -1,7 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useMemo } from 'react'
 import { FileText, Boxes, Layout, LayoutList, Package } from 'lucide-react'
+import { AnimatePresence, useReducedMotion } from 'motion/react'
+import * as m from 'motion/react-m'
 import { loadProductData, hasExportZip } from '@/lib/product-loader'
+import { SPRING } from '@/lib/motion'
+import { Tappable } from '@/components/motion-primitives'
 import { getAllSectionIds, getSectionScreenDesigns } from '@/lib/section-loader'
 
 export type Phase = 'product' | 'data-shape' | 'design' | 'sections' | 'export'
@@ -91,6 +95,7 @@ function usePhaseStatuses(): PhaseInfo[] {
 export function PhaseNav() {
   const navigate = useNavigate()
   const phaseInfos = usePhaseStatuses()
+  const reduce = useReducedMotion()
 
   return (
     <nav className="flex items-center justify-center">
@@ -100,18 +105,22 @@ export function PhaseNav() {
 
         return (
           <div key={phase.id} className="flex items-center">
-            {/* Connector line */}
+            {/* Connector line — draws itself in on load, left to right */}
             {!isFirst && (
-              <div
-                className={`w-4 sm:w-8 lg:w-12 h-px transition-colors duration-200 ${
+              <m.div
+                className={`w-4 sm:w-8 lg:w-12 h-px origin-left transition-colors duration-200 ${
                   status === 'upcoming'
                     ? 'bg-stone-200 dark:bg-stone-700'
                     : 'bg-stone-400 dark:bg-stone-500'
                 }`}
+                initial={{ scaleX: reduce ? 1 : 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.3, ease: 'easeOut', delay: 0.05 * index }}
               />
             )}
 
             {/* Phase button */}
+            <Tappable>
             <button
               onClick={() => navigate(phase.path)}
               className={`
@@ -137,14 +146,23 @@ export function PhaseNav() {
               </span>
 
               {/* Completion indicator - check circle at top-left (shows even when current) */}
-              {isComplete && (
-                <span className="absolute -top-1 -left-1 w-4 h-4 rounded-full bg-lime-500 flex items-center justify-center shadow-sm">
-                  <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </span>
-              )}
+              <AnimatePresence>
+                {isComplete && (
+                  <m.span
+                    className="absolute -top-1 -left-1 w-4 h-4 rounded-full bg-lime-500 flex items-center justify-center shadow-sm"
+                    initial={{ scale: reduce ? 1 : 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: reduce ? 1 : 0, opacity: 0 }}
+                    transition={SPRING.status}
+                  >
+                    <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </m.span>
+                )}
+              </AnimatePresence>
             </button>
+            </Tappable>
           </div>
         )
       })}

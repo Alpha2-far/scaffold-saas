@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Layers, ArrowLeft } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { PhaseNav } from './PhaseNav'
 import { ThemeToggle } from './ThemeToggle'
 import { Button } from '@/components/ui/button'
@@ -30,10 +30,21 @@ export function AppLayout({
   const isSubPage = !!backTo
 
   return (
-    <div className="min-h-screen bg-background animate-fade-in flex flex-col">
+    <div className="relative min-h-screen bg-background animate-fade-in flex flex-col">
+      {/* Ambient wash — a single warm light source behind the whole console */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-x-0 top-0 h-[420px] bg-[radial-gradient(80%_100%_at_50%_0%,rgba(132,204,22,0.07),transparent_70%)] dark:bg-[radial-gradient(80%_100%_at_50%_0%,rgba(163,230,53,0.05),transparent_70%)]"
+      />
+
       {/* Header */}
-      <header className="border-b border-stone-200 dark:border-stone-800 bg-card/80 backdrop-blur-sm sticky top-0 z-20">
-        <div className="px-4 sm:px-6 py-3">
+      <header className="relative border-b border-stone-200/70 dark:border-stone-800/70 bg-card/70 backdrop-blur-xl sticky top-0 z-20">
+        {/* Hairline that fades at both ends — reads as glass, not as a table rule */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-stone-300/70 dark:via-stone-600/50 to-transparent"
+        />
+        <div className="relative px-4 sm:px-6 py-3">
           {isSubPage ? (
             /* Sub-page header with back button */
             <div className="max-w-3xl mx-auto flex items-center gap-4">
@@ -61,9 +72,10 @@ export function AppLayout({
           ) : (
             /* Main page header with phase nav - full width */
             <div className="flex items-center justify-between gap-4">
-              {/* Theme Toggle on left for balance */}
-              <div className="w-10 shrink-0">
-                {/* Empty spacer for balance */}
+              {/* Scaffold Brand Logo on left */}
+              <div className="flex items-center gap-2 shrink-0">
+                <img src="/scaffold/logo.svg" alt="Scaffold™" className="w-5 h-5 object-contain" />
+                <span className="text-xs font-semibold tracking-wider text-stone-700 dark:text-stone-300">SCAFFOLD™</span>
               </div>
 
               {/* Phase Navigation - centered */}
@@ -74,7 +86,7 @@ export function AppLayout({
               )}
 
               {/* Theme Toggle */}
-              <div className="w-10 shrink-0 flex justify-end">
+              <div className="w-24 shrink-0 flex justify-end">
                 <ThemeToggle />
               </div>
             </div>
@@ -89,18 +101,11 @@ export function AppLayout({
 
       {/* Footer with logo */}
       <footer className="py-8 flex justify-center">
-        <a
-          href="https://buildermethods.com/design-os"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-400 transition-colors group"
-        >
+        <div className="flex items-center gap-2 text-stone-400 dark:text-stone-500">
           <span className="text-xs">Powered by</span>
-          <div className="w-5 h-5 rounded bg-stone-300 dark:bg-stone-600 flex items-center justify-center transition-colors group-hover:bg-stone-400 dark:group-hover:bg-stone-500">
-            <Layers className="w-3 h-3 text-stone-100 dark:text-stone-900" strokeWidth={1.5} />
-          </div>
-          <span className="text-xs font-medium">Design OS</span>
-        </a>
+          <img src="/scaffold/logo.svg" alt="Scaffold™" className="w-4 h-4 object-contain" />
+          <span className="text-xs font-medium tracking-wide">Scaffold™</span>
+        </div>
       </footer>
     </div>
   )
