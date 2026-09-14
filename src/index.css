@@ -14,6 +14,18 @@
   --font-body: "DM Sans", system-ui, sans-serif;
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /*
+    Official Scaffold™ mini-charte palette.
+    These are the exact brand values, not approximations of them — the emblem, the
+    loader and any brand surface must read from here rather than from Tailwind's
+    generic green/lime scales, which are close but not the mark.
+  */
+  --color-scaffold-green: #22c55e;   /* electric green — the primary brand accent */
+  --color-scaffold-lime: #84cc16;    /* lime — the highlight end of the gradient */
+  --color-scaffold-emerald: #064e3b; /* deep emerald — the shadow end of the gradient */
+  --color-scaffold-navy: #01062b;    /* midnight navy — the brand's dark ground */
+  --color-scaffold-navy-deep: #020826;
 }
 
 /* Shadcn theme integration */

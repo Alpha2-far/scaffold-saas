@@ -7,6 +7,7 @@ import { loadScreenDesignComponent, sectionUsesShell } from '@/lib/section-loade
 import { loadAppShell, hasShellComponents, loadShellInfo } from '@/lib/shell-loader'
 import { loadProductData } from '@/lib/product-loader'
 import React from 'react'
+import { ScaffoldLogoLoader } from '@/components/ScaffoldLogoLoader'
 
 const MIN_WIDTH = 320
 const DEFAULT_WIDTH_PERCENT = 100
@@ -344,7 +345,7 @@ export function ScreenDesignFullscreen() {
       <Suspense
         fallback={
           <div className="h-screen flex items-center justify-center bg-background">
-            <div className="text-stone-500 dark:text-stone-400">Loading...</div>
+            <ScaffoldLogoLoader size="lg" />
           </div>
         }
       >
@@ -360,7 +361,7 @@ export function ScreenDesignFullscreen() {
     <Suspense
       fallback={
         <div className="h-screen flex items-center justify-center bg-background">
-          <div className="text-stone-500 dark:text-stone-400">Loading...</div>
+          <ScaffoldLogoLoader size="lg" />
         </div>
       }
     >

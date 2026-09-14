@@ -31,11 +31,12 @@ returns `null` and the UI shows an empty state.
 
 | File | Written by | Headings |
 |---|---|---|
-| `product-overview.md` | `/product-vision` | `## Description`, `## Problems & Solutions`, `### Problem N:`, `## Key Features` |
-| `product-roadmap.md` | `/product-roadmap` | `## Sections`, `### N. Title` |
+| `product-overview.md` | `/product-vision` | `## Description`, `## Problems & Solutions`, `### Problem N:`, `## Key Features`, `## Out of Scope (V1)` |
+| `prd.md` | `/product-vision` | `# Titre`, `## Core Purpose`, `## In-Scope Features`, `## Out-of-Scope (V1)`, `## Milestones` |
+| `product-roadmap.md` | `/product-roadmap` | `## Sections`, `### N. Title` (strict: pas de sous-titres `### N.` imbriqués) |
 | `data-shape/data-shape.md` | `/data-shape` | `## Entities`, `### EntityName`, `## Relationships` |
 | `shell/spec.md` | `/design-shell` | `## Overview`, `## Navigation Structure`, `## Layout Pattern` |
-| `sections/*/spec.md` | `/shape-section` | `## Overview`, `## User Flows`, `## UI Requirements` |
+| `sections/*/spec.md` | `/shape-section` | `## Overview`, `## User Flows`, `## UI Requirements` (interdiction stricte d'inclure des éléments du hors-scope) |
 
 When editing a parser, open the matching command in `.claude/commands/design-os/`
 and update the template in the same change.

@@ -1,12 +1,12 @@
-# Agent OS Standards Index
+# Agent OS Standards Index (Scaffold™)
 
 css:
   color-vocabulary:
-    description: "Fixed hue roles: stone for neutral, lime for accomplishment, amber for reversible warning, destructive token for error"
+    description: "Official Scaffold™ palette (Midnight Navy, Electric Green, Lime, Emerald) and semantic hue roles"
   icons:
     description: "lucide-react sizes and stroke weights, and storing icon components in config maps"
   motion:
-    description: "200ms ease-out motion, animations declared in @layer utilities, tw-animate-css for Radix state"
+    description: "LazyMotion strict architecture, motion/react-m components, motion tokens, primitives and ScaffoldLogoLoader"
   two-layer-colors:
     description: "Semantic tokens in ui/ primitives, stone/lime literals with dark: pairs everywhere else"
 
@@ -15,6 +15,8 @@ global:
     description: "Props-only section components: no data imports, optional callbacks, intent not routes, no nav chrome"
   preview-wrappers:
     description: "The only file importing data.json; default export required, and the @/../product alias crossing"
+  scope-lock:
+    description: "Universal ASK rule, BM PRD double output (product/ and prd.md), PRD Sync Guard and export scope protections"
   section-ids:
     description: "Section IDs are slugify(roadmap title); the transform rules and how mismatches fail silently"
   section-structure:
@@ -30,8 +32,10 @@ javascript:
   loader-contract:
     description: "Loaders return T | null and never throw; has*() checks file presence, null means no usable content"
   markdown-parsing:
-    description: "Regex section-slicing patterns, heading contracts with the Design OS skills, and CRLF normalization"
+    description: "Regex section-slicing patterns, heading contracts with Design OS and Scaffold PRD skills, CRLF normalization"
   page-composition:
     description: "Flat routes, AppLayout composed per page, StepIndicator sequence, and local pure get*StepStatuses()"
   preview-iframe:
     description: "Page/Fullscreen twin routes, iframe isolation, theme sync, and validated lazy components"
+  product-audit:
+    description: "Live 4-contract deterministic audit engine: Scope Lock, Overview, Roadmap/Anti-Ghost, and Data Shape"

@@ -1,40 +1,56 @@
-# Motion
+# Motion System (Scaffold™)
 
-Motion is subtle and uniform: **200ms ease-out, no bounce**. One place to define
-it, so durations and curves can't drift component by component.
+Scaffold™ utilise le moteur d'animation moderne `motion@13.2.0` sous architecture **`<LazyMotion strict>`**. Le dynamisme est un système paramétrable en un point unique (`src/lib/motion.ts`), avec exécution accélérée par GPU et surcoût de bundle minimal (+57 kB brut / +19 kB gzip).
 
-## Where animations live
+## Règle Absolue d'Importation : `m.*` uniquement
 
-Declare every animation in `@layer utilities` in `src/index.css`:
-
-```css
-@layer utilities {
-  .animate-fade-in { animation: fade-in 200ms ease-out; }
-  @keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
-}
-```
-
-Never use arbitrary animation classes (`animate-[wiggle_1s]`) or inline
-`style={{ animation }}`.
-
-## Which library
-
-- **Radix state transitions** → `tw-animate-css` (already imported), inside
-  `ui/` primitives: `data-[state=open]`, dialog and dropdown enter/exit.
-- **Everything else** → hand-written in `index.css`. That covers the page
-  fade-in and the collapsibles driven by `--radix-collapsible-content-height`.
-
-## In components
+Sous `<LazyMotion strict>`, tout usage naïf de `motion.div` provoque une erreur de compilation ou de runtime immédiate.
+Toujours importer `* as m` depuis `motion/react-m` :
 
 ```tsx
-<div className="min-h-screen bg-background animate-fade-in">   {/* page root */}
-<button className="transition-colors">                          {/* hover */}
-<div className="transition-all duration-200">                   {/* multi-prop */}
+// ✅ Correct
+import * as m from 'motion/react-m'
+<m.div animate={{ opacity: 1 }} />
+
+// ❌ Interdit
+import { motion } from 'motion/react'
+<motion.div ... />
 ```
 
-- Page roots get `animate-fade-in`. Nothing else does.
-- Hover and focus use `transition-colors` — the default 150ms is fine, don't
-  set a duration.
-- Only set `duration-200` when animating several properties at once.
-- Transform-on-hover is limited to a small nudge: `group-hover:translate-x-1`,
-  `group-hover:scale-110`.
+## Tokens de Mouvement (`src/lib/motion.ts`)
+
+Toutes les durées, courbes d'accélération et configurations de ressorts proviennent exclusivement de `src/lib/motion.ts` :
+
+* **Durées standard (`DURATION`)** :
+  * `instant: 0.1` — feedback immédiat, focus rings.
+  * `fast: 0.2` — clics de boutons, pastilles, badges.
+  * `normal: 0.35` — entrées de cartes, déploiement de panneaux.
+  * `slow: 0.6` — transitions de page, masthead.
+* **Courbes bézier** :
+  * `EASE_OUT: [0.16, 1, 0.3, 1]` — expo-out naturel pour toute entrée.
+  * `EASE_SOFT: [0.25, 0.1, 0.25, 1]` — transitions douces et continues.
+* **Ressorts (`SPRING`)** :
+  * `press`: `{ stiffness: 500, damping: 30 }` — pour le micro-feedback tactile (`Tappable`).
+  * `lift`: `{ stiffness: 350, damping: 25 }` — pour la micro-élévation au survol (`Lift`).
+  * `status`: `{ stiffness: 200, damping: 20 }` — pour les checkmarks et radars de statut.
+
+## Primitives d'Animation Dédiées (`src/components/motion-primitives.tsx`)
+
+Ne pas recréer d'animations ad-hoc dans les composants : utiliser les 4 primitives :
+1. `<Reveal>` : Fondu ascendant au montage (`initial y: 15px`).
+2. `<Stagger>` + `<StaggerItem>` : Cascade d'apparition séquentielle pour listes et grilles de cartes.
+3. `<Lift>` : Micro-élévation (-3px) + halo néon lime au survol sur les cartes maîtresses.
+4. `<Tappable>` : Micro-feedback tactile (`whileHover: 1.02`, `whileTap: 0.98`).
+
+## Animated Logo Loader (`src/components/ScaffoldLogoLoader.tsx`)
+
+Le symbole Scaffold™ (les 4 barres de l'emblème) est animé par GPU :
+* Vague séquentielle lumineuse descendante décalée (`stagger wave`).
+* Aucune animation de propriétés lourdes (`width`, `height` sont interdits). Seuls `transform` et `opacity` sont animés.
+* Tailles disponibles : `sm` (inline dans la console), `md`, `lg`, `fullscreen` (splashscreen).
+
+## Respect Strict de `prefers-reduced-motion`
+
+Chaque composant animé appelle `useReducedMotion()`. Si l'utilisateur demande moins de mouvement :
+* Les translations (`y`, `x`) et les échelles (`scale`) sont désactivées.
+* Seuls les fondus d'opacité discrets sont conservés. L'interface ne casse jamais.

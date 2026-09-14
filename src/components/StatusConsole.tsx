@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { useReducedMotion } from 'motion/react'
 import * as m from 'motion/react-m'
 import { Activity, Boxes, Map, ShieldCheck } from 'lucide-react'
@@ -5,6 +6,7 @@ import type { ProductData } from '@/types/product'
 import type { ProductHealth } from '@/lib/product-health'
 import { DURATION, EASE_OUT, EASE_SOFT } from '@/lib/motion'
 import { Stagger, StaggerItem } from '@/components/motion-primitives'
+import { ScaffoldLogoLoader } from '@/components/ScaffoldLogoLoader'
 import { cn } from '@/lib/utils'
 
 type TileState = 'ok' | 'pending' | 'warn' | 'fail'
@@ -35,7 +37,7 @@ const tileTone: Record<TileState, { dot: string; value: string; ring: string }> 
 interface MetricTileProps {
   icon: typeof Activity
   label: string
-  value: string
+  value: ReactNode
   detail: string
   state: TileState
   /** Render the value in mono — used for the audit verdict token. */
@@ -154,6 +156,10 @@ export function StatusConsole({ data, health }: StatusConsoleProps) {
         <h1 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-stone-900 dark:text-stone-50 mb-3">
           Product Definition
         </h1>
+        {/* Official Scaffold™ baseline — kept verbatim in French, it is the brand line, not UI copy */}
+        <p className="text-lg sm:text-xl font-medium tracking-[-0.01em] text-scaffold-emerald dark:text-scaffold-green mb-2">
+          De l’idée floue au projet structuré.
+        </p>
         <p className="text-stone-600 dark:text-stone-400 max-w-xl leading-relaxed mb-7">
           Lock the vision, the scope and the shape of the data — before a single line of code is written.
         </p>
@@ -184,7 +190,19 @@ export function StatusConsole({ data, health }: StatusConsoleProps) {
           <MetricTile
             icon={Activity}
             label="Audit"
-            value={auditToken}
+            value={
+              health.state === 'idle' ? (
+                // Standing by, not computing: the emblem breathes while it waits for a
+                // product definition to exist. The verdict token stays visible next to it
+                // so the tile still reports a state rather than only a mood.
+                <span className="inline-flex items-center gap-2">
+                  <ScaffoldLogoLoader size="sm" label="Standing by — no product definition to audit yet" />
+                  {auditToken}
+                </span>
+              ) : (
+                auditToken
+              )
+            }
             detail={
               health.evaluated === 0
                 ? 'Nothing to audit yet'

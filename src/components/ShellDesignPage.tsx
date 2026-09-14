@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { loadShellPreview } from '@/lib/shell-loader'
 import React from 'react'
+import { ScaffoldLogoLoader } from '@/components/ScaffoldLogoLoader'
 
 const MIN_WIDTH = 320
 const DEFAULT_WIDTH_PERCENT = 100
@@ -232,7 +233,7 @@ export function ShellDesignFullscreen() {
     <Suspense
       fallback={
         <div className="h-screen flex items-center justify-center bg-background">
-          <div className="text-stone-500 dark:text-stone-400">Loading...</div>
+          <ScaffoldLogoLoader size="lg" />
         </div>
       }
     >
