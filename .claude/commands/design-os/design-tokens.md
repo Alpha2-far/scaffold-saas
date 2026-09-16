@@ -1,166 +1,317 @@
 # Design Tokens
 
-You are helping the user choose colors and typography for their product. These design tokens will be used consistently across all screen designs and the application shell.
+You are helping the user lock the visual identity of their product.
 
-## Step 1: Check Prerequisites
+Scaffold does not send the user anywhere to find a design system. The 43
+themes in `src/presets/` were ingested once from designmd.ai and compiled
+locally; the user browses them on `/design`, and this command records the
+choice. There is no API call here, no key, and no external service — the whole
+catalog is on disk.
 
-First, verify that the product overview exists:
+The output is a single pivot file, `product/DESIGN.md`, plus the two JSON
+token files the Design OS parsers already read. That pivot file is what
+`/export-product` copies verbatim into `product-plan/DESIGN.md` and what the
+downstream coding agent builds from. **What the user saw on `/design` is what
+gets exported — byte for byte.** That is the WYSIWYB contract.
 
-Read `/product/product-overview.md` to understand what the product is.
+---
 
-If it doesn't exist:
+## §0. The universal interrogation rule (`ASK`)
 
-"Before defining your design system, you'll need to establish your product vision. Please run `/product-vision` first."
+Whenever this command needs a decision with discrete options, use `ASK`:
+
+- **Claude Code** → `AskUserQuestion`
+- **Antigravity** → `ask_question`
+- **Cursor / Codex / any text terminal** → a formatted numbered list:
+  `1. Option A`, `2. Option B`, …
+
+Never hardcode a single host's tool. For free-form input (a custom hex, a font
+name) use a normal chat message.
+
+---
+
+## Step 1: Check prerequisites
+
+Read `product/product-overview.md` to understand what the product is.
+
+If it does not exist:
+
+> "Before defining your design system, you'll need to establish your product
+> vision. Please run `/product-vision` first."
 
 Stop here if the prerequisite is missing.
 
-## Step 2: Explain the Process
+Also read `product/prd.md` if present, and specifically its
+`## Out of Scope (V1)` matrix. A design system cannot introduce surface area —
+if a theme's DESIGN.md documents components for capabilities the product has
+explicitly cut, those components are not carried into `product/DESIGN.md`.
 
-"Let's define the visual identity for **[Product Name]**.
+---
 
-I'll help you choose:
-1. **Colors** — A primary accent, secondary accent, and neutral palette
-2. **Typography** — Fonts for headings, body text, and code
+## Step 2: Present the two paths
 
-These will be applied consistently across all your screen designs and the application shell.
+> "Let's lock the visual identity for **[Product Name]**.
+>
+> Two ways to get there:
+>
+> 1. **Pick an ingested theme** — 43 complete design systems are already in
+>    Scaffold, compiled and contrast-verified. Browse them on `/design`.
+> 2. **Derive a custom palette** — give me an accent color and I'll derive the
+>    full 12-token system mathematically.
+>
+> Either way you end up with the same thing: a `DESIGN.md` your coding agent
+> can build from without guessing."
 
-Do you have any existing brand colors or fonts in mind, or would you like suggestions?"
+Use `ASK`:
 
-Wait for their response.
+- Question: "How do you want to set the visual identity?"
+- Options:
+  - `Pick an ingested theme (recommended)` — browse the 43 on `/design`
+  - `Derive a custom palette from one accent color`
+  - `Keep it minimal — Tailwind palette names only`
 
-## Step 3: Choose Colors
+---
 
-Help the user select from Tailwind's built-in color palette. Present options based on their product type:
+## Step 3a: Picking an ingested theme
 
-"For colors, we'll pick from Tailwind's palette so they work seamlessly with your screen designs.
+Read `src/presets/_registry.json`. It carries, for every theme: `id`, `name`,
+`author`, `identifier`, `url`, `tags`, `nativeMode`, `neutralRamp`,
+`accessible`, and six representative `swatches`.
 
-**Primary color** (main accent, buttons, links):
-Common choices: `blue`, `indigo`, `violet`, `emerald`, `teal`, `amber`, `rose`, `lime`
+Narrow the field before presenting it — 43 options is not a choice, it is a
+catalog. Infer 3–4 candidates from the product's own character (its overview,
+its domain, its audience) and present those with `ASK`, each with one line
+saying *why it fits this product*:
 
-**Secondary color** (complementary accent, tags, highlights):
-Should complement your primary — often a different hue or a neutral variation
+> - **Violet Issue** — dark, dense, keyboard-first. Fits a tool people live in
+>   for hours.
+> - **Genesis** — editorial precision, generous spacing. Fits a product whose
+>   content is the point.
+> - **Crypto Blue** — data-rich and trustworthy. Fits anything holding money.
 
-**Neutral color** (backgrounds, text, borders):
-Options: `slate` (cool gray), `gray` (pure gray), `zinc` (slightly warm), `neutral`, `stone` (warm gray)
+Always include a fourth option: `Show me the full catalog on /design`.
 
-Based on [Product Name], I'd suggest:
-- **Primary:** [suggestion] — [why it fits]
-- **Secondary:** [suggestion] — [why it complements]
-- **Neutral:** [suggestion] — [why it works]
+Once chosen, read `src/presets/<id>/tokens.json` and
+`src/presets/<id>/DESIGN.md`. Go to Step 4.
 
-What feels right for your product?"
+---
 
-**ASK** to gather their preferences if they're unsure, using the interrogation rule from `/product-vision` §0.3 — the question tool your host provides (`AskUserQuestion`, `ask_question`), or a formatted numbered list if it has none:
+## Step 3b: Deriving a custom palette
 
-- "What vibe are you going for? Professional, playful, modern, minimal?"
-- "Any colors you definitely want to avoid?"
-- "Light mode, dark mode, or both?"
+Ask for one accent hex in a normal chat message, then use `ASK` for the
+neutral family (`zinc` / `slate` / `stone` / `gray` / `neutral`).
 
-## Step 4: Choose Typography
+Run §5 of
+`bm-skills/skills/bm-design-system/references/derive-palette.md` — the same
+arithmetic `scripts/compile-presets.mjs` runs:
 
-Help the user select Google Fonts:
+1. Fill surfaces and ink off the neutral ramp.
+2. `accent` is the input hex, in both modes.
+3. `accent-faded` = accent mixed 12% on `#ffffff` (light), 18% on
+   `neutral.950` (dark).
+4. `accent-display` = the accent's own hue walked along OKLCH lightness until
+   it clears **7:1** against the page.
+5. `on-accent` = `#ffffff` if it clears 4.5:1 on the accent; otherwise the
+   accent's own near-black.
+6. **Measure every value before writing it.** Report the ratios.
 
-"For typography, we'll use Google Fonts for easy web integration.
+If a custom accent cannot produce a compliant `accent-display`, say so and
+offer the nearest hue that can. Do not lower the bar.
 
-**Heading font** (titles, section headers):
-Popular choices: `DM Sans`, `Inter`, `Poppins`, `Manrope`, `Space Grotesk`, `Outfit`
+Alternatively, offer the 5 Scaffold author palettes — Titanium, Hyper Indigo,
+Emerald Cyber, Amber Solar, Rose Quartz — which are pre-derived and
+pre-measured in §4 of the same file.
 
-**Body font** (paragraphs, UI text):
-Often the same as heading, or: `Inter`, `Source Sans 3`, `Nunito Sans`, `Open Sans`
+---
 
-**Mono font** (code, technical content):
-Options: `IBM Plex Mono`, `JetBrains Mono`, `Fira Code`, `Source Code Pro`
+## Step 3c: Minimal
 
-My suggestions for [Product Name]:
-- **Heading:** [suggestion] — [why]
-- **Body:** [suggestion] — [why]
-- **Mono:** [suggestion] — [why]
+Pick Tailwind palette names only (`primary` / `secondary` / `neutral`) and a
+Google Fonts trio. Write only the two JSON files in Step 5, skip
+`product/DESIGN.md`, and tell the user that `/export-product` will ship tokens
+without a design system document.
 
-What do you prefer?"
+This path exists for speed. Say plainly that it gives the coding agent less to
+work from.
 
-## Step 5: Present Final Choices
+---
 
-Once they've made decisions:
+## Step 4: Confirm
 
-"Here's your design system:
+Present the resolved system and its measurements:
 
-**Colors:**
-- Primary: `[color]`
-- Secondary: `[color]`
-- Neutral: `[color]`
+> "Here's your design system — **[Theme Name]**, by [author]:
+>
+> **Surfaces** · page `#…` · surface `#…` · hairline `#…`
+> **Ink** · display `#…` (N.N:1) · body `#…` (N.N:1) · muted `#…` (N.N:1)
+> **Accent** · `#…` · faded `#…` · display `#…` (N.N:1) · on-accent `#…`
+> **Signal** `#…` · **Danger** `#…`
+>
+> **Type** · [display] / [body] / [mono]
+>
+> Every ink clears WCAG AAA (7:1) in both light and dark.
+>
+> Ready to lock it in?"
 
-**Typography:**
-- Heading: [Font Name]
-- Body: [Font Name]
-- Mono: [Font Name]
+If the compiler recorded `contrastCorrections` for this theme, say so, plainly:
 
-Does this look good? Ready to save it?"
+> "Two inks in the original DESIGN.md sat below the bar —
+> `ink-muted #9c9c9c` measured 2.63:1. Scaffold walked them along their own
+> hue until they cleared 7:1 (`#555555`). The theme keeps its tone; your users
+> keep their eyesight."
 
-## Step 6: Create the Files
+Do not hide this. The user chose a theme and is getting something slightly
+different from what its author wrote — they are entitled to know why.
 
-Once approved, create two files:
+---
 
-**File 1:** `/product/design-system/colors.json`
+## Step 5: Write the files
+
+Write all three. The JSON pair keeps the existing Design OS UI lit; the
+`DESIGN.md` is what the coding agent actually builds from.
+
+**File 1 — `product/design-system/colors.json`**
+
 ```json
 {
-  "primary": "[color]",
-  "secondary": "[color]",
-  "neutral": "[color]"
+  "primary": "[tailwind palette name closest to the accent]",
+  "secondary": "[tailwind palette name closest to the signal]",
+  "neutral": "[the neutral ramp: zinc | slate | stone | gray | neutral]"
 }
 ```
 
-**File 2:** `/product/design-system/typography.json`
+These stay Tailwind *names*, not hex — `src/lib/design-system-loader.ts` and
+`DesignPage`'s `colorMap` both key off names, and writing a hex here breaks
+the swatch preview.
+
+**File 2 — `product/design-system/typography.json`**
+
 ```json
 {
-  "heading": "[Font Name]",
-  "body": "[Font Name]",
-  "mono": "[Font Name]"
+  "heading": "[Google Font name]",
+  "body": "[Google Font name]",
+  "mono": "[Google Font name]"
 }
 ```
 
-## Step 7: Confirm Completion
+**File 3 — `product/DESIGN.md`** — the pivot file.
 
-Let the user know:
+When a theme was picked, start from `src/presets/<id>/DESIGN.md` and keep its
+structure and prose. Then:
 
-"I've saved your design tokens:
-- `/product/design-system/colors.json`
-- `/product/design-system/typography.json`
+- Replace the `## Colors` section with the **compiled** 12 semantic tokens
+  from `tokens.json`, both modes, with their measured ratios. The compiled
+  values are the ones that are accessible; the kit's originals are not
+  necessarily.
+- Add a `## Provenance` section naming the source (`author/slug`, its
+  designmd.ai URL, the license) and listing any `contrastCorrections`.
+- Drop any component documented for a capability in the product's
+  `## Out of Scope (V1)` matrix.
 
-**Your palette:**
-- Primary: `[color]` — for buttons, links, key actions
-- Secondary: `[color]` — for tags, highlights, secondary elements
-- Neutral: `[color]` — for backgrounds, text, borders
+Use this skeleton:
 
-**Your fonts:**
-- [Heading Font] for headings
-- [Body Font] for body text
-- [Mono Font] for code
+```markdown
+# [Product Name] — Design System
 
-These will be used when creating screen designs for your sections.
+## Overview
+[One paragraph: the visual character, in the product's own terms.]
 
-Next step: Run `/design-shell` to design your application's navigation and layout."
+## Colors
 
-## Reference: Tailwind Color Palette
+### Light
+| Token | Value | Contrast |
+|---|---|---|
+| page | `#ffffff` | — |
+| surface | `#fafafa` | — |
+| hairline | `#e4e4e7` | — |
+| ink-display | `#09090b` | 20.4:1 |
+| ink-body | `#3f3f46` | 10.4:1 |
+| ink-muted | `#52525b` | 7.6:1 |
+| accent | `#22c55e` | — |
+| accent-faded | `#e5f8ec` | — |
+| accent-display | `#065f46` | 7.7:1 |
+| on-accent | `#052e16` | 6.5:1 |
+| signal | `#fcd34d` | — |
+| signal-faded | `#fffaea` | — |
+| signal-display | `#92400e` | 7.1:1 |
+| danger | `#dc2626` | — |
+| danger-faded | `#fbe5e5` | — |
+| danger-display | `#991b1b` | 8.3:1 |
 
-Available colors (each has shades 50-950):
-- **Warm:** `red`, `orange`, `amber`, `yellow`, `lime`
-- **Cool:** `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`
-- **Purple:** `indigo`, `violet`, `purple`, `fuchsia`, `pink`, `rose`
-- **Neutral:** `slate`, `gray`, `zinc`, `neutral`, `stone`
+### Dark
+[Same table, dark values.]
 
-## Reference: Popular Google Font Pairings
+**`on-accent` is not `page`.** It is the foreground for a solid accent fill.
+A bright accent under white text is unreadable — use `on-accent` on
+`bg-accent`, always.
 
-- **Modern & Clean:** DM Sans + DM Sans + IBM Plex Mono
-- **Professional:** Inter + Inter + JetBrains Mono
-- **Friendly:** Nunito Sans + Nunito Sans + Fira Code
-- **Bold & Modern:** Space Grotesk + Inter + Source Code Pro
-- **Editorial:** Playfair Display + Source Sans 3 + IBM Plex Mono
-- **Tech-forward:** JetBrains Mono + Inter + JetBrains Mono
+## Typography
+- **Display Font**: [name]
+- **Body Font**: [name]
+- **Code Font**: [name]
 
-## Important Notes
+[Scale, weights, letter-spacing.]
 
-- Colors should be Tailwind palette names (not hex codes)
-- Fonts should be exact Google Fonts names
-- Keep suggestions contextual to the product type
-- The mono font is optional but recommended for any product with code/technical content
-- Design tokens apply to screen designs only — the Design OS app keeps its own aesthetic
+## Motion
+- Spring: `cubic-bezier(0.16, 1, 0.3, 1)`
+- Press: `scale(0.98)` on every clickable surface; `scale(0.95)` on small controls
+- Exit is faster than entrance (100–150ms `ease-in`)
+- All of it gated on `prefers-reduced-motion`
+
+## Border Radius
+[The ladder, and the concentric rule: R_outer = R_inner + padding.]
+
+## Elevation
+[Shadow tokens.]
+
+## Spacing
+[Base unit and scale.]
+
+## Components
+[Buttons, badges, inputs, tables, dialogs — each with its token bindings.]
+
+## Do's and Don'ts
+[Carried from the source theme, plus the product's own constraints.]
+
+## Provenance
+Ingested from [designmd.ai/author/slug](url) · license: [license]
+Compiled locally by `scripts/compile-presets.mjs`. No runtime dependency on
+any external service.
+
+[If applicable:]
+Contrast corrections applied: `ink-muted` `#9c9c9c` (2.63:1) → `#555555`
+(7.14:1) to meet the WCAG AAA floor.
+```
+
+---
+
+## Step 6: Confirm completion
+
+> "Design system locked:
+> - `product/DESIGN.md` — the pivot file your coding agent builds from
+> - `product/design-system/colors.json`
+> - `product/design-system/typography.json`
+>
+> Visit `/design` to see it rendered — the live components there are painted
+> from exactly these tokens, and `/export-product` will ship exactly what you
+> see.
+>
+> Next: run `/design-shell` to design your application's navigation and layout."
+
+---
+
+## Notes
+
+- `colors.json` and `typography.json` keep the **existing contracts**. Do not
+  change their shape — `design-system-loader.ts` validates the exact keys
+  `primary` / `secondary` / `neutral` and `heading` / `body` / `mono`.
+- Design tokens apply to the **product's** screen designs. Scaffold's own
+  console keeps its stone/lime chrome and its Midnight Navy dark mode — the
+  theme studio's preview is scoped to `[data-scaffold-preset]` precisely so it
+  cannot leak into the app around it.
+- Re-running this command is non-destructive: read the existing
+  `product/DESIGN.md` first and offer to refresh tokens, swap the theme, or
+  leave it.
+- To re-ingest or extend the catalog, run the MCP ingestion again and then
+  `node scripts/compile-presets.mjs`. The registry is regenerated from the
+  `DESIGN.md` files on disk; nothing is fetched at build or at runtime.

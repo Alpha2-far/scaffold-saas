@@ -51,9 +51,10 @@ function MetricTile({ icon: Icon, label, value, detail, state, mono = false }: M
     <StaggerItem className="h-full">
       <div
         className={cn(
-          'group h-full rounded-lg border border-stone-200/70 dark:border-slate-800/80',
-          'bg-white/60 dark:bg-[#070e28]/60 backdrop-blur-sm px-4 py-3',
-          'ring-1 ring-transparent transition-[box-shadow,border-color] duration-200',
+          'group h-full rounded-xl border border-stone-200/80 dark:border-[#1E293B]',
+          'bg-white/70 dark:bg-[#070e28]/70 backdrop-blur-md px-4 py-3.5',
+          'ring-1 ring-transparent transition-all duration-200 hover:-translate-y-0.5',
+          'hover:shadow-md dark:hover:shadow-[0_8px_24px_rgba(1,6,43,0.6)]',
           tone.ring
         )}
       >
@@ -64,7 +65,7 @@ function MetricTile({ icon: Icon, label, value, detail, state, mono = false }: M
           </span>
           <span className={cn('ml-auto w-1.5 h-1.5 rounded-full', tone.dot)} aria-hidden="true" />
         </div>
-        <p className={cn('text-lg leading-none font-semibold', mono && 'font-mono text-base', tone.value)}>
+        <p className={cn('text-lg leading-none font-semibold tabular-nums', mono && 'font-mono text-base', tone.value)}>
           {value}
         </p>
         <p className="mt-1.5 text-xs text-stone-500 dark:text-slate-400 truncate">{detail}</p>

@@ -77,14 +77,19 @@ export function SectionsPage() {
         {sections.length === 0 ? (
           <EmptyState type="roadmap" />
         ) : (
-          <Card className="border-stone-200 dark:border-stone-700 shadow-sm">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg font-semibold text-stone-900 dark:text-stone-100">
-                All Sections
-              </CardTitle>
+          <Card className="liquid-glass-card rounded-2xl overflow-hidden">
+            <CardHeader className="pb-4 border-b border-stone-200/50 dark:border-stone-800/60">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg font-semibold text-stone-900 dark:text-stone-100">
+                  All Sections
+                </CardTitle>
+                <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-full bg-lime-500/10 text-lime-600 dark:text-lime-400 border border-lime-500/20 tabular-nums">
+                  {completedSections} / {sections.length} Ready
+                </span>
+              </div>
             </CardHeader>
             <CardContent className="p-0">
-              <ul className="divide-y divide-stone-200 dark:divide-stone-700">
+              <ul className="divide-y divide-stone-200/40 dark:divide-stone-800/60">
                 {sections.map((section) => {
                   const progress = sectionProgressMap[section.id]
                   const isComplete = progress?.hasSpec && progress?.hasData && progress?.hasScreenDesigns
@@ -93,18 +98,18 @@ export function SectionsPage() {
                     <li key={section.id}>
                       <button
                         onClick={() => navigate(`/sections/${section.id}`)}
-                        className="w-full px-6 py-4 flex items-center justify-between gap-4 text-left hover:bg-stone-50 dark:hover:bg-stone-800/50 transition-colors"
+                        className="w-full px-6 py-4 flex items-center justify-between gap-4 text-left hover:bg-stone-50/80 dark:hover:bg-stone-800/40 transition-all duration-200 group"
                       >
                         <div className="flex items-start gap-4 min-w-0">
                           {/* Status indicator */}
                           <div className="shrink-0 mt-0.5">
                             {isComplete ? (
-                              <div className="w-6 h-6 rounded-full bg-lime-100 dark:bg-lime-900/30 flex items-center justify-center">
-                                <Check className="w-3.5 h-3.5 text-lime-600 dark:text-lime-400" strokeWidth={2.5} />
+                              <div className="w-7 h-7 rounded-lg bg-lime-500/15 border border-lime-500/30 flex items-center justify-center">
+                                <Check className="w-4 h-4 text-lime-600 dark:text-lime-400" strokeWidth={2.5} />
                               </div>
                             ) : (
-                              <div className="w-6 h-6 rounded-full bg-stone-200 dark:bg-stone-700 flex items-center justify-center">
-                                <span className="text-xs font-medium text-stone-600 dark:text-stone-400">
+                              <div className="w-7 h-7 rounded-lg bg-stone-100 dark:bg-stone-800/90 border border-stone-200 dark:border-stone-700/60 flex items-center justify-center">
+                                <span className="text-xs font-mono font-semibold text-stone-600 dark:text-stone-400 tabular-nums">
                                   {section.order}
                                 </span>
                               </div>
@@ -112,7 +117,7 @@ export function SectionsPage() {
                           </div>
 
                           <div className="min-w-0 flex-1">
-                            <h3 className="font-medium text-stone-900 dark:text-stone-100 truncate">
+                            <h3 className="font-semibold text-stone-900 dark:text-stone-100 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                               {section.title}
                             </h3>
                             <p className="text-sm text-stone-500 dark:text-stone-400 mt-0.5 line-clamp-1">
@@ -120,7 +125,7 @@ export function SectionsPage() {
                             </p>
 
                             {/* Progress indicators */}
-                            <div className="flex items-center gap-3 mt-2">
+                            <div className="flex items-center gap-3 mt-2.5">
                               <ProgressDot label="Spec" done={progress?.hasSpec} />
                               <ProgressDot label="Data" done={progress?.hasData} />
                               <ProgressDot
@@ -136,7 +141,7 @@ export function SectionsPage() {
                           </div>
                         </div>
 
-                        <ChevronRight className="w-4 h-4 text-stone-400 dark:text-stone-500 flex-shrink-0" strokeWidth={1.5} />
+                        <ChevronRight className="w-4 h-4 text-stone-400 dark:text-stone-500 flex-shrink-0 transform group-hover:translate-x-1 transition-transform duration-200" strokeWidth={2} />
                       </button>
                     </li>
                   )

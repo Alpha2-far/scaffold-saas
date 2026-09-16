@@ -1,12 +1,22 @@
-import { useMemo } from 'react'
+import { lazy, Suspense, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AppLayout } from '@/components/AppLayout'
 import { EmptyState } from '@/components/EmptyState'
 import { StepIndicator, type StepStatus } from '@/components/StepIndicator'
 import { NextPhaseButton } from '@/components/NextPhaseButton'
+import { ScaffoldLogoLoader } from '@/components/ScaffoldLogoLoader'
 import { loadProductData } from '@/lib/product-loader'
 import { ChevronRight, Layout } from 'lucide-react'
+
+/**
+ * The theme studio carries the whole preset registry and its preview
+ * stylesheet. Split out so the 42 other routes don't pay for it — importing
+ * it eagerly pushed the main bundle over the 500 kB budget.
+ */
+const ThemeStudio = lazy(() =>
+  import('@/components/ThemeStudio').then((m) => ({ default: m.ThemeStudio })),
+)
 
 // Map Tailwind color names to actual color values for preview
 const colorMap: Record<string, { light: string; base: string; dark: string }> = {
@@ -87,25 +97,48 @@ export function DesignPage() {
           </p>
         </div>
 
+        {/* The theme engine. It sits above the step flow because choosing the
+            visual language is what the rest of this page then records — and
+            because what is previewed here is, byte for byte, what lands in
+            product-plan/. */}
+        <Card className="liquid-glass-card rounded-2xl">
+          <CardContent className="pt-6">
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center py-20">
+                  <ScaffoldLogoLoader label="Chargement du moteur de thèmes…" />
+                </div>
+              }
+            >
+              <ThemeStudio />
+            </Suspense>
+          </CardContent>
+        </Card>
+
         {/* Step 1: Design Tokens */}
         <StepIndicator step={1} status={stepStatuses[0]}>
           {!designSystem?.colors && !designSystem?.typography ? (
             <EmptyState type="design-system" />
           ) : (
-            <Card className="border-stone-200 dark:border-stone-700 shadow-sm">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-lg font-semibold text-stone-900 dark:text-stone-100">
-                  Design Tokens
-                </CardTitle>
+            <Card className="liquid-glass-card rounded-2xl">
+              <CardHeader className="pb-4 border-b border-stone-200/50 dark:border-stone-800/60">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg font-semibold text-stone-900 dark:text-stone-100">
+                    Design Tokens
+                  </CardTitle>
+                  <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 tabular-nums">
+                    Scaffold Studio V1
+                  </span>
+                </div>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-6 pt-6">
                 {/* Colors */}
                 {designSystem?.colors && (
                   <div>
-                    <h4 className="text-sm font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-4">
-                      Colors
+                    <h4 className="text-xs font-semibold text-stone-400 dark:text-stone-400 uppercase tracking-wider mb-3">
+                      Palette & Harmonie Chromatique
                     </h4>
-                    <div className="grid grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <ColorSwatch
                         label="Primary"
                         colorName={designSystem.colors.primary}
@@ -125,26 +158,43 @@ export function DesignPage() {
                 {/* Typography */}
                 {designSystem?.typography && (
                   <div>
-                    <h4 className="text-sm font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-4">
-                      Typography
+                    <h4 className="text-xs font-semibold text-stone-400 dark:text-stone-400 uppercase tracking-wider mb-3">
+                      Spécifications Typographiques
                     </h4>
-                    <div className="grid grid-cols-3 gap-6">
-                      <div>
-                        <p className="text-xs text-stone-500 dark:text-stone-400 mb-1">Heading</p>
-                        <p className="font-semibold text-stone-900 dark:text-stone-100">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div className="rounded-xl border border-stone-200/60 dark:border-stone-800/80 bg-stone-50/50 dark:bg-stone-900/40 p-4 transition-colors hover:border-emerald-500/30">
+                        <span className="text-[11px] font-mono text-stone-400 dark:text-stone-400 uppercase tracking-wider block mb-1">
+                          Heading
+                        </span>
+                        <p className="font-semibold text-base text-stone-900 dark:text-stone-100 mb-1 truncate">
                           {designSystem.typography.heading}
                         </p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-stone-500 dark:text-stone-400 mb-1">Body</p>
-                        <p className="text-stone-900 dark:text-stone-100">
-                          {designSystem.typography.body}
+                        <p className="text-xs text-stone-500 dark:text-stone-400 italic">
+                          Aa Bb Gg 123
                         </p>
                       </div>
-                      <div>
-                        <p className="text-xs text-stone-500 dark:text-stone-400 mb-1">Mono</p>
-                        <p className="font-mono text-stone-900 dark:text-stone-100">
+
+                      <div className="rounded-xl border border-stone-200/60 dark:border-stone-800/80 bg-stone-50/50 dark:bg-stone-900/40 p-4 transition-colors hover:border-emerald-500/30">
+                        <span className="text-[11px] font-mono text-stone-400 dark:text-stone-400 uppercase tracking-wider block mb-1">
+                          Body
+                        </span>
+                        <p className="font-medium text-base text-stone-900 dark:text-stone-100 mb-1 truncate">
+                          {designSystem.typography.body}
+                        </p>
+                        <p className="text-xs text-stone-500 dark:text-stone-400 italic">
+                          Aa Bb Gg 123
+                        </p>
+                      </div>
+
+                      <div className="rounded-xl border border-stone-200/60 dark:border-stone-800/80 bg-stone-50/50 dark:bg-stone-900/40 p-4 transition-colors hover:border-emerald-500/30">
+                        <span className="text-[11px] font-mono text-stone-400 dark:text-stone-400 uppercase tracking-wider block mb-1">
+                          Mono / Code
+                        </span>
+                        <p className="font-mono text-sm text-stone-900 dark:text-stone-100 mb-1 truncate">
                           {designSystem.typography.mono}
+                        </p>
+                        <p className="font-mono text-xs text-stone-500 dark:text-stone-400 tabular-nums">
+                          0123456789
                         </p>
                       </div>
                     </div>
@@ -152,10 +202,12 @@ export function DesignPage() {
                 )}
 
                 {/* Edit hint */}
-                <div className="bg-stone-100 dark:bg-stone-800 rounded-md px-4 py-2.5">
-                  <p className="text-xs text-stone-500 dark:text-stone-400">
-                    Run <code className="font-mono text-stone-700 dark:text-stone-300">/design-tokens</code> to update
+                <div className="rounded-xl bg-stone-100/70 dark:bg-stone-900/60 border border-stone-200/50 dark:border-stone-800/80 px-4 py-2.5 flex items-center justify-between">
+                  <p className="text-xs text-stone-500 dark:text-stone-400 flex items-center gap-2">
+                    <span className="inline-block w-2 h-2 rounded-full bg-emerald-500" />
+                    Lancer <code className="font-mono text-stone-700 dark:text-stone-300 font-semibold">/design-tokens</code> pour réajuster la charte
                   </p>
+                  <span className="text-[10px] font-mono text-stone-400 uppercase">Interactive</span>
                 </div>
               </CardContent>
             </Card>
@@ -167,72 +219,90 @@ export function DesignPage() {
           {!shell?.spec ? (
             <EmptyState type="shell" />
           ) : (
-            <Card className="border-stone-200 dark:border-stone-700 shadow-sm">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-lg font-semibold text-stone-900 dark:text-stone-100">
-                  Application Shell
-                </CardTitle>
+            <Card className="liquid-glass-card rounded-2xl">
+              <CardHeader className="pb-4 border-b border-stone-200/50 dark:border-stone-800/60">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg font-semibold text-stone-900 dark:text-stone-100">
+                    Application Shell & Architecture
+                  </CardTitle>
+                  <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-full bg-lime-500/10 text-lime-600 dark:text-lime-400 border border-lime-500/20 tabular-nums">
+                    {shell.spec.navigationItems.length} Nav Items
+                  </span>
+                </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-5 pt-6">
                 {/* Overview */}
                 {shell.spec.overview && (
-                  <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
-                    {shell.spec.overview}
-                  </p>
+                  <div className="rounded-xl border border-stone-200/60 dark:border-stone-800/80 bg-stone-50/50 dark:bg-stone-900/40 p-4">
+                    <p className="text-stone-700 dark:text-stone-300 text-sm leading-relaxed">
+                      {shell.spec.overview}
+                    </p>
+                  </div>
                 )}
 
                 {/* Navigation items */}
                 {shell.spec.navigationItems.length > 0 && (
                   <div>
-                    <h4 className="text-sm font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-2">
-                      Navigation
+                    <h4 className="text-xs font-semibold text-stone-400 dark:text-stone-400 uppercase tracking-wider mb-2.5">
+                      Navigation Prévue
                     </h4>
-                    <ul className="space-y-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {shell.spec.navigationItems.map((item, index) => {
-                        // Parse markdown-style bold: **text** → <strong>text</strong>
                         const parts = item.split(/\*\*([^*]+)\*\*/)
                         return (
-                          <li key={index} className="flex items-center gap-2 text-stone-700 dark:text-stone-300">
-                            <span className="w-1 h-1 rounded-full bg-stone-400 dark:bg-stone-500" />
-                            {parts.map((part, i) =>
-                              i % 2 === 1 ? (
-                                <strong key={i} className="font-semibold">{part}</strong>
-                              ) : (
-                                <span key={i}>{part}</span>
-                              )
-                            )}
-                          </li>
+                          <div
+                            key={index}
+                            className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-stone-100/60 dark:bg-stone-900/50 border border-stone-200/40 dark:border-stone-800/60 text-stone-700 dark:text-stone-300 text-sm"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-lime-500 shrink-0" />
+                            <span className="truncate">
+                              {parts.map((part, i) =>
+                                i % 2 === 1 ? (
+                                  <strong key={i} className="font-semibold text-stone-900 dark:text-stone-100">{part}</strong>
+                                ) : (
+                                  <span key={i}>{part}</span>
+                                )
+                              )}
+                            </span>
+                          </div>
                         )
                       })}
-                    </ul>
+                    </div>
                   </div>
                 )}
 
                 {/* View Shell Design Link */}
                 {shell.hasComponents && (
-                  <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
+                  <div className="pt-2">
                     <Link
                       to="/shell/design"
-                      className="flex items-center justify-between gap-4 py-2 hover:text-stone-900 dark:hover:text-stone-100 transition-colors group"
+                      className="flex items-center justify-between gap-4 p-3.5 rounded-xl bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-200 group"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-md bg-stone-200 dark:bg-stone-700 flex items-center justify-center">
-                          <Layout className="w-4 h-4 text-stone-600 dark:text-stone-300" strokeWidth={1.5} />
+                        <div className="w-9 h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                          <Layout className="w-4 h-4" strokeWidth={1.5} />
                         </div>
-                        <span className="font-medium text-stone-700 dark:text-stone-300 group-hover:text-stone-900 dark:group-hover:text-stone-100">
-                          View Shell Design
-                        </span>
+                        <div>
+                          <span className="font-medium text-sm text-stone-900 dark:text-stone-100 block">
+                            Inspecter le Shell Maquetté
+                          </span>
+                          <span className="text-xs text-stone-500 dark:text-stone-400">
+                            Visualiser le layout, le header et la barre latérale
+                          </span>
+                        </div>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-stone-400 dark:text-stone-500" strokeWidth={1.5} />
+                      <ChevronRight className="w-4 h-4 text-emerald-500 transform group-hover:translate-x-1 transition-transform duration-200" strokeWidth={2} />
                     </Link>
                   </div>
                 )}
 
                 {/* Edit hint */}
-                <div className="bg-stone-100 dark:bg-stone-800 rounded-md px-4 py-2.5">
-                  <p className="text-xs text-stone-500 dark:text-stone-400">
-                    Run <code className="font-mono text-stone-700 dark:text-stone-300">/design-shell</code> to update
+                <div className="rounded-xl bg-stone-100/70 dark:bg-stone-900/60 border border-stone-200/50 dark:border-stone-800/80 px-4 py-2.5 flex items-center justify-between">
+                  <p className="text-xs text-stone-500 dark:text-stone-400 flex items-center gap-2">
+                    <span className="inline-block w-2 h-2 rounded-full bg-lime-500" />
+                    Lancer <code className="font-mono text-stone-700 dark:text-stone-300 font-semibold">/design-shell</code> pour recalculer le shell
                   </p>
+                  <span className="text-[10px] font-mono text-stone-400 uppercase">Shell Builder</span>
                 </div>
               </CardContent>
             </Card>
@@ -259,26 +329,35 @@ function ColorSwatch({ label, colorName }: ColorSwatchProps) {
   const colors = colorMap[colorName] || colorMap.stone
 
   return (
-    <div>
-      <div className="flex gap-0.5 mb-2">
+    <div className="rounded-xl border border-stone-200/60 dark:border-stone-800/80 bg-stone-50/50 dark:bg-stone-900/40 p-3.5 space-y-3 transition-colors hover:border-emerald-500/30">
+      {/* 3-shade horizontal strip */}
+      <div className="flex h-12 rounded-lg overflow-hidden border border-black/5 dark:border-white/10 shadow-inner">
         <div
-          className="flex-1 h-14 rounded-l-md"
+          className="flex-1 transition-opacity hover:opacity-90"
           style={{ backgroundColor: colors.light }}
-          title={`${colorName}-300`}
+          title={`${colorName}-300: ${colors.light}`}
         />
         <div
-          className="flex-[2] h-14"
+          className="flex-[2] transition-opacity hover:opacity-90"
           style={{ backgroundColor: colors.base }}
-          title={`${colorName}-500`}
+          title={`${colorName}-500: ${colors.base}`}
         />
         <div
-          className="flex-1 h-14 rounded-r-md"
+          className="flex-1 transition-opacity hover:opacity-90"
           style={{ backgroundColor: colors.dark }}
-          title={`${colorName}-600`}
+          title={`${colorName}-600: ${colors.dark}`}
         />
       </div>
-      <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{label}</p>
-      <p className="text-xs text-stone-500 dark:text-stone-400">{colorName}</p>
+
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-xs font-semibold text-stone-900 dark:text-stone-100">{label}</p>
+          <p className="text-[11px] text-stone-500 dark:text-stone-400 capitalize">{colorName}</p>
+        </div>
+        <span className="text-[10px] font-mono font-medium text-stone-500 dark:text-stone-400 tabular-nums px-2 py-0.5 rounded-md bg-stone-200/60 dark:bg-stone-800/60">
+          {colors.base}
+        </span>
+      </div>
     </div>
   )
 }

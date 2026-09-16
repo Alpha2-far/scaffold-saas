@@ -13,6 +13,7 @@ Verify the minimum requirements exist:
 
 **Recommended (show warning if missing):**
 - `/product/data-shape/data-shape.md` — Product entities
+- `/product/DESIGN.md` — The design system pivot file (written by `/design-tokens`)
 - `/product/design-system/colors.json` — Color tokens
 - `/product/design-system/typography.json` — Typography tokens
 - `src/shell/components/AppShell.tsx` — Application shell
@@ -46,13 +47,14 @@ Read all relevant files:
 1. `/product/product-overview.md` — Product name, description, features
 2. `/product/product-roadmap.md` — List of sections in order
 3. `/product/data-shape/data-shape.md` (if exists)
-4. `/product/design-system/colors.json` (if exists)
-5. `/product/design-system/typography.json` (if exists)
-6. `/product/shell/spec.md` (if exists)
-7. For each section: `spec.md`, `data.json`, `types.ts`
-8. List screen design components in `src/sections/` and `src/shell/`
-9. `/product/prd.md` (if exists) — the full PRD and its **Out of Scope — V1 matrix**
-10. `/product/milestones/` (if exists) — the development milestone sequence written by `/product-vision`
+4. `/product/DESIGN.md` (if exists) — the design system pivot file
+5. `/product/design-system/colors.json` (if exists)
+6. `/product/design-system/typography.json` (if exists)
+7. `/product/shell/spec.md` (if exists)
+8. For each section: `spec.md`, `data.json`, `types.ts`
+9. List screen design components in `src/sections/` and `src/shell/`
+10. `/product/prd.md` (if exists) — the full PRD and its **Out of Scope — V1 matrix**
+11. `/product/milestones/` (if exists) — the development milestone sequence written by `/product-vision`
 
 ### Scope-lock detection
 
@@ -60,6 +62,7 @@ Two conditional flags drive the scope-lock content in every step below. Resolve 
 
 - **`PRD_EXISTS`** — true if `/product/prd.md` is present. This file carries the locked V1 scope and the out-of-scope matrix.
 - **`OUT_OF_SCOPE_EXISTS`** — true if `/product/product-overview.md` contains an `## Out of Scope (V1)` section. `/product-vision` writes that mirror; a hand-written overview may not have it.
+- **`DESIGN_EXISTS`** — true if `/product/DESIGN.md` is present. This file is the design system contract: the compiled 12 semantic tokens, their measured contrast ratios, the motion curves and the component bindings. `/design-tokens` writes it.
 
 If `OUT_OF_SCOPE_EXISTS`, capture that section's body **verbatim** — you transport it in Step 4.
 
@@ -91,10 +94,23 @@ product-plan/
 │       ├── 03-[second-section].md
 │       └── ...
 │
+├── DESIGN.md                    # Design system contract (if DESIGN_EXISTS)
+│
 ├── design-system/               # Design tokens
 │   ├── tokens.css
 │   ├── tailwind-colors.md
-│   └── fonts.md
+│   ├── fonts.md
+│   └── components-ui/           # Portable primitives (if DESIGN_EXISTS)
+│       ├── button.tsx
+│       ├── input.tsx
+│       ├── badge.tsx
+│       ├── dialog.tsx
+│       ├── data-table.tsx
+│       ├── checkbox.tsx
+│       ├── radio.tsx
+│       ├── select.tsx
+│       ├── theme-toggle.tsx
+│       └── design-system.css
 │
 ├── data-shapes/                 # UI data contracts
 │   ├── README.md
@@ -188,6 +204,77 @@ If `PRD_EXISTS`, copy `product/prd.md` to `product-plan/prd.md` **verbatim** —
 
 If `PRD_EXISTS` is false, skip this and omit `prd.md` from the directory tree, the README, the prompt files, and the completion message.
 
+### Step 4c: Package the design system hermetically
+
+If `DESIGN_EXISTS`, the handoff carries the design system as a **sealed unit**: the contract, the tokens, and the primitives that implement them. A coding agent that receives this package never has to look anything up, and never has to guess a value.
+
+Hermetic means exactly this: **`product-plan/` contains everything needed to build the UI, and references nothing outside itself.** No designmd.ai URL to fetch. No API key. No Scaffold install. No "see the design system at …". If a value matters, it is in the package.
+
+**1. Copy the contract verbatim.**
+
+Copy `product/DESIGN.md` to `product-plan/DESIGN.md` — no summarizing, no reformatting, no dropping the contrast tables. This is the WYSIWYB seal: what the user approved on `/design` is what the implementing agent receives. An edited copy is a different design system.
+
+**2. Derive `design-system/tokens.css` from `DESIGN.md`, not from `colors.json`.**
+
+`colors.json` carries Tailwind palette *names* for Scaffold's own swatch UI. `DESIGN.md` carries the measured hex values. The CSS must come from the hex:
+
+```css
+/* Generated from product-plan/DESIGN.md — the 12 semantic tokens. */
+@theme {
+  --color-page: #ffffff;
+  --color-surface: #fafafa;
+  --color-hairline: #e4e4e7;
+  --color-ink-display: #09090b;
+  --color-ink-body: #3f3f46;
+  --color-ink-muted: #52525b;
+  --color-accent: #22c55e;
+  --color-accent-faded: #e5f8ec;
+  --color-accent-display: #065f46;
+  --color-on-accent: #052e16;
+  --color-signal: #fcd34d;
+  --color-signal-faded: #fffaea;
+  --color-signal-display: #92400e;
+  --color-danger: #dc2626;
+  --color-danger-faded: #fbe5e5;
+  --color-danger-display: #991b1b;
+
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.dark {
+  /* the dark column of the same table */
+}
+```
+
+Emit **both** modes. A single-mode token file guarantees the agent invents the other one.
+
+**3. Copy the primitives.**
+
+Copy from `bm-skills/skills/bm-design-system/references/` into `product-plan/design-system/components-ui/`:
+
+- `components-ui/{button,button-dropdown,input,badge,dialog,checkbox,radio,select,data-table,dropdown-menu,theme-toggle}.tsx`
+- `styles/design-system.css` → `components-ui/design-system.css`
+- `lib/utils.ts` → `components-ui/utils.ts` (the `cn` helper the primitives import)
+
+These are props-based React 19 + Tailwind v4 components that read the tokens above and nothing else. They are the executable half of the contract: the agent does not reimplement a button from a paragraph describing one.
+
+Rewrite their `@/lib/utils` imports to `./utils` so the folder resolves standalone, with no path alias configured.
+
+**4. Write `design-system/README.md`** stating the three rules that most often get broken:
+
+> - **`on-accent`, never `page`, on a solid accent fill.** A bright accent under white text is unreadable. `.btn-primary` is `bg-accent text-on-accent`.
+> - **Every ink in this package clears WCAG AAA (7:1)** against the surface it is specified for, in both modes. The ratios are in `DESIGN.md`. Do not substitute a color without re-measuring.
+> - **Concentric radii**: `R_outer = R_inner + padding`. A `p-6` panel containing `rounded-lg` children is `rounded-2xl`, not `rounded-lg`.
+
+**5. Scope check.** If `OUT_OF_SCOPE_EXISTS`, do not carry primitives or `DESIGN.md` component sections that serve a capability the V1 matrix excluded. The design system cannot smuggle in surface area the PRD ruled out.
+
+If `DESIGN_EXISTS` is false, skip this step entirely and omit `DESIGN.md` and `components-ui/` from the directory tree, the README, the prompt files and the completion message. Say so once:
+
+> "Note: no `product/DESIGN.md` found. Your handoff carries color and font tokens but no design system contract — the implementing agent will make its own component decisions. Run `/design-tokens` if you want the visual system locked and exported."
+
+Never synthesize a `DESIGN.md` to fill the gap. An invented design system reads as a decision the product owner never made.
+
 ## Step 5: Generate Milestone Instructions
 
 Each milestone instruction file should begin with the following preamble (adapt the milestone-specific details):
@@ -247,9 +334,12 @@ Set up the design tokens and application shell — the persistent chrome that wr
 [If design tokens exist:]
 Configure your styling system with these tokens:
 
-- See `product-plan/design-system/tokens.css` for CSS custom properties
+- **Read `product-plan/DESIGN.md` first** — it is the design system contract: the 12 semantic tokens with their measured contrast ratios, the motion curves, the radius ladder and the component bindings. Every value you need is in it.
+- See `product-plan/design-system/tokens.css` for CSS custom properties (both modes)
+- See `product-plan/design-system/components-ui/` for the props-based primitives that implement the contract — use them rather than rebuilding buttons, inputs, badges, dialogs and tables from scratch
 - See `product-plan/design-system/tailwind-colors.md` for Tailwind configuration
 - See `product-plan/design-system/fonts.md` for Google Fonts setup
+- Use `text-on-accent` on any solid `bg-accent` fill, never `text-page`
 
 [If not:]
 Define your own design tokens based on your brand guidelines.
@@ -874,10 +964,11 @@ Please carefully read and analyze the following files:
 
 1. **@product-plan/product-overview.md** — Product summary with sections and entity overview
 2. **@product-plan/prd.md** — The locked V1 scope, including the **Out of Scope — V1 matrix** *(omit this line if `prd.md` wasn't generated)*
-3. **@product-plan/instructions/one-shot-instructions.md** — Complete implementation instructions for all milestones
+3. **@product-plan/DESIGN.md** — The design system contract: the 12 semantic tokens with their measured contrast ratios, the motion curves and the component bindings *(omit this line if `DESIGN.md` wasn't generated)*
+4. **@product-plan/instructions/one-shot-instructions.md** — Complete implementation instructions for all milestones
 
 After reading these, also review:
-- **@product-plan/design-system/** — Color and typography tokens
+- **@product-plan/design-system/** — Token CSS (both modes), fonts, and `components-ui/` — the props-based primitives that implement the contract
 - **@product-plan/data-shapes/** — UI data contracts (the shapes of data the components expect)
 - **@product-plan/shell/** — Application shell components
 - **@product-plan/sections/** — All section components, types, sample data, and test specs
@@ -896,6 +987,8 @@ Lastly, ask me if I have any additional notes for this implementation.
 Once I answer your questions, create a comprehensive implementation plan before coding.
 
 **Scope rule:** treat the PRD's **Out of Scope — V1 matrix** as binding. Do not build anything on it, and do not add features that appear in neither the instructions nor the PRD's in-scope list. If the designs seem to require an out-of-scope item, raise it with me instead of building it.
+
+**Design rule:** `product-plan/DESIGN.md` is binding. Use its token values verbatim and the primitives in `product-plan/design-system/components-ui/` rather than rebuilding them. Put `text-on-accent` on any solid `bg-accent` fill — never `text-page`. Do not substitute a color without re-measuring its contrast; every ink in the package clears 7:1 by construction.
 
 ```
 
@@ -922,7 +1015,8 @@ Please carefully read and analyze the following files:
 
 1. **@product-plan/product-overview.md** — Product summary for overall context
 2. **@product-plan/prd.md** — The locked V1 scope, including the **Out of Scope — V1 matrix** *(omit this line if `prd.md` wasn't generated)*
-3. **@product-plan/instructions/incremental/NN-SECTION_ID.md** — Specific instructions for this section
+3. **@product-plan/DESIGN.md** — The design system contract: the 12 semantic tokens with their measured contrast ratios, the motion curves and the component bindings *(omit this line if `DESIGN.md` wasn't generated)*
+4. **@product-plan/instructions/incremental/NN-SECTION_ID.md** — Specific instructions for this section
 
 Also review the section assets:
 - **@product-plan/sections/SECTION_ID/README.md** — Feature overview and design intent
@@ -944,6 +1038,8 @@ Lastly, ask me if I have any additional notes for this implementation.
 Once I answer your questions, proceed with implementation.
 
 **Scope rule:** the PRD's **Out of Scope — V1 matrix** is binding for this section too. Build what this section's instructions specify — nothing from the matrix, and nothing that appears in neither the instructions nor the PRD's in-scope list. Raise conflicts with me instead of resolving them by adding scope.
+
+**Design rule:** `product-plan/DESIGN.md` is binding. Use its token values verbatim and the primitives in `product-plan/design-system/components-ui/` rather than rebuilding them. Put `text-on-accent` on any solid `bg-accent` fill — never `text-page`. Do not substitute a color without re-measuring its contrast; every ink in the package clears 7:1 by construction.
 
 ```
 

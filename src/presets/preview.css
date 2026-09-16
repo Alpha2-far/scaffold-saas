@@ -1,0 +1,192 @@
+/**
+ * Live preview surface for the theme gallery on /design.
+ *
+ * Every rule here reads `--ds-*` and nothing else. Those variables are set by
+ * the generated per-preset theme.css on the `[data-scaffold-preset]` element,
+ * so the same markup renders as any of the ingested themes by changing one
+ * attribute — and Scaffold's own stone/lime chrome outside the preview is
+ * untouched, because none of these selectors escape `.ds-root`.
+ *
+ * This is the WYSIWYB contract in CSS: what the preview paints is what the
+ * compiled tokens say, which is what `product-plan/` exports.
+ */
+
+.ds-root {
+  background: var(--ds-page);
+  color: var(--ds-ink-body);
+  font-family: var(--font-sans);
+  border-radius: 1rem;
+  container-type: inline-size;
+}
+
+/* ---- Type ---------------------------------------------------------- */
+
+.ds-display {
+  color: var(--ds-ink-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.ds-body { color: var(--ds-ink-body); line-height: 1.6; text-wrap: pretty; }
+.ds-muted { color: var(--ds-ink-muted); }
+.ds-num { font-variant-numeric: tabular-nums; }
+
+/* ---- Surfaces ------------------------------------------------------ */
+
+.ds-surface {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-hairline);
+  /* Concentric: p-4 (16px) inside, so 8 + 16 = 24px outside. */
+  border-radius: 1.5rem;
+}
+.ds-inner {
+  border: 1px solid var(--ds-hairline);
+  border-radius: 0.5rem;
+}
+.ds-hairline { border-color: var(--ds-hairline); }
+
+/* ---- Buttons ------------------------------------------------------- */
+
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2.25rem;
+  padding: 0 0.875rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  /* The haptic press, on the same spring as the rest of Scaffold. */
+  transition:
+    transform 120ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+.ds-btn:active { transform: scale(0.98); }
+.ds-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ds-page), 0 0 0 4px var(--ds-accent);
+}
+
+/* `--ds-on-accent`, never `--ds-page`: a bright accent under white text is
+   unreadable, and 11 of the ingested themes have a bright accent. */
+.ds-btn-primary { background: var(--ds-accent); color: var(--ds-on-accent); }
+.ds-btn-primary:hover { filter: brightness(0.94); }
+
+.ds-btn-secondary {
+  background: var(--ds-surface);
+  color: var(--ds-ink-display);
+  border-color: var(--ds-hairline);
+}
+.ds-btn-secondary:hover { background: var(--ds-hairline); }
+
+.ds-btn-soft { background: var(--ds-accent-faded); color: var(--ds-accent-display); }
+.ds-btn-ghost { background: transparent; color: var(--ds-ink-body); }
+.ds-btn-ghost:hover { background: var(--ds-surface); }
+.ds-btn-danger { background: var(--ds-danger); color: #fff; }
+
+/* ---- Badges -------------------------------------------------------- */
+
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  border: 1px solid transparent;
+}
+.ds-badge-accent { background: var(--ds-accent-faded); color: var(--ds-accent-display); }
+.ds-badge-signal { background: var(--ds-signal-faded); color: var(--ds-signal-display); }
+.ds-badge-danger { background: var(--ds-danger-faded); color: var(--ds-danger-display); }
+.ds-badge-neutral {
+  background: var(--ds-surface);
+  color: var(--ds-ink-body);
+  border-color: var(--ds-hairline);
+}
+.ds-badge-solid { background: var(--ds-accent); color: var(--ds-on-accent); }
+
+/* The status dot. Radar ping on the live state — one element, so the eye
+   reads a pulse rather than a flicker. */
+.ds-dot {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: currentColor;
+  flex: none;
+}
+.ds-dot-live::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: ds-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ds-ping {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* ---- Fields -------------------------------------------------------- */
+
+.ds-field {
+  display: block;
+  width: 100%;
+  height: 2.25rem;
+  padding: 0 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--ds-hairline);
+  background: var(--ds-page);
+  color: var(--ds-ink-body);
+  font-size: 0.8125rem;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.ds-field::placeholder { color: var(--ds-ink-muted); }
+.ds-field:focus {
+  outline: none;
+  border-color: var(--ds-accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ds-accent) 28%, transparent);
+}
+
+/* ---- Table --------------------------------------------------------- */
+
+.ds-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+.ds-table th,
+.ds-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--ds-hairline);
+}
+.ds-table th {
+  color: var(--ds-ink-muted);
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.ds-table td { color: var(--ds-ink-body); }
+.ds-table .ds-td-num { text-align: right; font-variant-numeric: tabular-nums; }
+.ds-table tbody tr:last-child td { border-bottom: 0; }
+
+/* ---- Swatches ------------------------------------------------------ */
+
+.ds-swatch {
+  height: 2.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in oklab, var(--ds-ink-display) 12%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-btn:active { transform: none; }
+  .ds-dot-live::after { animation: none; }
+}

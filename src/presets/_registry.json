@@ -1,0 +1,1018 @@
+[
+  {
+    "id": "atmospheric-glass",
+    "name": "Atmospheric Glass Design System",
+    "author": "brunopetrovic",
+    "identifier": "brunopetrovic/atmospheric-glass",
+    "url": "https://designmd.ai/brunopetrovic/atmospheric-glass",
+    "tags": [
+      "glassmorphism",
+      "premium",
+      "saas"
+    ],
+    "nativeMode": "dark",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#ffffff",
+      "#ffffff",
+      "#0b1326",
+      "#0b1326",
+      "#f2f5ff",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "broadsheet",
+    "name": "Broadsheet Design System",
+    "author": "chef",
+    "identifier": "chef/broadsheet",
+    "url": "https://designmd.ai/chef/broadsheet",
+    "tags": [
+      "editorial",
+      "media",
+      "minimal",
+      "news"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#0a0a0a",
+      "#0a0a0a",
+      "#ffffff",
+      "#ffffff",
+      "#09090b",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "chatbubble",
+    "name": "ChatBubble Design System",
+    "author": "chef",
+    "identifier": "chef/chatbubble",
+    "url": "https://designmd.ai/chef/chatbubble",
+    "tags": [
+      "light",
+      "mobile-app",
+      "playful",
+      "social"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#22c55e",
+      "#02672c",
+      "#ffffff",
+      "#f3f4f6",
+      "#09090b",
+      "#f59e0b"
+    ]
+  },
+  {
+    "id": "command-center",
+    "name": "Command Center",
+    "author": "frknaykc",
+    "identifier": "frknaykc/command-center",
+    "url": "https://designmd.ai/frknaykc/command-center",
+    "tags": [
+      "dark",
+      "dashboard",
+      "saas",
+      "security"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#fe6e00",
+      "#913d04",
+      "#fcfaf7",
+      "#f3f4f6",
+      "#393430",
+      "#edb200"
+    ]
+  },
+  {
+    "id": "corpscale",
+    "name": "CorpScale Design System",
+    "author": "chef",
+    "identifier": "chef/corpscale",
+    "url": "https://designmd.ai/chef/corpscale",
+    "tags": [
+      "dashboard",
+      "enterprise",
+      "professional"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "slate",
+    "accessible": true,
+    "swatches": [
+      "#1e3a5f",
+      "#1e3a5f",
+      "#f8fafc",
+      "#ffffff",
+      "#020617",
+      "#ca8a04"
+    ]
+  },
+  {
+    "id": "createspace",
+    "name": "CreateSpace Design System",
+    "author": "chef",
+    "identifier": "chef/createspace",
+    "url": "https://designmd.ai/chef/createspace",
+    "tags": [
+      "bold",
+      "creative",
+      "portfolio"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#e11d48",
+      "#af1336",
+      "#ffffff",
+      "#ffffff",
+      "#09090b",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "crypto-blue",
+    "name": "Crypto Blue",
+    "author": "chef",
+    "identifier": "chef/crypto-blue",
+    "url": "https://designmd.ai/chef/crypto-blue",
+    "tags": [
+      "clean",
+      "fintech",
+      "modern"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#0052ff",
+      "#0145da",
+      "#f9fafb",
+      "#ffffff",
+      "#050f1a",
+      "#f0ad4e"
+    ]
+  },
+  {
+    "id": "docuforge",
+    "name": "DocuForge Design System",
+    "author": "chef",
+    "identifier": "chef/docuforge",
+    "url": "https://designmd.ai/chef/docuforge",
+    "tags": [
+      "clean",
+      "devtools",
+      "light",
+      "saas"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "slate",
+    "accessible": true,
+    "swatches": [
+      "#2563eb",
+      "#0b48cf",
+      "#fafafa",
+      "#ffffff",
+      "#020617",
+      "#ca8a04"
+    ]
+  },
+  {
+    "id": "electric-volt",
+    "name": "Electric Volt",
+    "author": "chef",
+    "identifier": "chef/electric-volt",
+    "url": "https://designmd.ai/chef/electric-volt",
+    "tags": [
+      "dark",
+      "luxury",
+      "minimal"
+    ],
+    "nativeMode": "dark",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#cc0000",
+      "#fe6351",
+      "#000000",
+      "#111111",
+      "#ffffff",
+      "#f5a623"
+    ]
+  },
+  {
+    "id": "ember-studio",
+    "name": "Ember Studio",
+    "author": "chef",
+    "identifier": "chef/ember-studio",
+    "url": "https://designmd.ai/chef/ember-studio",
+    "tags": [
+      "dashboard",
+      "premium",
+      "saas",
+      "warm"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#c2410c",
+      "#9a340c",
+      "#fafaf9",
+      "#f5f5f4",
+      "#1c1917",
+      "#d97706"
+    ]
+  },
+  {
+    "id": "flip7-card-game",
+    "name": "Flip7 Design System",
+    "author": "yiujc",
+    "identifier": "yiujc/flip7-card-game",
+    "url": "https://designmd.ai/yiujc/flip7-card-game",
+    "tags": [
+      "bold",
+      "gaming",
+      "mobile-app",
+      "playful"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#2ba8a2",
+      "#066460",
+      "#ffffff",
+      "#eff8f7",
+      "#09090b",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "genesis",
+    "name": "Genesis",
+    "author": "chef",
+    "identifier": "chef/genesis",
+    "url": "https://designmd.ai/chef/genesis",
+    "tags": [
+      "accessible",
+      "clean",
+      "saas"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#6366f1",
+      "#4640c9",
+      "#fafafa",
+      "#ffffff",
+      "#0a0a0a",
+      "#f59e0b"
+    ]
+  },
+  {
+    "id": "green-deck",
+    "name": "Green Deck",
+    "author": "chef",
+    "identifier": "chef/green-deck",
+    "url": "https://designmd.ai/chef/green-deck",
+    "tags": [
+      "bold",
+      "dark",
+      "modern"
+    ],
+    "nativeMode": "dark",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#1db954",
+      "#1db954",
+      "#121212",
+      "#181818",
+      "#ffffff",
+      "#f59b23"
+    ]
+  },
+  {
+    "id": "homeui",
+    "name": "HomeUI Design System",
+    "author": "young",
+    "identifier": "young/homeui-design-system-v2",
+    "url": "https://designmd.ai/young/homeui-design-system-v2",
+    "tags": [
+      "design-tokens",
+      "glassmorphism",
+      "saas"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#3f75ff",
+      "#1c4ad1",
+      "#ffffff",
+      "#ffffff",
+      "#09090b",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "journey-ui",
+    "name": "QuestUI Design System",
+    "author": "chef",
+    "identifier": "chef/questui",
+    "url": "https://designmd.ai/chef/questui",
+    "tags": [
+      "bold",
+      "dark",
+      "gaming",
+      "premium"
+    ],
+    "nativeMode": "dark",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#ca8a04",
+      "#d29219",
+      "#1a0f0a",
+      "#2c1a10",
+      "#fafafa",
+      "#ca8a04"
+    ]
+  },
+  {
+    "id": "longcipher",
+    "name": "Vercel Web Interface & Design System Guidelines",
+    "author": "Akagi201",
+    "identifier": "Akagi201/longcipher-design",
+    "url": "https://designmd.ai/Akagi201/longcipher-design",
+    "tags": [
+      "component-library",
+      "design-tokens",
+      "minimal",
+      "saas"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#171717",
+      "#171717",
+      "#ffffff",
+      "#fafafa",
+      "#09090b",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "magspread",
+    "name": "MagSpread Design System",
+    "author": "chef",
+    "identifier": "chef/magspread",
+    "url": "https://designmd.ai/chef/magspread",
+    "tags": [
+      "editorial",
+      "elegant",
+      "news",
+      "warm"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "stone",
+    "accessible": true,
+    "swatches": [
+      "#134e4a",
+      "#134e4a",
+      "#ffffff",
+      "#fdf2e9",
+      "#0c0a09",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "marblecrest",
+    "name": "MarbleCrest Design System",
+    "author": "chef",
+    "identifier": "chef/marblecrest",
+    "url": "https://designmd.ai/chef/marblecrest",
+    "tags": [
+      "elegant",
+      "light",
+      "luxury",
+      "premium"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#27272a",
+      "#27272a",
+      "#ffffff",
+      "#f5f5f0",
+      "#09090b",
+      "#ca8a04"
+    ]
+  },
+  {
+    "id": "marketnest",
+    "name": "MarketNest",
+    "author": "chef",
+    "identifier": "chef/marketnest",
+    "url": "https://designmd.ai/chef/marketnest",
+    "tags": [
+      "ecommerce",
+      "organic",
+      "warm"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "neutral",
+    "accessible": true,
+    "swatches": [
+      "#c2410c",
+      "#9a340c",
+      "#fffbf5",
+      "#ffffff",
+      "#0a0a0a",
+      "#f59e0b"
+    ]
+  },
+  {
+    "id": "medicare-plus",
+    "name": "MediCare+",
+    "author": "chef",
+    "identifier": "chef/medicare",
+    "url": "https://designmd.ai/chef/medicare",
+    "tags": [
+      "accessible",
+      "healthcare",
+      "light"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "gray",
+    "accessible": true,
+    "swatches": [
+      "#0077b6",
+      "#0d5a89",
+      "#fafcff",
+      "#ffffff",
+      "#030712",
+      "#d97706"
+    ]
+  },
+  {
+    "id": "midnight-banking",
+    "name": "Midnight Banking Dashboard",
+    "author": "nswamy14",
+    "identifier": "nswamy14/midnight-banking-dashboard",
+    "url": "https://designmd.ai/nswamy14/midnight-banking-dashboard",
+    "tags": [
+      "dark",
+      "fintech",
+      "premium",
+      "saas"
+    ],
+    "nativeMode": "dark",
+    "neutralRamp": "gray",
+    "accessible": true,
+    "swatches": [
+      "#040d3f",
+      "#86a0de",
+      "#040d3f",
+      "#141c4e",
+      "#ffffff",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "nexus-tech",
+    "name": "Nexus - Technical Topologies",
+    "author": "brunopetrovic",
+    "identifier": "brunopetrovic/nexusech",
+    "url": "https://designmd.ai/brunopetrovic/nexusech",
+    "tags": [
+      "dashboard",
+      "glassmorphism",
+      "technical"
+    ],
+    "nativeMode": "dark",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#60a5fa",
+      "#60a5fa",
+      "#02040a",
+      "#18181b",
+      "#ffffff",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "noirluxe",
+    "name": "NoirLuxe Design System",
+    "author": "chef",
+    "identifier": "chef/noirluxe",
+    "url": "https://designmd.ai/chef/noirluxe",
+    "tags": [
+      "dark",
+      "elegant",
+      "luxury",
+      "premium"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#c9a84c",
+      "#6e5609",
+      "#ffffff",
+      "#0c0c0e",
+      "#09090b",
+      "#fbbf24"
+    ]
+  },
+  {
+    "id": "nomadkit",
+    "name": "NomadKit Design System",
+    "author": "chef",
+    "identifier": "chef/nomadkit",
+    "url": "https://designmd.ai/chef/nomadkit",
+    "tags": [
+      "minimal",
+      "organic",
+      "travel",
+      "warm"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "neutral",
+    "accessible": true,
+    "swatches": [
+      "#d4a373",
+      "#7a4e1e",
+      "#fffdf7",
+      "#ffffff",
+      "#0a0a0a",
+      "#ca8a04"
+    ]
+  },
+  {
+    "id": "octo-code",
+    "name": "Octo Code",
+    "author": "chef",
+    "identifier": "chef/octo-code",
+    "url": "https://designmd.ai/chef/octo-code",
+    "tags": [
+      "clean",
+      "dark",
+      "devtools",
+      "modern"
+    ],
+    "nativeMode": "dark",
+    "neutralRamp": "gray",
+    "accessible": true,
+    "swatches": [
+      "#2f81f7",
+      "#619efb",
+      "#0d1117",
+      "#161b22",
+      "#e6edf3",
+      "#d29922"
+    ]
+  },
+  {
+    "id": "open-serif",
+    "name": "Open Serif",
+    "author": "chef",
+    "identifier": "chef/open-serif",
+    "url": "https://designmd.ai/chef/open-serif",
+    "tags": [
+      "editorial",
+      "elegant",
+      "minimal"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#3366cc",
+      "#1c4db0",
+      "#f6f6f6",
+      "#ffffff",
+      "#202122",
+      "#edab00"
+    ]
+  },
+  {
+    "id": "panamericana",
+    "name": "Design System Specification: The Digital Curator",
+    "author": "matuspambol",
+    "identifier": "matuspambol/design-system-universidad-panamericana",
+    "url": "https://designmd.ai/matuspambol/design-system-universidad-panamericana",
+    "tags": [
+      "academic",
+      "elegant",
+      "glassmorphism"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#6c0128",
+      "#6c0128",
+      "#ffffff",
+      "#f9f9f9",
+      "#1a1c1c",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "prismatic-pay",
+    "name": "Prismatic Pay",
+    "author": "chef",
+    "identifier": "chef/prismatic-pay",
+    "url": "https://designmd.ai/chef/prismatic-pay",
+    "tags": [
+      "devtools",
+      "fintech",
+      "premium",
+      "professional"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#635bff",
+      "#4d39de",
+      "#ffffff",
+      "#f6f9fc",
+      "#0a2540",
+      "#ffbb00"
+    ]
+  },
+  {
+    "id": "pulsepoint",
+    "name": "PulsePoint",
+    "author": "chef",
+    "identifier": "chef/pulsepoint",
+    "url": "https://designmd.ai/chef/pulsepoint",
+    "tags": [
+      "dark",
+      "dashboard",
+      "healthcare",
+      "professional"
+    ],
+    "nativeMode": "dark",
+    "neutralRamp": "slate",
+    "accessible": true,
+    "swatches": [
+      "#1e3a5f",
+      "#85a5d1",
+      "#0f172a",
+      "#1e293b",
+      "#f8fafc",
+      "#f59e0b"
+    ]
+  },
+  {
+    "id": "rawblock",
+    "name": "RawBlock Design System",
+    "author": "chef",
+    "identifier": "chef/rawblock",
+    "url": "https://designmd.ai/chef/rawblock",
+    "tags": [
+      "brutalist",
+      "experimental",
+      "minimal",
+      "portfolio"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#000000",
+      "#000000",
+      "#ffffff",
+      "#ffffff",
+      "#09090b",
+      "#ffa500"
+    ]
+  },
+  {
+    "id": "red-broadcast",
+    "name": "Red Broadcast",
+    "author": "chef",
+    "identifier": "chef/red-broadcast",
+    "url": "https://designmd.ai/chef/red-broadcast",
+    "tags": [
+      "clean",
+      "modern",
+      "video"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#ff0000",
+      "#b1130c",
+      "#ffffff",
+      "#f2f2f2",
+      "#0f0f0f",
+      "#fb8c00"
+    ]
+  },
+  {
+    "id": "resortlux",
+    "name": "ResortLux Design System",
+    "author": "chef",
+    "identifier": "chef/resortlux",
+    "url": "https://designmd.ai/chef/resortlux",
+    "tags": [
+      "elegant",
+      "light",
+      "premium",
+      "travel"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "neutral",
+    "accessible": true,
+    "swatches": [
+      "#b8860b",
+      "#73530c",
+      "#fffff0",
+      "#ffffff",
+      "#0a0a0a",
+      "#ca8a04"
+    ]
+  },
+  {
+    "id": "shopvibe",
+    "name": "ShopVibe",
+    "author": "chef",
+    "identifier": "chef/shopvibe",
+    "url": "https://designmd.ai/chef/shopvibe",
+    "tags": [
+      "bold",
+      "ecommerce",
+      "fashion",
+      "light"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "neutral",
+    "accessible": true,
+    "swatches": [
+      "#d946ef",
+      "#9602a8",
+      "#fafafa",
+      "#ffffff",
+      "#0a0a0a",
+      "#f59e0b"
+    ]
+  },
+  {
+    "id": "skylearn",
+    "name": "Skylearn",
+    "author": "duanhdan",
+    "identifier": "duanhdan/skylearn",
+    "url": "https://designmd.ai/duanhdan/skylearn",
+    "tags": [
+      "accessible",
+      "education",
+      "light",
+      "playful"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "gray",
+    "accessible": true,
+    "swatches": [
+      "#3b82f6",
+      "#0251c1",
+      "#ffffff",
+      "#f8fafc",
+      "#0f172a",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "studioblank",
+    "name": "StudioBlank Design System",
+    "author": "chef",
+    "identifier": "chef/studioblank",
+    "url": "https://designmd.ai/chef/studioblank",
+    "tags": [
+      "creative",
+      "minimal",
+      "portfolio"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#0a0a0a",
+      "#0a0a0a",
+      "#ffffff",
+      "#fafafa",
+      "#09090b",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "tavily",
+    "name": "Tavily",
+    "author": "luuphuc6297",
+    "identifier": "luuphuc6297/tavily-web-access-layer-for-ai-agents",
+    "url": "https://designmd.ai/luuphuc6297/tavily-web-access-layer-for-ai-agents",
+    "tags": [
+      "devtools",
+      "editorial",
+      "minimal",
+      "warm"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#fefcf5",
+      "#5b5954",
+      "#ffffff",
+      "#fafafa",
+      "#09090b",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "thoughtstream",
+    "name": "ThoughtStream",
+    "author": "chef",
+    "identifier": "chef/thoughtstream",
+    "url": "https://designmd.ai/chef/thoughtstream",
+    "tags": [
+      "design-tokens",
+      "minimal",
+      "saas"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#78716c",
+      "#5c5550",
+      "#fafaf9",
+      "#f5f5f4",
+      "#1c1917",
+      "#ca8a04"
+    ]
+  },
+  {
+    "id": "trust-blue-pay",
+    "name": "Trust Blue Pay",
+    "author": "chef",
+    "identifier": "chef/trust-blue-pay",
+    "url": "https://designmd.ai/chef/trust-blue-pay",
+    "tags": [
+      "accessible",
+      "clean",
+      "fintech",
+      "professional"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#003087",
+      "#003087",
+      "#f5f7fa",
+      "#ffffff",
+      "#1a1a2e",
+      "#f5ba2e"
+    ]
+  },
+  {
+    "id": "verdana-health",
+    "name": "Verdana Health Design System",
+    "author": "chef",
+    "identifier": "chef/verdana-health-design-system",
+    "url": "https://designmd.ai/chef/verdana-health-design-system",
+    "tags": [
+      "accessible",
+      "digital-health",
+      "elegant",
+      "saas"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "neutral",
+    "accessible": true,
+    "swatches": [
+      "#0f172a",
+      "#0f172a",
+      "#f8fafc",
+      "#ffffff",
+      "#0a0a0a",
+      "#eab308"
+    ]
+  },
+  {
+    "id": "violet-issue",
+    "name": "Violet Issue",
+    "author": "chef",
+    "identifier": "chef/violet-issue",
+    "url": "https://designmd.ai/chef/violet-issue",
+    "tags": [
+      "dark",
+      "dense",
+      "devtools",
+      "minimal"
+    ],
+    "nativeMode": "dark",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#5e6ad2",
+      "#8696fc",
+      "#101014",
+      "#1f1f2e",
+      "#f1f1f4",
+      "#f0c000"
+    ]
+  },
+  {
+    "id": "voicebox",
+    "name": "VoiceBox",
+    "author": "chef",
+    "identifier": "chef/voicebox",
+    "url": "https://designmd.ai/chef/voicebox",
+    "tags": [
+      "blog",
+      "bold",
+      "dark",
+      "devtools"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#0a0a0a",
+      "#0a0a0a",
+      "#fafafa",
+      "#f5f5f5",
+      "#0a0a0a",
+      "#ca8a04"
+    ]
+  },
+  {
+    "id": "wattvision",
+    "name": "Sistema de Monitoreo Eléctrico WattVision",
+    "author": "groquispe100inf-max",
+    "identifier": "groquispe100inf-max/design-md-sistema-de-monitoreo-el-ctrico-wattvision",
+    "url": "https://designmd.ai/groquispe100inf-max/design-md-sistema-de-monitoreo-el-ctrico-wattvision",
+    "tags": [
+      "bold",
+      "dark",
+      "dashboard",
+      "devtools"
+    ],
+    "nativeMode": "dark",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#121212",
+      "#a0a0a0",
+      "#121212",
+      "#18181b",
+      "#fafafa",
+      "#fcd34d"
+    ]
+  },
+  {
+    "id": "zalopay",
+    "name": "Zalopay",
+    "author": "luuphuc6297",
+    "identifier": "luuphuc6297/zalopay-vietnamese-e-wallet-super-app",
+    "url": "https://designmd.ai/luuphuc6297/zalopay-vietnamese-e-wallet-super-app",
+    "tags": [
+      "bold",
+      "fintech",
+      "mobile-app",
+      "professional"
+    ],
+    "nativeMode": "light",
+    "neutralRamp": "zinc",
+    "accessible": true,
+    "swatches": [
+      "#007bff",
+      "#0b55b0",
+      "#ffffff",
+      "#fafafa",
+      "#09090b",
+      "#fcd34d"
+    ]
+  }
+]

@@ -31,10 +31,14 @@ export function AppLayout({
 
   return (
     <div className="relative min-h-screen bg-background animate-fade-in flex flex-col">
-      {/* Ambient wash — a single warm light source behind the whole console */}
+      {/* Ambient wash + Studio Blueprint Grid */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-x-0 top-0 h-[420px] bg-[radial-gradient(80%_100%_at_50%_0%,rgba(132,204,22,0.07),transparent_70%)] dark:bg-[radial-gradient(80%_100%_at_50%_0%,rgba(163,230,53,0.05),transparent_70%)]"
+        className="pointer-events-none fixed inset-0 bg-studio-grid opacity-80"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-x-0 top-0 h-[480px] bg-[radial-gradient(80%_100%_at_50%_0%,rgba(132,204,22,0.08),transparent_70%)] dark:bg-[radial-gradient(80%_100%_at_50%_0%,rgba(34,197,94,0.06),transparent_70%)]"
       />
 
       {/* Header */}
