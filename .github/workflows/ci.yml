@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: 22
           cache: 'npm'
-          cache-dependency-path: design-os/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Setup Bun Runtime
         uses: oven-sh/setup-bun@v2
@@ -36,27 +36,21 @@ jobs:
           bun-version: latest
 
       - name: Install Frontend Dependencies
-        working-directory: ./design-os
         run: npm ci
 
       - name: Offloaded TypeScript Compilation & Typecheck
-        working-directory: ./design-os
         run: npx tsc -b
 
       - name: Offloaded Production Bundle Build
-        working-directory: ./design-os
         run: npm run build
 
       - name: Offloaded ESLint Check
-        working-directory: ./design-os
         run: npm run lint
 
       - name: Verify 43 Local Presets Integrity
-        working-directory: ./design-os
         run: npm run presets
 
       - name: Verify Agent OS Standards & Graphify Freshness
-        working-directory: ./design-os
         run: |
           echo "Verifying Agent OS standards and Graphify graph integrity..."
           if [ -f ".graphify/graph.json" ]; then
@@ -66,7 +60,6 @@ jobs:
           fi
 
       - name: Run Backend Server Tests (Bun Test)
-        working-directory: ./design-os
         run: |
           if [ -d "server" ]; then
             bun test

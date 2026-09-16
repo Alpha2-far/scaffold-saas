@@ -4,8 +4,8 @@
 *Base Fondatrice : `design-os/` (React 19 + Tailwind v4 + Vite v7)*  
 *Standards Actifs : Agent OS (17 standards) & Graphify Knowledge Graph (`.graphify/` — 411 nœuds)*  
 *Infrastructure CI/CD : GitHub Actions Cloud Runner (`.github/workflows/ci.yml`)*  
-*Date de Référence : 16 septembre 2026*  
-*Dépôt Git : `https://github.com/Alpha2-far/scaffold-v1.git`*
+*Dépôt Git Officiel SaaS : `https://github.com/Alpha2-far/scaffold-saas.git`*
+*Dépôt Historique V1 : `https://github.com/Alpha2-far/scaffold-v1.git`*
 
 ---
 
