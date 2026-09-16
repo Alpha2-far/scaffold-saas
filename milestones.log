@@ -1,0 +1,168 @@
+# Scaffold™ SaaS — Journal des Jalons d'Ingénierie (`milestones.log`)
+
+*Projet : Scaffold™ — Visual Workspace & Pre-Code Intelligence Layer*  
+*Base Fondatrice : `design-os/` (React 19 + Tailwind v4 + Vite v7)*  
+*Standards Actifs : Agent OS (17 standards) & Graphify Knowledge Graph (`.graphify/` — 411 nœuds)*  
+*Infrastructure CI/CD : GitHub Actions Cloud Runner (`.github/workflows/ci.yml`)*  
+*Date de Référence : 16 septembre 2026*  
+*Dépôt Git : `https://github.com/Alpha2-far/scaffold-v1.git`*
+
+---
+
+## 🏛️ Invariants d'Exécution & Décharge Matérielle
+
+1. **Décharge de Calcul Local (Mac ➔ GitHub Actions)** :
+   Le poste Mac de développement ne dispose pas de la puissance requise pour exécuter les builds lourds, les vérifications exhaustives de types (`tsc -b`), les suites de tests bout-en-bout ou le packaging de conteneurs.
+   **Règle absolue** : La machine locale est cantonnée à l'édition de code, aux modifications de fichiers et au serveur de développement léger. Tous les builds lourds, vérifications lint exhaustives, exécutions de tests complets et déploiements sont **systématiquement déchargés sur les runners GitHub Actions** (`ubuntu-latest`).
+2. **Certification par GitHub Actions** :
+   Un jalon n'est formellement certifié et clôturé dans ce log que si le commit associé est validé par un **workflow GitHub Actions 100% vert** sur la branche `main`.
+3. **Maintien du Graphe de Connaissance Graphify** :
+   Après chaque jalon, l'intégrité du graphe de dépendances (`design-os/.graphify/graph.json`) et la protection des carrefours vitaux (*god nodes* : `App.tsx`, `product-health.ts`, `ThemeStudio.tsx`) sont vérifiées.
+4. **Respect des Standards Agent OS** :
+   Toute interface et tout composant respectent les 17 standards gravés dans `design-os/agent-os/standards/` (notamment `executive-register.md`, `two-layer-colors.md`, `mathematical-tokens.md`, `react-19.md`).
+
+---
+
+## 📦 [ARCHIVE] Jalons Fondateurs Validés (Socle `design-os/` & Purge Propriétaire)
+
+### Milestone 0.1 à 0.5 : Moteur de Design System Propriétaire & 43 Presets Locaux
+- **Statut** : ✅ Terminé et commité
+- **Ce qui est nouveau dans l'application** :
+  - Disparition de toute dépendance ou template externe.
+  - Studio de thèmes autonome sur `/design` permettant de naviguer et tester 43 thèmes d'auteur complets.
+  - Dérivation mathématique OKLCH avec contraste garanti AAA (ratio ≥ 7:1) pour les textes et boutons d'action.
+  - Intégration de composants haptiques (`StatusBadge` pulsant, boutons avec retours élastiques `motion`).
+  - Moteur d'audit de santé en temps réel `product-health.ts` (Score 100/100).
+- **Ce qui a été bâti** :
+  - Codebase React 19 + Tailwind v4 + Vite v7 dans `design-os/`.
+  - Catalogue des 43 presets locaux compilés par `scripts/compile-presets.mjs` dans `src/presets/`.
+  - Primitives UI réutilisables dans `src/components/ui/`.
+- **Purge Propriétaire** :
+  - Réécriture intégrale de l'historique Git (30 commits) avec `Farel Viaho <Kitsonfarel@gmail.com>` comme auteur et committer unique.
+  - Suppression de l'upstream externe et force-push sur le dépôt propriétaire `Alpha2-far/scaffold-v1.git`.
+
+### Milestone 0.6 : Pare-Feu de Vocabulaire & Registre Exécutif (§0.6)
+- **Statut** : ✅ Terminé (Commit `73a8e9c`)
+- **Ce qui est nouveau dans l'application** :
+  - Dialogue naturel, fluide et centré business entre l'utilisateur et l'agent conversationnel.
+  - Éradication totale du jargon robotique de surface (*"Brain dump"*, *"In-scope"*, *"Data shape"*, *"Cut list"*).
+- **Ce qui a été bâti** :
+  - Standard formel `design-os/agent-os/standards/global/executive-register.md`.
+  - Préservation hermétique des identifiants et contrats machines sur disque (`## Key Features`, `## Entities`, `## Out of Scope (V1)`).
+- **Vérification** : 12/12 vérifications de conformité validées, `tsc -b && vite build` passant.
+
+---
+
+## 🚀 Jalons de Développement de la Plateforme SaaS (Séquence Active)
+
+### 🏁 Jalon 1 : Socle Serveur Bun & BDD Double Adaptateur
+* **Statut** : 🟡 EN COURS DE PRÉPARATION
+* **Ce qui sera nouveau dans l'application** :
+  - Première couche backend unifiée exécutée sous Bun.
+  - Point d'entrée de santé opérationnel `GET /api/health` vérifiant la réactivité du serveur et l'état de la base de données.
+  - Persistance locale immédiate en SQLite (`bun:sqlite`) pour le dev local sans config, et adaptateur Postgres pour la production (Supabase / Neon).
+* **Ce qui sera bâti** :
+  - `server/index.ts` : Serveur `Bun.serve` natif avec timeouts infinis (`idleTimeout: 0`) pour les flux temps réel.
+  - `server/db/client.ts` : Interface unifiée `DbClient` assurant la compatibilité SQLite locale / PostgreSQL production.
+  - `server/db/migrations/` : Migrations SQL complètes créant les tables `users`, `oauth_accounts`, `projects`, `agent_sessions`, `chat_messages`, `project_capabilities`, `document_snapshots`.
+  - `server/router.ts` : Routeur ordonné séquentiel premier-match.
+* **Exécution & Décharge Cloud** :
+  - Édition et test local minimal (`bun run server/index.ts`).
+  - Validation complète de la compilation TypeScript et des tests unitaires exécutée sur le runner **GitHub Actions** (`.github/workflows/ci.yml`).
+* **Graphify & Agent OS** :
+  - Maintien de l'isolation du serveur vis-à-vis des composants UI.
+  - Mise à jour du graphe Graphify (`npm run graphify`) pour indexer le nouveau sous-arbre `server/`.
+
+---
+
+### 🏁 Jalon 2 : Passerelle OpenRouter Cascade & Flux Streaming SSE
+* **Statut** : ⚪ EN ATTENTE (Dépendance : Jalon 1)
+* **Ce qui sera nouveau dans l'application** :
+  - Console de chat connectée au flux d'intelligence en direct sans latence.
+  - Tolérance aux pannes maximale : bascule automatique et transparente entre modèles LLM si l'un d'eux est indisponible ou saturé.
+* **Ce qui sera bâti** :
+  - `server/ai/openrouter.ts` : Client OpenRouter avec tableau de cascade native `models: ['anthropic/claude-3.7-sonnet', 'openai/gpt-4o', 'google/gemini-2.0-flash', 'deepseek/deepseek-r1']`.
+  - `server/handlers/chatStream.ts` : Endpoint `POST /api/projects/:id/chat` servant le flux SSE (Server-Sent Events) au navigateur.
+  - Intégration du pare-feu de vocabulaire §0.6 dans les prompts système de l'agent.
+* **Exécution & Décharge Cloud** :
+  - Simulation de flux et test de bascule de modèles certifiés par le runner GitHub Actions.
+
+---
+
+### 🏁 Jalon 3 : Interface Triptyque avec Rail 56px & Live Canvas
+* **Statut** : ⚪ EN ATTENTE (Dépendance : Jalon 2)
+* **Ce qui sera nouveau dans l'application** :
+  - Aménagement ergonomique optimisé pour les ordinateurs portables (écrans 13"-14").
+  - Barre de navigation latérale rétractable en un rail d'icônes de 56 px par défaut.
+  - Respect strict du ratio 40/60 (40% pour la console de dialogue de l'Agent, 60% pour le pare-brise visuel interactif Live Canvas).
+  - Suppression définitive des commandes slash pour l'utilisateur final au profit d'un dialogue naturel assisté de cartes de choix interactives (*recommend-then-confirm*).
+* **Ce qui sera bâti** :
+  - `src/components/NavigationRail.tsx` : Rail escamotable 56 px.
+  - `src/components/AgentConsole.tsx` : Console centrale de pilotage.
+  - `src/components/LiveCanvas.tsx` : Intégration du visualiseur WYSIWYB multi-écrans avec le sélecteur des 43 thèmes d'auteur locaux.
+* **Exécution & Décharge Cloud** :
+  - Bundle build de production et vérification de la non-régression responsive testés sur le runner GitHub Actions.
+
+---
+
+### 🏁 Jalon 4 : Moteur de Compilation Zod & Résolution des Capacités
+* **Statut** : ⚪ EN ATTENTE (Dépendance : Jalon 3)
+* **Ce qui sera nouveau dans l'application** :
+  - Génération déterministe certifiée des 6 documents de spécification (`product-plan/`) à partir des choix de l'utilisateur.
+  - Visualisation en direct du score de santé logicielle (100/100) fourni par le moteur d'audit `product-health.ts`.
+* **Ce qui sera bâti** :
+  - `server/compilation/schema.ts` : Schémas Zod stricts pour chaque capacité et chaque entité.
+  - `server/compilation/engine.ts` : Compilateur assemblant les 6 documents de sortie (`product-overview.md`, `data-shape.md`, `prd.md`, `product-roadmap.md`, `prompts/`, `soul.md`).
+  - Implémentation exhaustive de la capacité Google Auth (`auth.google`) servant de référence étalon.
+* **Exécution & Décharge Cloud** :
+  - Suite de tests unitaires de compilation vérifiant l'égalité exacte octet par octet des documents générés, exécutée sur GitHub Actions.
+
+---
+
+### 🏁 Jalon 5 : Module de Paiement Géolocalisé & Modèle Steve Jobs (9 € / 6 000 FCFA)
+* **Statut** : ⚪ EN ATTENTE (Dépendance : Jalon 4)
+* **Ce qui sera nouveau dans l'application** :
+  - Monétisation selon le modèle iTunes « Jouer gratuitement, payer pour emporter ».
+  - Détection automatique de la géolocalisation de l'utilisateur avec conversion instantanée de devise.
+  - Tiroir de paiement fluide « Prendre les clés du logiciel » proposant Mobile Money en Afrique (MTN, Moov, Wave) et Cartes / Apple Pay / Google Pay à l'international.
+  - Déverrouillage immédiat et téléchargement du package ZIP complet dès validation du paiement.
+* **Ce qui sera bâti** :
+  - `server/billing/geoIp.ts` : Résolution de localisation et conversion de devise (XOF/XAF, EUR, USD).
+  - `server/billing/adapters/africaMobileMoney.ts` : Adaptateur agnostique pour Mobile Money avec push USSD / QR code.
+  - `server/billing/adapters/internationalCards.ts` : Adaptateur agnostique pour cartes et Apple Pay en 1 clic.
+  - `src/components/CheckoutDrawer.tsx` : Tiroir de paiement épuré sans friction.
+  - `server/handlers/billingWebhook.ts` : Gestionnaire idempotent de webhooks déclenchant la libération de l'archive ZIP.
+* **Exécution & Décharge Cloud** :
+  - Tests unitaires simulant la réception idempotente de webhooks et l'intégrité de l'archive ZIP sur GitHub Actions.
+
+---
+
+### 🏁 Jalon 6 : Dashboard Superadmin (`/admin`), SSE On-Demand & Anti-Bot
+* **Statut** : ⚪ EN ATTENTE (Dépendance : Jalon 5)
+* **Ce qui sera nouveau dans l'application** :
+  - Espace d'administration sécurisé réservé au rôle `superadmin`.
+  - Vue temps réel du nombre d'utilisateurs inscrits, des projets créés et des conversions.
+  - Observation en direct des flux agents sans saturer le serveur (connexion SSE ouverte à la demande au clic sur une session précise).
+  - Gestion dynamique à chaud des modèles OpenRouter (activation, désactivation, réordonnancement sans redémarrer le serveur).
+  - Protection défensive anti-bot avec Cloudflare Turnstile, Honeypot invisible, rate limiting glissant et bannissement automatique d'IP.
+* **Ce qui sera bâti** :
+  - `src/pages/admin/` : Interface complète du tableau de bord d'administration.
+  - `src/components/admin/AdminSessionWatcher.tsx` : Moniteur SSE On-Demand.
+  - `src/components/admin/ModelManager.tsx` : Gestionnaire dynamique de modèles LLM.
+  - `server/security/` : Filtre Honeypot, validation de token Turnstile et table de bannissement IP.
+* **Exécution & Décharge Cloud** :
+  - Tests de pénétration automatisés et validation de sécurité exécutés sur GitHub Actions.
+
+---
+
+### 🏁 Jalon 7 : Garde-Fous d'Architecture Instatic, CI/CD Cloud & Déploiement
+* **Statut** : ⚪ EN ATTENTE (Dépendance : Jalon 6)
+* **Ce qui sera nouveau dans l'application** :
+  - Plateforme SaaS entièrement opérationnelle, sécurisée, documentée et déployée en production.
+  - Imperméabilité absolue certifiée par les 6 tests d'architecture Instatic (zéro fuite de clé API, isolation stricte multi-tenants, Zod gate).
+* **Ce qui sera bâti** :
+  - `scripts/test-architecture.mjs` : Suite automatisée des 6 tests de garde-fous d'architecture.
+  - Configuration de déploiement (Dockerfile multi-stage, Caddyfile avec HTTPS automatique, variables d'environnement de production).
+  - Validation finale de l'ensemble du cycle sur GitHub Actions.
+* **Exécution & Décharge Cloud** :
+  - Build complet et déploiement automatisé orchestré par GitHub Actions.

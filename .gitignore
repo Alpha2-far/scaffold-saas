@@ -20,6 +20,7 @@ dist/
 
 # Logs
 *.log
+!milestones.log
 npm-debug.log*
 
 # Amp orb runtime files
