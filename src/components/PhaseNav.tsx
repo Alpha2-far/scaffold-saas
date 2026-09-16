@@ -1,31 +1,13 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useMemo } from 'react'
-import { FileText, Boxes, Layout, LayoutList, Package } from 'lucide-react'
 import { AnimatePresence, useReducedMotion } from 'motion/react'
 import * as m from 'motion/react-m'
 import { loadProductData, hasExportZip } from '@/lib/product-loader'
 import { SPRING } from '@/lib/motion'
 import { Tappable } from '@/components/motion-primitives'
 import { getAllSectionIds, getSectionScreenDesigns } from '@/lib/section-loader'
+import { phases, type Phase, type PhaseConfig, type PhaseStatus } from '@/lib/phases'
 
-export type Phase = 'product' | 'data-shape' | 'design' | 'sections' | 'export'
-
-interface PhaseConfig {
-  id: Phase
-  label: string
-  icon: typeof FileText
-  path: string
-}
-
-const phases: PhaseConfig[] = [
-  { id: 'product', label: 'Product', icon: FileText, path: '/' },
-  { id: 'data-shape', label: 'Data Shape', icon: Boxes, path: '/data-shape' },
-  { id: 'design', label: 'Design', icon: Layout, path: '/design' },
-  { id: 'sections', label: 'Sections', icon: LayoutList, path: '/sections' },
-  { id: 'export', label: 'Export', icon: Package, path: '/export' },
-]
-
-export type PhaseStatus = 'completed' | 'current' | 'upcoming'
 
 interface PhaseInfo {
   phase: PhaseConfig
@@ -169,5 +151,3 @@ export function PhaseNav() {
     </nav>
   )
 }
-
-export { phases }

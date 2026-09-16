@@ -1,11 +1,11 @@
-import { Suspense, useMemo, useState, useRef, useCallback, useEffect } from 'react'
+import { Suspense, createElement, useMemo, useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, PanelLeft, Maximize2, GripVertical, Smartphone, Tablet, Monitor } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { loadShellPreview } from '@/lib/shell-loader'
-import React from 'react'
 import { ScaffoldLogoLoader } from '@/components/ScaffoldLogoLoader'
+import { cachedLazy } from '@/lib/lazy-preview'
 
 const MIN_WIDTH = 320
 const DEFAULT_WIDTH_PERCENT = 100
@@ -184,7 +184,7 @@ export function ShellDesignFullscreen() {
 
   const ShellPreviewComponent = useMemo(() => {
     if (!shellPreviewLoader) return null
-    return React.lazy(shellPreviewLoader)
+    return cachedLazy('shell-preview', shellPreviewLoader)
   }, [shellPreviewLoader])
 
   // Sync theme with parent window
@@ -237,7 +237,10 @@ export function ShellDesignFullscreen() {
         </div>
       }
     >
-      <ShellPreviewComponent />
+      {/* Dispatched explicitly: the preview module is chosen at runtime, so the
+          component cannot be a statically-bound JSX tag. Its identity is stable —
+          `cachedLazy` returns the same component for the same key. */}
+      {createElement(ShellPreviewComponent)}
     </Suspense>
   )
 }

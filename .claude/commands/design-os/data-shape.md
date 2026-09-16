@@ -17,13 +17,15 @@ When `/product-vision` ran the BM PRD engine, it described the data in **two** p
 
 So before writing anything, say it plainly:
 
-"Heads up: you have a PRD at `product/prd.md`, and its `## Data model` section holds the locked entities and their fields. Changing the data shape here means the PRD needs updating too, or the two will disagree — and the PRD is what `/export-product` hands to your coding agent."
+"One thing before we change this: your project brief already records this information, along with the detail behind it. If we change it here and not there, the two will disagree — and the brief is what the developers receive."
+
+Per `/product-vision` §0.6, keep that sentence in the user's register: say *your project brief*, never *the PRD*; say *the information the app keeps track of*, never *the data model* or *entities*.
 
 Then ASK, using the interrogation rule from `/product-vision` §0.3 — the question tool your host provides (`AskUserQuestion`, `ask_question`), or a formatted numbered list if it has none:
 
-1. **Update both files** *(recommended)* — edit the data shape and the PRD's `## Data model` block together.
-2. **Data shape only** — leave the PRD alone and accept the drift.
-3. **This is a real scope change** — cancel and re-run `/product-vision`.
+1. **Update both, keep them consistent** *(recommended)* — change it here and in your brief together.
+2. **Change it here only** — the brief will no longer match, and I'll tell you exactly where.
+3. **This changes what we're building** — stop, and revisit the vision with `/product-vision`.
 
 Then act on the answer:
 

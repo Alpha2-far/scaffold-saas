@@ -4,7 +4,8 @@ Scaffold™ utilise le moteur d'animation moderne `motion@13.2.0` sous architect
 
 ## Règle Absolue d'Importation : `m.*` uniquement
 
-Sous `<LazyMotion strict>`, tout usage naïf de `motion.div` provoque une erreur de compilation ou de runtime immédiate.
+Sous `<LazyMotion strict>`, tout usage naïf de `motion.div` **lève une erreur au runtime**
+(c'est la définition même de `strict`, et non un avertissement de compilation).
 Toujours importer `* as m` depuis `motion/react-m` :
 
 ```tsx
@@ -16,6 +17,44 @@ import * as m from 'motion/react-m'
 import { motion } from 'motion/react'
 <motion.div ... />
 ```
+
+### Pourquoi `strict` n'est pas une coquetterie
+
+Un **seul** composant `motion.*` laissé quelque part dans l'arbre fait bundler la totalité
+des fonctionnalités et annule le bénéfice de `LazyMotion`. `strict` transforme cette fuite
+silencieuse — qui ne se voit que sur la taille du bundle, des semaines plus tard — en une
+erreur immédiate et localisée.
+
+### Ce qui vient de `motion/react` et ce qui vient de `motion/react-m`
+
+| Import | Depuis | Nature |
+|---|---|---|
+| `m` (`* as m`) | `motion/react-m` | **Les composants animés.** Jamais ailleurs. |
+| `LazyMotion` | `motion/react` | Le fournisseur, monté une fois à la racine |
+| `AnimatePresence` | `motion/react` | Orchestrateur, pas un composant animé — compatible `m.*` |
+| `useReducedMotion` | `motion/react` | Hook |
+| `type Transition`, `type Variants` | `motion/react` | Types uniquement |
+| `domAnimation` | `motion/react` | Isolé dans `src/lib/motion-features.ts` — voir plus bas |
+
+## Le feature bundle est isolé dans son propre module
+
+```tsx
+// src/lib/motion-features.ts — le seul fichier qui importe domAnimation
+import { domAnimation } from 'motion/react'
+export default domAnimation
+
+// src/main.tsx
+<LazyMotion features={loadDomAnimation} strict>
+```
+
+`domAnimation` couvre animations, variants, sorties et gestes hover/press/focus.
+**`domMax` n'est pas utilisé** : il ajoute drag et layout projection, que Scaffold
+n'emploie pas, pour un coût supplémentaire. Le module séparé est ce qui permet à Vite de
+sortir le bundle dans un chunk asynchrone (`motion-features.js`, 37 kB) au lieu de le
+fondre dans `index.js`.
+
+**Ne pas importer `domAnimation` ailleurs** : cela le ramènerait dans le chunk principal et
+annulerait le découpage.
 
 ## Tokens de Mouvement (`src/lib/motion.ts`)
 
@@ -54,3 +93,16 @@ Le symbole Scaffold™ (les 4 barres de l'emblème) est animé par GPU :
 Chaque composant animé appelle `useReducedMotion()`. Si l'utilisateur demande moins de mouvement :
 * Les translations (`y`, `x`) et les échelles (`scale`) sont désactivées.
 * Seuls les fondus d'opacité discrets sont conservés. L'interface ne casse jamais.
+
+C'est une **réduction, pas une suppression** : l'utilisateur garde le retour d'information
+(l'état change, le fondu le dit), il perd seulement le déplacement qui lui coûte.
+
+## Ce qu'on anime, et ce qu'on n'anime jamais
+
+Seuls `transform` et `opacity` sont animés : ce sont les deux propriétés que le compositeur
+traite sans relayout ni repaint. Animer `width`, `height`, `top`, `left` ou `margin` force
+un layout à chaque frame et fait tomber l'animation sous les 60 fps sur les machines
+modestes — un mouvement saccadé est pire que pas de mouvement.
+
+Pour faire varier une taille, animer `scaleX` / `scaleY`, ou faire varier la taille d'un
+conteneur en CSS et animer l'opacité du contenu.

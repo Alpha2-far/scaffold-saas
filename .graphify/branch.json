@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "branchName": "main",
+  "worktreePath": "/Users/farelviaho/Desktop/FAREL OS/design-os",
+  "upstream": "origin/main",
+  "mergeBase": "b13fcb932b9de2ccb7ec014da23d40925ebea1be",
+  "firstSeenHead": "b13fcb932b9de2ccb7ec014da23d40925ebea1be",
+  "lastSeenHead": "b13fcb932b9de2ccb7ec014da23d40925ebea1be",
+  "lastAnalyzedHead": "b13fcb932b9de2ccb7ec014da23d40925ebea1be",
+  "stale": false,
+  "staleReason": null,
+  "staleSince": null,
+  "lifecycleEvent": null,
+  "createdAt": "2026-09-16T19:13:22.939Z",
+  "updatedAt": "2026-09-16T20:01:43.222Z"
+}

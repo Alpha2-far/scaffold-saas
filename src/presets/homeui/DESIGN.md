@@ -8,7 +8,7 @@ format: DESIGN.md
 
 # HomeUI Design System
 
-This file describes the visual system extracted from the current React/Vite project. It is intended for AI coding agents and designmd.ai style workflows. Use it as the single source of truth when adding, editing, or regenerating UI for this project.
+This file describes the visual system extracted from the current React/Vite project. It is intended for AI coding agents and Scaffold style workflows. Use it as the single source of truth when adding, editing, or regenerating UI for this project.
 
 ## Visual Theme
 

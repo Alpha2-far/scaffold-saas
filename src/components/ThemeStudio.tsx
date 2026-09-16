@@ -1,10 +1,13 @@
 /**
  * The Scaffold Theme Studio — the visual half of the WYSIWYB contract.
  *
- * Everything on this screen is read from `src/presets/`, which was ingested
- * once from designmd.ai through MCP and compiled locally. At runtime there is
- * no network call and no API key: the user browses, switches and inspects
- * every theme without leaving Scaffold.
+ * Everything on this screen is read from `src/presets/`, compiled locally by
+ * `scripts/compile-presets.mjs`. At runtime there is no network call and no
+ * API key: the user browses, switches and inspects every theme without ever
+ * leaving Scaffold.
+ *
+ * White label: nothing in this component names, links to or credits an
+ * external registry. The compiled artifacts carry no such field to render.
  *
  * Three axes, all independent:
  *   · which theme          — the gallery, filterable by tag
@@ -13,7 +16,7 @@
  *                            that `/export-product` will copy verbatim
  */
 import { useEffect, useMemo, useState } from 'react'
-import { Check, Code2, Eye, Moon, Search, Sun, ExternalLink, ShieldCheck } from 'lucide-react'
+import { Check, Code2, Eye, Moon, Search, Sun, ShieldCheck } from 'lucide-react'
 import {
   themes,
   themeTags,
@@ -87,7 +90,7 @@ export function ThemeStudio() {
       if (!q) return true
       return (
         t.name.toLowerCase().includes(q) ||
-        t.author.toLowerCase().includes(q) ||
+        t.neutralRamp.includes(q) ||
         t.tags.some((x) => x.includes(q))
       )
     })
@@ -110,8 +113,8 @@ export function ThemeStudio() {
             {themes.length} thèmes internes
           </h2>
           <p className="text-sm text-stone-500 dark:text-stone-400 mt-0.5">
-            Ingérés une fois depuis designmd.ai, compilés localement. Zéro appel
-            réseau à l'exécution.
+            {themes.length} thèmes d'auteur propriétaires compilés en interne.
+            Rendu visuel immédiat &amp; zéro appel réseau.
           </p>
         </div>
 
@@ -147,7 +150,7 @@ export function ThemeStudio() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Rechercher un thème…"
-            className="w-full h-8 pl-9 pr-3 rounded-lg text-xs bg-stone-100/70 dark:bg-stone-900/60 border border-stone-200/60 dark:border-stone-800/80 text-stone-700 dark:text-stone-200 placeholder:text-stone-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/40 focus-visible:border-lime-500/60 transition-colors"
+            className="w-full h-8 pl-9 pr-3 rounded-lg text-xs bg-stone-100/70 dark:bg-stone-900/60 border border-stone-200/60 dark:border-stone-800/80 text-stone-700 dark:text-stone-200 placeholder:text-stone-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-lime-500/40 focus-visible:border-lime-500/60 transition-colors"
           />
         </div>
 
@@ -207,7 +210,7 @@ function TagPill({
       onClick={onClick}
       className={cn(
         'h-8 px-2.5 rounded-lg text-[11px] font-medium transition-colors border cursor-pointer',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/40',
+        'focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-lime-500/40',
         active
           ? 'bg-lime-500/15 text-lime-700 dark:text-lime-300 border-lime-500/40'
           : 'bg-stone-100/60 dark:bg-stone-900/50 text-stone-600 dark:text-stone-400 border-stone-200/60 dark:border-stone-800/70 hover:text-stone-900 dark:hover:text-stone-100',
@@ -243,7 +246,7 @@ function SegmentedToggle({
               onClick={() => onChange(v)}
               className={cn(
                 'inline-flex h-7 items-center gap-1.5 px-2.5 rounded-lg text-[11px] font-medium cursor-pointer transition-colors',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/40',
+                'focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-lime-500/40',
                 active
                   ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-sm'
                   : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100',
@@ -277,7 +280,7 @@ function ThemeCard({
         'group text-left rounded-xl border p-2 cursor-pointer',
         'transition-[border-color,background-color,transform] duration-150',
         'active:scale-[0.98] motion-reduce:active:scale-100',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/40',
+        'focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-lime-500/40',
         selected
           ? 'border-lime-500/60 bg-lime-500/5 dark:bg-lime-500/10'
           : 'border-stone-200/60 dark:border-stone-800/80 bg-stone-50/50 dark:bg-stone-900/40 hover:border-stone-300 dark:hover:border-stone-700',
@@ -293,8 +296,8 @@ function ThemeCard({
           <p className="text-[11px] font-semibold text-stone-900 dark:text-stone-100 truncate">
             {theme.name}
           </p>
-          <p className="text-[10px] text-stone-500 dark:text-stone-400 truncate">
-            @{theme.author}
+          <p className="text-[10px] text-stone-500 dark:text-stone-400 truncate capitalize">
+            {theme.tags[0] ?? theme.neutralRamp}
           </p>
         </div>
         {selected && (
@@ -384,7 +387,7 @@ function VisualStage({ theme, mode }: { theme: Theme; mode: ThemeMode }) {
         <section className="space-y-2">
           <p className="ds-display text-2xl">{theme.name}</p>
           <p className="ds-body text-sm max-w-prose">
-            {detail.description || 'Système de design ingéré depuis designmd.ai.'}
+            {detail.description || 'Système de design propriétaire Scaffold™.'}
           </p>
           <p className="ds-muted text-xs">
             {detail.typography.display || '—'} · {detail.typography.body || '—'} ·{' '}
@@ -547,15 +550,18 @@ function ThemeHeader({ theme, mode }: { theme: Theme; mode: ThemeMode }) {
           )}
         </span>
       </div>
-      <a
-        href={theme.url}
-        target="_blank"
-        rel="noreferrer"
-        className="inline-flex items-center gap-1 text-[11px] text-stone-500 dark:text-stone-400 hover:text-lime-600 dark:hover:text-lime-400 transition-colors"
-      >
-        {theme.identifier}
-        <ExternalLink className="w-3 h-3" />
-      </a>
+      {/* The catalog tags, in place of the external source link this used to
+          carry. Scaffold does not point anywhere outside itself. */}
+      <div className="flex items-center gap-1.5">
+        {theme.tags.slice(0, 3).map((t) => (
+          <span
+            key={t}
+            className="px-1.5 py-0.5 rounded text-[10px] font-medium capitalize bg-stone-100/70 dark:bg-stone-900/60 text-stone-500 dark:text-stone-400"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
     </div>
   )
 }

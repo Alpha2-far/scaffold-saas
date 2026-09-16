@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useState, useRef, useCallback, useEffect } from 'react'
+import { Suspense, createElement, useMemo, useState, useRef, useCallback, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Maximize2, GripVertical, Layout, Smartphone, Tablet, Monitor } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -8,6 +8,7 @@ import { loadAppShell, hasShellComponents, loadShellInfo } from '@/lib/shell-loa
 import { loadProductData } from '@/lib/product-loader'
 import React from 'react'
 import { ScaffoldLogoLoader } from '@/components/ScaffoldLogoLoader'
+import { cachedLazy } from '@/lib/lazy-preview'
 
 const MIN_WIDTH = 320
 const DEFAULT_WIDTH_PERCENT = 100
@@ -202,7 +203,7 @@ export function ScreenDesignFullscreen() {
     const loader = loadScreenDesignComponent(sectionId, screenDesignName)
     if (!loader) return null
     // Wrap the loader to handle potential export issues
-    return React.lazy(async () => {
+    return cachedLazy(`screen:${sectionId}/${screenDesignName}`, async () => {
       try {
         const module = await loader()
         if (module && typeof module.default === 'function') {
@@ -238,7 +239,7 @@ export function ScreenDesignFullscreen() {
     }
 
     // Wrap the loader to provide default props to the shell
-    return React.lazy(async () => {
+    return cachedLazy(`shell:${sectionId ?? '*'}`, async () => {
       try {
         const module = await loader() as Record<string, unknown>
         const ShellComponent = (module?.default || module?.AppShell) as React.ComponentType<Record<string, unknown>>
@@ -349,9 +350,10 @@ export function ScreenDesignFullscreen() {
           </div>
         }
       >
-        <AppShellComponent>
-          <ScreenDesignComponent />
-        </AppShellComponent>
+        {/* Dispatched explicitly: both the shell and the screen design are chosen at
+            runtime from the section's config, so neither can be a statically-bound JSX
+            tag. `cachedLazy` keeps each one's identity stable across renders. */}
+        {createElement(AppShellComponent, null, createElement(ScreenDesignComponent))}
       </Suspense>
     )
   }
@@ -365,7 +367,7 @@ export function ScreenDesignFullscreen() {
         </div>
       }
     >
-      <ScreenDesignComponent />
+      {createElement(ScreenDesignComponent)}
     </Suspense>
   )
 }

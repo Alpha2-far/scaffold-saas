@@ -35,7 +35,9 @@ export function SectionsPage() {
   const navigate = useNavigate()
   const productData = useMemo(() => loadProductData(), [])
 
-  const sections = productData.roadmap?.sections || []
+  // Memoised: `roadmap?.sections || []` allocates a fresh array on every render when
+  // there is no roadmap, which would invalidate every downstream useMemo below it.
+  const sections = useMemo(() => productData.roadmap?.sections || [], [productData])
 
   // Calculate progress for each section
   const sectionProgressMap = useMemo(() => {
@@ -141,7 +143,7 @@ export function SectionsPage() {
                           </div>
                         </div>
 
-                        <ChevronRight className="w-4 h-4 text-stone-400 dark:text-stone-500 flex-shrink-0 transform group-hover:translate-x-1 transition-transform duration-200" strokeWidth={2} />
+                        <ChevronRight className="w-4 h-4 text-stone-400 dark:text-stone-500 shrink-0 transform group-hover:translate-x-1 transition-transform duration-200" strokeWidth={2} />
                       </button>
                     </li>
                   )

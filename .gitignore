@@ -24,3 +24,6 @@ npm-debug.log*
 
 # Amp orb runtime files
 .amp/portals/*
+
+# Graphify cache
+.graphify/cache/

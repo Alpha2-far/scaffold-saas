@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { AlertTriangle, X } from 'lucide-react'
 import { loadProductData } from '@/lib/product-loader'
@@ -15,9 +15,23 @@ function getStorageKey(productName: string): string {
   return `design-os-phase-warning-dismissed-${sanitized}`
 }
 
+/**
+ * Read the dismissal flag. Fails closed (dismissed) rather than throwing: there is no
+ * `localStorage` under the headless render harness, and accessing it throws outright in
+ * a private window or with site data blocked. A missing preference must never be the
+ * reason a page fails to render.
+ */
+function readDismissed(storageKey: string): boolean {
+  if (typeof window === 'undefined') return true
+  try {
+    return window.localStorage.getItem(storageKey) === 'true'
+  } catch {
+    return true
+  }
+}
+
 export function PhaseWarningBanner() {
   const productData = useMemo(() => loadProductData(), [])
-  const [isDismissed, setIsDismissed] = useState(true) // Start dismissed to avoid flash
 
   const hasDataShape = !!productData.dataShape
   const hasDesignSystem = !!(productData.designSystem?.colors || productData.designSystem?.typography)
@@ -27,14 +41,37 @@ export function PhaseWarningBanner() {
   const productName = productData.overview?.name || 'default-product'
   const storageKey = getStorageKey(productName)
 
-  // Check localStorage on mount
-  useEffect(() => {
-    const dismissed = localStorage.getItem(storageKey) === 'true'
-    setIsDismissed(dismissed)
-  }, [storageKey])
+  /*
+    The preference is read in the state initialiser, not in an effect. Reading it in an
+    effect meant the first paint always showed the dismissed state and a second render
+    corrected it — a cascading render that React 19 flags, and the reason the initial
+    value had to be hardcoded to `true` "to avoid flash". Read once, synchronously, and
+    the very first paint is already right.
+
+    `dismissedFor` carries the key the value was read under, so that a product rename
+    (a different storage key) re-reads during render instead of in another effect. This
+    is React's documented "adjusting state when a prop changes" pattern: React discards
+    the render and retries immediately, without ever committing the stale value.
+  */
+  const [dismissedFor, setDismissedFor] = useState(() => ({
+    key: storageKey,
+    value: readDismissed(storageKey),
+  }))
+
+  let isDismissed = dismissedFor.value
+  if (dismissedFor.key !== storageKey) {
+    isDismissed = readDismissed(storageKey)
+    setDismissedFor({ key: storageKey, value: isDismissed })
+  }
+
+  const setIsDismissed = (value: boolean) => setDismissedFor({ key: storageKey, value })
 
   const handleDismiss = () => {
-    localStorage.setItem(storageKey, 'true')
+    try {
+      window.localStorage.setItem(storageKey, 'true')
+    } catch {
+      // Storage blocked: the dismissal still applies for this session.
+    }
     setIsDismissed(true)
   }
 

@@ -1,0 +1,742 @@
+{
+  "eslint.config.js": {
+    "mtime": 1788956436671.6719,
+    "hash": "b8893da386a89dfd3672dad848f4ec7e"
+  },
+  "scripts/compile-presets.mjs": {
+    "mtime": 1789585343772.0042,
+    "hash": "02321c4a80d22999a699926cd66f58b7"
+  },
+  "src/components/AppLayout.tsx": {
+    "mtime": 1789386163565.9377,
+    "hash": "1170f84e7d5f91fdeda9f3955f22bed5"
+  },
+  "src/components/DataCard.tsx": {
+    "mtime": 1789586910393.471,
+    "hash": "1d5ae579712f901660258521cb912628"
+  },
+  "src/components/DataShapePage.tsx": {
+    "mtime": 1788956436869.1619,
+    "hash": "12efa6b74901a4a5e9daad7b74343a8d"
+  },
+  "src/components/DesignPage.tsx": {
+    "mtime": 1789583237386.3425,
+    "hash": "bb2a08ae34cba98c9cb5d43e91883672"
+  },
+  "src/components/EmptyState.tsx": {
+    "mtime": 1788961817745.59,
+    "hash": "92ee2ef16b90c270dfbb67dacfe2521b"
+  },
+  "src/components/ExportPage.tsx": {
+    "mtime": 1788956436871.7056,
+    "hash": "5e8e5b3140e48e2eebc778493db7ec1d"
+  },
+  "src/components/NextPhaseButton.tsx": {
+    "mtime": 1789586902909.8901,
+    "hash": "d6ca0feb549e017b0696c6315ab82821"
+  },
+  "src/components/PhaseNav.tsx": {
+    "mtime": 1789586902906.3647,
+    "hash": "f6345f6b3f5ae79cbe04fc7c06f681e2"
+  },
+  "src/components/PhaseWarningBanner.tsx": {
+    "mtime": 1789586951575.9316,
+    "hash": "d29bef47deaa0dd8e36b960743fdc6d8"
+  },
+  "src/components/ProductOverviewCard.tsx": {
+    "mtime": 1789386457336.7812,
+    "hash": "0c169284f8345b309b49d683144aaad5"
+  },
+  "src/components/ProductPage.tsx": {
+    "mtime": 1788969863889.3572,
+    "hash": "7b69a649249f5758a44beb1be3eb7e88"
+  },
+  "src/components/ScaffoldLogoLoader.tsx": {
+    "mtime": 1788989038300.6804,
+    "hash": "49e9273ae84fe91d62b2b5b766dfae0a"
+  },
+  "src/components/ScreenDesignPage.tsx": {
+    "mtime": 1789587210449.433,
+    "hash": "b97624deffb6f46a39897387142315e9"
+  },
+  "src/components/ScreenDesignsCard.tsx": {
+    "mtime": 1788956436887.4404,
+    "hash": "0785c0f0b2c98b985c8bf7d6e1764900"
+  },
+  "src/components/SectionPage.tsx": {
+    "mtime": 1788961836655.4026,
+    "hash": "e4c081fd5cea69fdb19cf2f3f3a3fd93"
+  },
+  "src/components/SectionsCard.tsx": {
+    "mtime": 1789386363647.176,
+    "hash": "62b5453df41916c7825039aa74c85688"
+  },
+  "src/components/SectionsPage.tsx": {
+    "mtime": 1789586849184.14,
+    "hash": "b08f982c628b0c79fb5909ac6f2847fc"
+  },
+  "src/components/ShellCard.tsx": {
+    "mtime": 1788956436888.5544,
+    "hash": "b2bfb69fc38d0e67762250b2f02519cb"
+  },
+  "src/components/ShellDesignPage.tsx": {
+    "mtime": 1789587210446.6187,
+    "hash": "a95681d86c57404c30c371eb6d689a0c"
+  },
+  "src/components/SpecCard.tsx": {
+    "mtime": 1788956436895.0508,
+    "hash": "ee4a2c118235136d9aafb33da8729c61"
+  },
+  "src/components/StatusConsole.tsx": {
+    "mtime": 1789386288913.2097,
+    "hash": "d314d1e274f3b500fa1c1bab055cce03"
+  },
+  "src/components/StepIndicator.tsx": {
+    "mtime": 1788969958491.6318,
+    "hash": "e1e3d5d969d2230a428c4788574e6a05"
+  },
+  "src/components/ThemeStudio.tsx": {
+    "mtime": 1789588832930.2227,
+    "hash": "8c5ead2b62d4c1dc5f9045b8efa7a39d"
+  },
+  "src/components/ThemeToggle.tsx": {
+    "mtime": 1788970328741.0771,
+    "hash": "955049a95f251cddf39ecd63e81f7ed8"
+  },
+  "src/components/motion-primitives.tsx": {
+    "mtime": 1788969958483.0063,
+    "hash": "b4884d0ab0574eeb8d852b83ce420d43"
+  },
+  "src/components/ui/avatar.tsx": {
+    "mtime": 1788956436896.4587,
+    "hash": "19bc4411b724fb504c65550b61a453b1"
+  },
+  "src/components/ui/badge.tsx": {
+    "mtime": 1789586880117.815,
+    "hash": "b8f8a284af98cf8472798fd63d6d5740"
+  },
+  "src/components/ui/button.tsx": {
+    "mtime": 1789586880120.6772,
+    "hash": "f21efa778fe0d6cfd13dbe62971947d1"
+  },
+  "src/components/ui/card.tsx": {
+    "mtime": 1788956436899.935,
+    "hash": "a6752f4d1da504c7f03196d90cde4b2c"
+  },
+  "src/components/ui/collapsible.tsx": {
+    "mtime": 1788956436900.847,
+    "hash": "aba7f811cbbd9426403dfef39800d839"
+  },
+  "src/components/ui/dialog.tsx": {
+    "mtime": 1788956436901.337,
+    "hash": "48a74bc4e6b2a9609c91582cae95730f"
+  },
+  "src/components/ui/dropdown-menu.tsx": {
+    "mtime": 1788956436901.7517,
+    "hash": "8a7f49b4f303577830fafaaaedb8c4f3"
+  },
+  "src/components/ui/input.tsx": {
+    "mtime": 1789588832957.4744,
+    "hash": "fe9a393c78c54953239ee723c42ba4aa"
+  },
+  "src/components/ui/label.tsx": {
+    "mtime": 1788956436902.6982,
+    "hash": "710ce51843629f84766e78763b194c90"
+  },
+  "src/components/ui/separator.tsx": {
+    "mtime": 1788956436903.0042,
+    "hash": "07b35dc35f811b26a1ee3982582ba9fb"
+  },
+  "src/components/ui/sheet.tsx": {
+    "mtime": 1788956436903.5364,
+    "hash": "6945241f834cad4ca26b2b06a7c49a50"
+  },
+  "src/components/ui/skeleton.tsx": {
+    "mtime": 1788956436904.978,
+    "hash": "ee5017bac14efeda715feaceb488382a"
+  },
+  "src/components/ui/table.tsx": {
+    "mtime": 1788956436905.4114,
+    "hash": "531bf830b5f3b399abe3fd453157cdb7"
+  },
+  "src/components/ui/tabs.tsx": {
+    "mtime": 1789588832949.5889,
+    "hash": "9fd01a5f8c4c372cf9aa9b2bc7b19fe8"
+  },
+  "src/lib/data-shape-loader.ts": {
+    "mtime": 1788960632166.5818,
+    "hash": "7d226d18199da13b02099124b3972088"
+  },
+  "src/lib/design-system-loader.ts": {
+    "mtime": 1788956436911.3145,
+    "hash": "a0565ee98b7d42bba8c11a7d824d9b0b"
+  },
+  "src/lib/motion-features.ts": {
+    "mtime": 1788970023272.8306,
+    "hash": "732f6624e69b82959a9ff0dc8171c372"
+  },
+  "src/lib/motion.ts": {
+    "mtime": 1788969525296.006,
+    "hash": "3d0082be02ba003a5ac4b836e7ec2b2a"
+  },
+  "src/lib/product-health.ts": {
+    "mtime": 1788970215432.001,
+    "hash": "355103b1bfaf5207174a7f84b0b4fa9a"
+  },
+  "src/lib/product-loader.ts": {
+    "mtime": 1788963441413.735,
+    "hash": "ad74624db60b0c5d7be0d613d2f1b859"
+  },
+  "src/lib/router.tsx": {
+    "mtime": 1788956436913.8718,
+    "hash": "ab3179b1d63a9fe0e21099ce471a4bdf"
+  },
+  "src/lib/section-loader.ts": {
+    "mtime": 1788960632171.5225,
+    "hash": "e1fc7db99668a66576ce732f2d240d6c"
+  },
+  "src/lib/shell-loader.ts": {
+    "mtime": 1788960632168.7195,
+    "hash": "3059cfdd45672d8b9636ac2c8755367b"
+  },
+  "src/lib/utils.ts": {
+    "mtime": 1788956436915.842,
+    "hash": "5a6fd53fdcf2be529e9cc0b718fde352"
+  },
+  "src/main.tsx": {
+    "mtime": 1788970023340.8464,
+    "hash": "aa805e6fd4c476349f82c5ed11c555f3"
+  },
+  "src/presets/index.ts": {
+    "mtime": 1789585379596.7002,
+    "hash": "6897e70c4f792e0902d8917d1251aafb"
+  },
+  "src/types/product.ts": {
+    "mtime": 1788956436920.0923,
+    "hash": "f36449883e1eabfcc8cfe66d7ec221fb"
+  },
+  "src/types/section.ts": {
+    "mtime": 1788956436920.4114,
+    "hash": "36a2cd1592a5a446591ecd48ab95c857"
+  },
+  "vite.config.ts": {
+    "mtime": 1788956436922.5576,
+    "hash": "aaa99499f3db5f5e3bfc922e29f705f8"
+  },
+  "AGENTS.md": {
+    "mtime": 1788966674436.6802,
+    "hash": "0d27bb3e538f034538e93f4f4175d36a"
+  },
+  "CHANGELOG.md": {
+    "mtime": 1788956436662.7727,
+    "hash": "53e2363a4c75f4c006ab332b8ad1cc6d"
+  },
+  "CLAUDE.md": {
+    "mtime": 1788956436662.9656,
+    "hash": "e1e46f295b62b89a2a4dedb04f205c11"
+  },
+  "README.md": {
+    "mtime": 1788970737033.1716,
+    "hash": "72cb7d600c5db7989f792f74686b2cbe"
+  },
+  "agent-os/standards/css/color-vocabulary.md": {
+    "mtime": 1789383925620.7031,
+    "hash": "4d913e2626bfac1d14833d15c478e8a9"
+  },
+  "agent-os/standards/css/icons.md": {
+    "mtime": 1788962520464.382,
+    "hash": "4b778967cc5f1963d52d1fce558d825b"
+  },
+  "agent-os/standards/css/motion.md": {
+    "mtime": 1789588076399.8848,
+    "hash": "e46679f0b9ddaa714b9c21bc9bb61c39"
+  },
+  "agent-os/standards/css/two-layer-colors.md": {
+    "mtime": 1788962289957.9211,
+    "hash": "20e43fd915f7e837d654ed0980e751f3"
+  },
+  "agent-os/standards/global/exportable-components.md": {
+    "mtime": 1788962994793.0798,
+    "hash": "13edf38b627d80ecc73c33f5c1695580"
+  },
+  "agent-os/standards/global/preview-wrappers.md": {
+    "mtime": 1788963120358.2236,
+    "hash": "4d14ffc67d3efdc94118a466cf6dae09"
+  },
+  "agent-os/standards/global/scope-lock.md": {
+    "mtime": 1789383953495.9753,
+    "hash": "89f467101bb3028623882bc75a9101f7"
+  },
+  "agent-os/standards/global/section-ids.md": {
+    "mtime": 1788963468495.168,
+    "hash": "e7b886428ac18d1a4642f6e4f1eda67a"
+  },
+  "agent-os/standards/global/section-structure.md": {
+    "mtime": 1788962860790.3562,
+    "hash": "6518802ac6c5c7582dd2f1115de8eedb"
+  },
+  "agent-os/standards/index.yml": {
+    "mtime": 1789588111571.4695,
+    "hash": "a7f201e1eb892f7d74831882a625011c"
+  },
+  "agent-os/standards/javascript/content-loading.md": {
+    "mtime": 1788960209278.6997,
+    "hash": "1ab83b2ae8625841a31e0bfe980f4818"
+  },
+  "agent-os/standards/javascript/derived-progress.md": {
+    "mtime": 1788961219304.9443,
+    "hash": "073c3451252162024572af5b1852a6ac"
+  },
+  "agent-os/standards/javascript/empty-states.md": {
+    "mtime": 1788961806701.5142,
+    "hash": "1d16c78cef863f4adbeaa26c7a271afb"
+  },
+  "agent-os/standards/javascript/loader-contract.md": {
+    "mtime": 1788960506358.294,
+    "hash": "a4178e7fec0d5fe5cc139e119c619e96"
+  },
+  "agent-os/standards/javascript/markdown-parsing.md": {
+    "mtime": 1789384047426.575,
+    "hash": "e6f0b26c6784e1265e55856e61e67af2"
+  },
+  "agent-os/standards/javascript/page-composition.md": {
+    "mtime": 1788961081388.0823,
+    "hash": "87eff38878e4c7e844a0637a06cb869c"
+  },
+  "agent-os/standards/javascript/preview-iframe.md": {
+    "mtime": 1789588095140.9014,
+    "hash": "726754f83f35e2941f10337e81bef31d"
+  },
+  "agent-os/standards/javascript/product-audit.md": {
+    "mtime": 1789383997374.3594,
+    "hash": "1298acf1b4c6885a7bc1ab737cea8d02"
+  },
+  "docs/codebase-implementation.md": {
+    "mtime": 1788956436666.112,
+    "hash": "9dd12efb01d7906e61058eda414a070f"
+  },
+  "docs/design-section.md": {
+    "mtime": 1788956436666.7847,
+    "hash": "5cb0877974ca808dd82b45f302859b86"
+  },
+  "docs/export.md": {
+    "mtime": 1788956436668.9326,
+    "hash": "3a8802548e8e38b50ee4f7052dda8337"
+  },
+  "docs/getting-started.md": {
+    "mtime": 1788956436669.2908,
+    "hash": "5c783db55dbe5d30c5cb10580ec8b3c3"
+  },
+  "docs/index.md": {
+    "mtime": 1788956436669.6711,
+    "hash": "d5a238c309cf5bd6b7349803d6af126a"
+  },
+  "docs/product-planning.md": {
+    "mtime": 1788956436670.0928,
+    "hash": "d7e38d24b72c0fdb47c01e34057989cf"
+  },
+  "docs/requirements.md": {
+    "mtime": 1788956436670.415,
+    "hash": "96c79c43dd1fa8ffd021fcda2de16c35"
+  },
+  "docs/usage.md": {
+    "mtime": 1788956436671.1226,
+    "hash": "8340bdae058cf18791c5c4627cf4c9e7"
+  },
+  "genesis-DESIGN.md": {
+    "mtime": 1789393374727.8677,
+    "hash": "76d342f523f2b9149f0430fcb267e7de"
+  },
+  "index.html": {
+    "mtime": 1788971208965.9421,
+    "hash": "8acd1c365c94f65bb89fb06394086115"
+  },
+  "src/presets/atmospheric-glass/DESIGN.md": {
+    "mtime": 1789582326428.2104,
+    "hash": "de867b5c3312dee3168129ec85324f8b"
+  },
+  "src/presets/broadsheet/DESIGN.md": {
+    "mtime": 1789582106374.5513,
+    "hash": "89b9e3f31c020e853619956ff0733a01"
+  },
+  "src/presets/chatbubble/DESIGN.md": {
+    "mtime": 1789581644406.9373,
+    "hash": "73d7d52d6cd80a2d9503de949ab7ab14"
+  },
+  "src/presets/command-center/DESIGN.md": {
+    "mtime": 1789581396055.0498,
+    "hash": "825c4b35233da8847a5f53c16a7bfacd"
+  },
+  "src/presets/corpscale/DESIGN.md": {
+    "mtime": 1789582001010.5684,
+    "hash": "d13bb3c0f4381f9a11fcc06371a7a157"
+  },
+  "src/presets/createspace/DESIGN.md": {
+    "mtime": 1789581433770.7617,
+    "hash": "ed0c507825cb4cbf8cfd9e6f758be4e4"
+  },
+  "src/presets/crypto-blue/DESIGN.md": {
+    "mtime": 1789581772637.7563,
+    "hash": "3e36ff8f76cebf3ddd060178df521e1e"
+  },
+  "src/presets/docuforge/DESIGN.md": {
+    "mtime": 1789581441285.3464,
+    "hash": "5cdc5d6e7091902c6b3290e4da9a3eed"
+  },
+  "src/presets/electric-volt/DESIGN.md": {
+    "mtime": 1789582355539.8523,
+    "hash": "c017c7e386b299001aee5e06c3c8559b"
+  },
+  "src/presets/ember-studio/DESIGN.md": {
+    "mtime": 1789581407525.2004,
+    "hash": "6bbed293b7e363f290c298f6a040a3da"
+  },
+  "src/presets/flip7-card-game/DESIGN.md": {
+    "mtime": 1789581356078.4463,
+    "hash": "002b3a2e58b76c2a1fc096763638db6f"
+  },
+  "src/presets/genesis/DESIGN.md": {
+    "mtime": 1789581347592.5444,
+    "hash": "76d342f523f2b9149f0430fcb267e7de"
+  },
+  "src/presets/green-deck/DESIGN.md": {
+    "mtime": 1789581427526.7222,
+    "hash": "a461818541cf5faf882d12436d1e5704"
+  },
+  "src/presets/homeui/DESIGN.md": {
+    "mtime": 1789585345217.7979,
+    "hash": "bdb8d2108f3da327f508058f0ada14da"
+  },
+  "src/presets/journey-ui/DESIGN.md": {
+    "mtime": 1789581372979.5166,
+    "hash": "f7674c680ecd1ef022c33eaf5ab77ece"
+  },
+  "src/presets/longcipher/DESIGN.md": {
+    "mtime": 1789581446994.9722,
+    "hash": "02612fd11ce566d06a301aa47addb9f2"
+  },
+  "src/presets/magspread/DESIGN.md": {
+    "mtime": 1789582096555.9673,
+    "hash": "f25e0df0c8d67f90c7989e2555d80ad1"
+  },
+  "src/presets/marblecrest/DESIGN.md": {
+    "mtime": 1789582349986.4744,
+    "hash": "fd21986a60d046fcef5a2fb29f7458b7"
+  },
+  "src/presets/marketnest/DESIGN.md": {
+    "mtime": 1789582363648.5947,
+    "hash": "0e0bb6e90e4be1ff7d419351ac77ccbf"
+  },
+  "src/presets/medicare-plus/DESIGN.md": {
+    "mtime": 1789582379809.5488,
+    "hash": "336550b05436bdb1cc52df7bda83e195"
+  },
+  "src/presets/midnight-banking/DESIGN.md": {
+    "mtime": 1789585345285.919,
+    "hash": "e4d52932519dc8291172117bc5f1ac11"
+  },
+  "src/presets/nexus-tech/DESIGN.md": {
+    "mtime": 1789582334457.7644,
+    "hash": "c0b8d213f8430d27e930069b8e44ab5c"
+  },
+  "src/presets/noirluxe/DESIGN.md": {
+    "mtime": 1789582341803.0051,
+    "hash": "f64e61670d60c6dfb7c57f1c7c98b2bb"
+  },
+  "src/presets/nomadkit/DESIGN.md": {
+    "mtime": 1789581421358.2205,
+    "hash": "3748e7a0ba857ada333ba5a8e5220377"
+  },
+  "src/presets/octo-code/DESIGN.md": {
+    "mtime": 1789581458443.7483,
+    "hash": "a03988394b99ff8c1fe6a79b6fbc4e9a"
+  },
+  "src/presets/open-serif/DESIGN.md": {
+    "mtime": 1789582012570.1438,
+    "hash": "9539311310c896f09f3dde74135f5de0"
+  },
+  "src/presets/panamericana/DESIGN.md": {
+    "mtime": 1789582306522.1165,
+    "hash": "26c06abfe28b1bcefefd2445d60aea71"
+  },
+  "src/presets/prismatic-pay/DESIGN.md": {
+    "mtime": 1789581834267.6895,
+    "hash": "3885b77a43adb60a1fc85a97bd97f3cb"
+  },
+  "src/presets/pulsepoint/DESIGN.md": {
+    "mtime": 1789582385732.229,
+    "hash": "9842d8f95f29055432ece6cfb10a7180"
+  },
+  "src/presets/rawblock/DESIGN.md": {
+    "mtime": 1789581384818.7708,
+    "hash": "e7c636832d091415dfe76512d83d44f4"
+  },
+  "src/presets/red-broadcast/DESIGN.md": {
+    "mtime": 1789581401840.8792,
+    "hash": "6309740587acf27c4de2bfc875c4aa67"
+  },
+  "src/presets/resortlux/DESIGN.md": {
+    "mtime": 1789582369635.4766,
+    "hash": "0c2c2083ceed98a1dca9e8bf6674c9b2"
+  },
+  "src/presets/shopvibe/DESIGN.md": {
+    "mtime": 1789581390428.45,
+    "hash": "0cd5edb95a1b29bd2a6f171d54ce400c"
+  },
+  "src/presets/skylearn/DESIGN.md": {
+    "mtime": 1789581452719.7185,
+    "hash": "cd6a77c4b2f494d070d0036a4e26fea8"
+  },
+  "src/presets/studioblank/DESIGN.md": {
+    "mtime": 1789581763590.4807,
+    "hash": "d746ea29eb49bac997925f8035ff902c"
+  },
+  "src/presets/tavily/DESIGN.md": {
+    "mtime": 1789582299157.85,
+    "hash": "7e18d5d24e8f31c8d7a90b0c55b2d622"
+  },
+  "src/presets/thoughtstream/DESIGN.md": {
+    "mtime": 1789581413172.9294,
+    "hash": "f4be38160bc095412b22ceb892020cb3"
+  },
+  "src/presets/trust-blue-pay/DESIGN.md": {
+    "mtime": 1789581841492.4053,
+    "hash": "41b8374d9d2784cf822c515c7c4450bc"
+  },
+  "src/presets/verdana-health/DESIGN.md": {
+    "mtime": 1789581367292.8767,
+    "hash": "fd5c47ccdffb72d6fba3d28fdd737251"
+  },
+  "src/presets/violet-issue/DESIGN.md": {
+    "mtime": 1789581650183.288,
+    "hash": "c471a9b83bd52dea08a13ebeb84dbc7b"
+  },
+  "src/presets/voicebox/DESIGN.md": {
+    "mtime": 1789581378894.1492,
+    "hash": "e249a4fc4e8265e3c5ffab74a367044d"
+  },
+  "src/presets/wattvision/DESIGN.md": {
+    "mtime": 1789581361731.716,
+    "hash": "f75261b98a6b3b79301a666874e3369a"
+  },
+  "src/presets/zalopay/DESIGN.md": {
+    "mtime": 1789581924975.9644,
+    "hash": "c7350935a268454d43b7e3b359fd7e0e"
+  },
+  "assets/logo-scaffold-blanc-fond-noir.png": {
+    "mtime": 1788970377061.5728,
+    "hash": "92da4340362cbe172e24d57e5101e7b3"
+  },
+  "assets/logo-scaffold-blanc.png": {
+    "mtime": 1788969921197.2705,
+    "hash": "92da4340362cbe172e24d57e5101e7b3"
+  },
+  "assets/logo-scaffold-couleur-fond-noir.png": {
+    "mtime": 1788970377035.8228,
+    "hash": "2006dbaa93455a51a9c07cf7cdb697c8"
+  },
+  "assets/logo-scaffold-couleur-fond-transparent.png": {
+    "mtime": 1788970377044.5002,
+    "hash": "1ecd85ac13f0cd2fcb49eaa7cad67b2c"
+  },
+  "assets/logo-scaffold-couleur.png": {
+    "mtime": 1788969921167.8994,
+    "hash": "1ecd85ac13f0cd2fcb49eaa7cad67b2c"
+  },
+  "assets/logo-scaffold-couleur.svg": {
+    "mtime": 1788969921146.6118,
+    "hash": "3024dcf484c3673f47c570adab1c34ee"
+  },
+  "assets/logo-scaffold-noir-fond-blanc.png": {
+    "mtime": 1788970377081.4563,
+    "hash": "dd8abcd19c0ac26b4d7bb431a4fc7465"
+  },
+  "assets/logotype-scaffold-couleur-fond-noir.png": {
+    "mtime": 1788970377092.171,
+    "hash": "02c43f919eb5dbafda50439a669aa55e"
+  },
+  "assets/logotype-scaffold-couleur-fond-transparent.png": {
+    "mtime": 1788970377102.5845,
+    "hash": "e9402128f246304b6ee869b00e6054c0"
+  },
+  "assets/logotype-scaffold.png": {
+    "mtime": 1788969921220.4758,
+    "hash": "e9402128f246304b6ee869b00e6054c0"
+  },
+  "assets/logotype-scaffold.svg": {
+    "mtime": 1788969921209.1838,
+    "hash": "c58fcc06d0762de21aab1c80d69fa92e"
+  },
+  "assets/scaffold-charte.png": {
+    "mtime": 1788969921234.6062,
+    "hash": "8ee1ce160688e8fe98db04b5be402aa8"
+  },
+  "assets/scaffold-logo-dark.png": {
+    "mtime": 1788971454679.174,
+    "hash": "68b265e68673aa4ceb729ec566bf5bbd"
+  },
+  "assets/scaffold-logo-light.png": {
+    "mtime": 1788971148188.8245,
+    "hash": "df3241779188ad12ebaf1f9d735122a4"
+  },
+  "assets/scaffold-mark-dark.png": {
+    "mtime": 1788971152872.8416,
+    "hash": "adf8f369039506355fee31d2330905ea"
+  },
+  "assets/scaffold-mark.png": {
+    "mtime": 1788971150014.615,
+    "hash": "6c9ac2b859f5ed9a6efbb010ddf00806"
+  },
+  "public/scaffold/logo-dark.png": {
+    "mtime": 1788970386114.009,
+    "hash": "2006dbaa93455a51a9c07cf7cdb697c8"
+  },
+  "public/scaffold/logo-white.png": {
+    "mtime": 1788970386119.9873,
+    "hash": "92da4340362cbe172e24d57e5101e7b3"
+  },
+  "public/scaffold/logo.png": {
+    "mtime": 1788969962918.9275,
+    "hash": "1ecd85ac13f0cd2fcb49eaa7cad67b2c"
+  },
+  "public/scaffold/logo.svg": {
+    "mtime": 1788969962908.586,
+    "hash": "3024dcf484c3673f47c570adab1c34ee"
+  },
+  "public/scaffold/logotype.svg": {
+    "mtime": 1788969962925.9817,
+    "hash": "c58fcc06d0762de21aab1c80d69fa92e"
+  },
+  "public/scaffold/scaffold-logo-dark.png": {
+    "mtime": 1788971453920.449,
+    "hash": "68b265e68673aa4ceb729ec566bf5bbd"
+  },
+  "public/scaffold/scaffold-logo-light.png": {
+    "mtime": 1788971147398.5637,
+    "hash": "df3241779188ad12ebaf1f9d735122a4"
+  },
+  "public/scaffold/scaffold-mark-dark.png": {
+    "mtime": 1788971152408.2708,
+    "hash": "adf8f369039506355fee31d2330905ea"
+  },
+  "public/scaffold/scaffold-mark.png": {
+    "mtime": 1788971149191.3909,
+    "hash": "6c9ac2b859f5ed9a6efbb010ddf00806"
+  },
+  "public/vite.svg": {
+    "mtime": 1788956436854.2058,
+    "hash": "8e3a10e157f75ada21ab742c022d5430"
+  },
+  "src/assets/react.svg": {
+    "mtime": 1788956436858.5168,
+    "hash": "f0402b67b6ce880f65666bb49e841696"
+  },
+  ".agents/setup": {
+    "mtime": 1788956436552.7617,
+    "hash": "c4b6bf2d1922dcc9f483f54908eb249e"
+  },
+  ".agents/skills/frontend-design/SKILL.md": {
+    "mtime": 1788956436553.5347,
+    "hash": "f97f33bc244faedad5c2a99372e0fc5c"
+  },
+  ".claude/commands/agent-os/discover-standards.md": {
+    "mtime": 1788959335774.5266,
+    "hash": "362f1af1ed5d1765be4c7043c1df8e88"
+  },
+  ".claude/commands/agent-os/index-standards.md": {
+    "mtime": 1788959335779.478,
+    "hash": "de3ca14cb82af8c482906d0eeb6ee6ac"
+  },
+  ".claude/commands/agent-os/inject-standards.md": {
+    "mtime": 1788959335784.3733,
+    "hash": "a7c90555f3a230d3e7f2615015a07847"
+  },
+  ".claude/commands/agent-os/plan-product.md": {
+    "mtime": 1788959335790.9412,
+    "hash": "18860f8292e90429479fdc51e4b32745"
+  },
+  ".claude/commands/agent-os/shape-spec.md": {
+    "mtime": 1788959335798.6252,
+    "hash": "3f87693fe4199998bec5278da4afc266"
+  },
+  ".claude/commands/design-os/bm-prd.md": {
+    "mtime": 1788967569222.2712,
+    "hash": "a3c87af6184770bf646fa7c49eff146f"
+  },
+  ".claude/commands/design-os/data-shape.md": {
+    "mtime": 1788965847004.4707,
+    "hash": "269c4813c4779cef94eb4663668aca1d"
+  },
+  ".claude/commands/design-os/design-screen.md": {
+    "mtime": 1788966639277.596,
+    "hash": "31258dbe2fd7979ae5b97389321118e7"
+  },
+  ".claude/commands/design-os/design-shell.md": {
+    "mtime": 1788966656550.6936,
+    "hash": "31ebe0de907bc03b65949bd2f4c3b6bd"
+  },
+  ".claude/commands/design-os/export-product.md": {
+    "mtime": 1789583462565.8362,
+    "hash": "30964fbb9173e7ae5f0a411e2a29c361"
+  },
+  ".claude/commands/design-os/product-audit.md": {
+    "mtime": 1788966945751.8748,
+    "hash": "9f18cb77ba86870d365714a404d79a72"
+  },
+  ".claude/commands/design-os/product-roadmap.md": {
+    "mtime": 1788965815950.2666,
+    "hash": "96b8267e6181b9de2acde8c8a6d17fbe"
+  },
+  ".claude/commands/design-os/product-vision.md": {
+    "mtime": 1788965037444.4246,
+    "hash": "85130a583f4af4b6cb4b65f3eaf9e09e"
+  },
+  ".claude/commands/design-os/product-vision.old.md": {
+    "mtime": 1788956436559.0107,
+    "hash": "b3f5b02d9b485c5cb0f56e647826a1b9"
+  },
+  ".claude/commands/design-os/sample-data.md": {
+    "mtime": 1788966656546.757,
+    "hash": "34cc1367e5a65239538668966078aaa2"
+  },
+  ".claude/commands/design-os/scaffold-audit.md": {
+    "mtime": 1788967586870.7798,
+    "hash": "fc5125c9f98469c6ce092de39c21d254"
+  },
+  ".claude/commands/design-os/screenshot-design.md": {
+    "mtime": 1788966656548.8445,
+    "hash": "2c7c43d98aefcf720f3b449f25cf2bd1"
+  },
+  ".claude/commands/design-os/shape-section.md": {
+    "mtime": 1788966607794.126,
+    "hash": "c4b0797347bef88ed39af3d346d48751"
+  },
+  ".github/workflows/ci.yml": {
+    "mtime": 1788959699055.2312,
+    "hash": "45e509dac6da32bf6e81b463f3d0d48a"
+  },
+  "src/components/ui/badge-variants.ts": {
+    "mtime": 1789586861591.7395,
+    "hash": "61418545f24b7be9967e51775a0b140f"
+  },
+  "src/components/ui/button-variants.ts": {
+    "mtime": 1789588832955.191,
+    "hash": "968131598860062213ed285e5f16cdba"
+  },
+  "src/lib/lazy-preview.ts": {
+    "mtime": 1789587194481.9956,
+    "hash": "99083c61e7597fe6892dd7da8eacfed2"
+  },
+  "src/lib/phases.ts": {
+    "mtime": 1789586893825.6807,
+    "hash": "a645f76264c757489ccf30b501c8822e"
+  },
+  "agent-os/standards/global/graphify-rules.md": {
+    "mtime": 1789588633533.629,
+    "hash": "47d2072d78c3fa1e3e0f3ed78d73ca8c"
+  },
+  "agent-os/standards/javascript/react-19.md": {
+    "mtime": 1789588145430.0024,
+    "hash": "d3cf3302d4008844b3214193ad5aa47d"
+  }
+}

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { FileText, Boxes, Layout, LayoutList, Package, ArrowRight } from 'lucide-react'
-import type { Phase } from './PhaseNav'
+import type { Phase } from '@/lib/phases'
 import { Tappable } from '@/components/motion-primitives'
 
 interface NextPhaseButtonProps {

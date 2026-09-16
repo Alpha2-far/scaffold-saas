@@ -1,16 +1,21 @@
 /**
  * The Scaffold theme registry.
  *
- * Every theme here was ingested from designmd.ai once, through the `designmd`
- * MCP server, and compiled locally by `scripts/compile-presets.mjs`. At
- * runtime this module reads nothing but its own folder: no fetch, no API key,
- * no network. The user switches themes inside Scaffold and never leaves it.
+ * Every theme here was ingested once through MCP and compiled locally by
+ * `scripts/compile-presets.mjs`. At runtime this module reads nothing but its
+ * own folder: no fetch, no API key, no network. The user switches themes
+ * inside Scaffold and never leaves it.
+ *
+ * White label: the compiled artifacts carry no author, identifier or source
+ * URL. Provenance is retained in `_catalog.json`, which the compiler reads
+ * from disk and this module never imports — so nothing about where a theme
+ * came from reaches the bundle.
  *
  * Three tiers of loading, chosen so the selector is instant and the bundle
  * stays small:
  *
- *   _registry.json  eager  — one ~11 kB index: names, authors, tags, swatches.
- *                            Enough to paint the whole gallery at once.
+ *   _registry.json  eager  — one small index: names, tags, swatches. Enough
+ *                            to paint the whole gallery at once.
  *   theme.css       eager  — CSS custom properties, scoped per preset, so a
  *                            switch is one attribute change and the preview
  *                            repaints before any JSON has resolved.
@@ -38,13 +43,17 @@ const designDocLoaders = import.meta.glob('./*/DESIGN.md', {
 
 /* ------------------------------------------------------------------ */
 
-/** What the gallery needs, and nothing more. */
+/**
+ * What the gallery needs, and nothing more.
+ *
+ * White label: there is deliberately no author, identifier or source URL on
+ * this type. Everything the registry carries is bundled and shipped, so
+ * anything here would surface in the app — in devtools if not on screen.
+ * Provenance is kept in `_catalog.json`, which only the compiler reads.
+ */
 export interface Theme {
   id: string
   name: string
-  author: string
-  identifier: string
-  url: string
   tags: string[]
   nativeMode: ThemeMode
   neutralRamp: string
@@ -100,7 +109,6 @@ export interface PresetTokens {
   id: string
   name: string
   description: string
-  source: { registry: string; identifier: string; author: string; url: string }
   nativeMode: ThemeMode
   neutralRamp: string
   palette: { label: string; hex: string }[]
@@ -168,9 +176,9 @@ export function loadTokens(id: string): Promise<PresetTokens | null> {
 }
 
 /**
- * The raw DESIGN.md for a theme — the exact bytes designmd.ai served, which
- * is what Raw mode shows and what `/export-product` copies into
- * `product-plan/DESIGN.md`. Loaded on demand.
+ * The raw DESIGN.md for a theme — what Raw mode shows and what
+ * `/export-product` copies into `product-plan/DESIGN.md`. The compiler has
+ * already normalized these files to white label. Loaded on demand.
  */
 export async function loadDesignDoc(id: string): Promise<string | null> {
   const entry = Object.entries(designDocLoaders).find(

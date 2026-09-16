@@ -17,13 +17,15 @@ When `/product-vision` ran the BM PRD engine, it wrote the section list into **t
 
 So before writing anything, say it plainly:
 
-"Heads up: you have a PRD at `product/prd.md`, and it holds the locked section list. Changing the roadmap here means `prd.md` has to change too, or the two will disagree — and the PRD is what `/export-product` hands to your coding agent."
+"One thing before we change this: your project brief already records the agreed list of areas. If we change it here and not there, the two will disagree — and the brief is what the developers receive."
+
+Per `/product-vision` §0.6, keep that sentence in the user's register: say *your project brief*, never *the PRD*; say *the main areas of the application*, never *sections* as a technical term.
 
 Then ASK, using the interrogation rule from `/product-vision` §0.3 — the question tool your host provides (`AskUserQuestion`, `ask_question`), or a formatted numbered list if it has none:
 
-1. **Update both files** *(recommended)* — edit the roadmap and the PRD's `## Sections` block together.
-2. **Roadmap only** — leave the PRD alone and accept the drift.
-3. **This is a real scope change** — cancel and re-run `/product-vision`.
+1. **Update both, keep them consistent** *(recommended)* — change it here and in your brief together.
+2. **Change it here only** — the brief will no longer match, and I'll tell you exactly where.
+3. **This changes what we're building** — stop, and revisit the vision with `/product-vision`.
 
 Then act on the answer:
 

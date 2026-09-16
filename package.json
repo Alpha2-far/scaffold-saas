@@ -9,7 +9,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "presets": "node scripts/compile-presets.mjs"
+    "presets": "node scripts/compile-presets.mjs",
+    "graphify": "graphify update . --scope all"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.11",

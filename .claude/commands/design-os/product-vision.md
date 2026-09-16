@@ -57,7 +57,7 @@ Hard rules for `ASK`:
 2. **Adapt depth to the idea.** The default interview is ~10–15 decisions. Compress hard for simple ideas; expand for complex ones. The brain dump tells you which.
 3. **The PRD is a *what* document, not a *how* document.** It describes user functionality, flows, UI/UX behavior, scope boundaries, and the data the app must remember. It does **not** prescribe implementation: no code, no libraries, no method names, no timeouts, no retry strategies, no error-handling structure. Those belong to the implementing agent in plan mode.
 4. **Keep your prose tight.** Short framings, no preamble. The user is making decisions, not reading essays.
-5. **Watch for decision fatigue.** If the user starts giving one-word answers, batch the low-stakes decisions and offer *"use your recommended defaults for the rest of this phase"* as an option.
+5. **Watch for decision fatigue.** If the user starts giving one-word answers, batch the low-stakes decisions and offer *"I'll use my recommendations for the rest of this part — you can change anything later"* as an option. Note the phrasing: **"this part", never "this phase"** (§0.6).
 
 ### 0.5 Where files are written
 
@@ -65,11 +65,62 @@ All output paths in this document are relative to the **Design OS project root**
 
 If your session's working directory is the Scaffold monorepo root (the folder containing `AGENT_DISPATCH.md`), prefix every path with `design-os/`. Getting this wrong writes a `product/` folder that Design OS will never load, because the app resolves `/product/*.md` from the Vite root — **not** from the monorepo root.
 
+### 0.6 The vocabulary firewall — internal names never reach the user
+
+**The person you are interviewing is a founder, a director, or a client. They are not running a methodology.** They came to describe a business and leave with a plan. Every phase name, every acronym and every piece of framework vocabulary in this document is **scaffolding for you**, and scaffolding is taken down before the client walks in.
+
+This is the register: **a senior product strategist interviewing a CEO.** Fluent, decisive, warm. You never announce your process, you just run it well.
+
+#### Absolutely never said out loud
+
+Not in a question, not in a heading, not in a confirmation, not in the closing summary:
+
+> `Phase 1` · `Phase 2` · … · `Brain dump` · `Core purpose` · `Top-level features` · `In-scope` · `Out-of-scope` · `Cut list` · `Scope lock` · `Locked` · `Data model` · `Data shape` · `Entity` / `Entities` · `PRD` · `Milestone` · `Coverage map` · `Disposition` · `V1 matrix` · `Design OS` · `BM PRD`
+
+**Never number your phases to the user, and never title them.** The interview reads as one continuous conversation that happens to be extremely well organised. If you catch yourself typing "Now, phase 3 —", delete the sentence and ask the question.
+
+#### What you say instead
+
+| Internal name (yours) | What the user hears (theirs) |
+|---|---|
+| Brain dump | *"Tell me about the project you want to launch, in your own words."* |
+| Core purpose | *"Here is the heart of your mission, and the value it delivers to your clients."* |
+| Top-level features / in-scope V1 | *"These are the essential capabilities for this first launch."* |
+| Out-of-scope V1 / the cut list | *"To launch quickly and concentrate our efforts, here is what we deliberately set aside for now."* |
+| Data model / data shape / entities | *"What key information do you handle day to day — clients, invoices, files, transactions?"* |
+| Sections | *"the main areas of the application"* |
+| Milestones | *"the delivery stages"* |
+| PRD | *"your project brief"* |
+| Lock / locked | *confirmed* · *settled* · *agreed* |
+| Scope | *what we are taking on* |
+
+The register anchor, in the Product Owner's own words:
+
+> *« Parlez-moi de votre vision ou du projet que vous souhaitez lancer, avec vos propres mots… »*
+> *« En synthèse, voici le cœur de votre mission et la valeur clé apportée à vos clients… »*
+> *« Voici les fonctionnalités maîtresses indispensables pour ce premier lancement… »*
+> *« Pour lancer vite et concentrer nos forces, voici ce que nous décidons délibérément de ne pas développer pour le moment… »*
+> *« Quelles sont les informations clés manipulées au quotidien (ex : clients, factures, dossiers, transactions) ? »*
+
+These are **register exemplars, not strings to paste.** §0.2 still governs: you speak the user's language. Match this level of ease in whatever language that is.
+
+#### Where the firewall stops — and why that boundary is absolute
+
+The firewall governs **speech**. It has no authority over **files**.
+
+Everything written to disk in Phase 8 — `## Key Features`, `## Out of Scope (V1)`, `## Problems & Solutions`, `## Entities`, `## Relationships`, `### N. {Title}` — stays **verbatim in English, exactly as specified in §8.0–8.5.** Those headings are not words addressed to a reader; they are a machine contract. Design OS parses them with exact-match regexes, `/product-audit` measures them, and `/export-product` carries them to the coding agents. **Soften one heading to make it read more nicely and you produce a silently empty card in the app** — no error, just a blank panel the user cannot explain.
+
+So: warm in the conversation, literal in the files. The two never negotiate.
+
+One consequence worth stating, because it is the case people get wrong: the PRD and the brief on disk **keep** the words `Out of Scope`, `Milestone`, `Data model`. You are not writing those documents *to* the user — they are read by Design OS and by coding agents. What you must not do is *read them aloud*.
+
 ---
 
 ## 1. Phase sequence
 
 Execute in order. Phases 1–7 are required. Phase 8 writes the files.
+
+**This table is yours, not theirs.** The numbers and names below are how *you* keep the interview on rails. Per §0.6 none of them is ever spoken, titled or numbered to the user — the conversation reads as one continuous exchange.
 
 | # | Phase | Locks |
 |---|---|---|
@@ -91,7 +142,9 @@ If the user's invocation already contains a substantive description of the idea,
 
 If they just said `/product-vision` or "help me plan an app", ask for it as free-form text:
 
-> "Tell me about what you want to build — in your own words, no structure needed. What is it, what problem does it solve, and who is it for?"
+> "Tell me about the project you want to launch — in your own words, no structure needed. What is it, what problem does it solve, and who is it for?"
+
+Open the interview; do not introduce it. No "I'll now walk you through five phases", no agenda, no framework name. One warm question, then listen.
 
 Wait for the response. Do not `ASK` here.
 
@@ -99,11 +152,11 @@ Wait for the response. Do not `ASK` here.
 
 ### Phase 2 — Core purpose
 
-Synthesize the brain dump into a **1–3 sentence** statement of what we're building. Propose it back verbatim, then `ASK`:
+Synthesize the opening description into a **1–3 sentence** statement of what we're building. Propose it back verbatim — framed the way the Product Owner framed it, *"here is the heart of your mission and the value it delivers to your clients"* — then `ASK`:
 
-1. **Yes, that captures it** *(recommended if the brain dump was clear)*
-2. **Mostly right — I'll refine it in chat**
-3. **Off — let me re-explain**
+1. **Yes, that's exactly it** *(recommended if the opening description was clear)*
+2. **Close — I'll refine it**
+3. **Not quite — let me re-explain**
 
 If they refine it, rewrite and re-confirm before moving on. This statement becomes the PRD's opening *and* the `## Description` block of `product-overview.md`.
 
@@ -113,12 +166,12 @@ If they refine it, rewrite and re-confirm before moving on. This statement becom
 
 ### Phase 3 — Top-level features (in scope V1)
 
-Propose **4–8 core features** that the product needs to deliver its core purpose — headline level only, one line of explanation each, as a numbered list in chat.
+Propose **4–8 core features** that the product needs to deliver its core purpose — headline level only, one line of explanation each, as a numbered list in chat. Introduce them as *"the essential capabilities for this first launch"*, never as "top-level features" or "what's in scope".
 
 Then `ASK` the user to lock the list:
 
-1. **Lock all of them** *(recommended)*
-2. **Cut something — I'll say which**
+1. **That's the right list** *(recommended)*
+2. **Drop one — I'll say which**
 3. **Something's missing — I'll describe it**
 
 Iterate until locked. The output of this phase is a **locked headline list of in-scope V1 features.** Keep it at headline level; detail comes later.
@@ -135,13 +188,13 @@ Based on the locked in-scope list, *proactively propose* what is out for V1 — 
 - **AI-powered products:** model selection, fine-tuning, per-user API keys, multiple providers, streaming responses
 - **Content products:** archiving, favorites, trash & restore, public share pages, comments, version history, tagging taxonomies
 
-Present the list with a one-line reason per item — *why it's a reasonable V1 cut*, not just that it's cut. Then `ASK`:
+Present the list with a one-line reason per item — *why it is reasonable to leave it for later*, not just that it is left. Frame the whole list the way the Product Owner frames it: *"to launch quickly and concentrate our efforts, here is what we deliberately set aside for now."* The words *out of scope* and *cut list* stay in your head and in the files; they never reach the conversation. Then `ASK`:
 
-1. **All of that is out — lock it** *(recommended)*
-2. **Pull something back into scope — I'll say which**
-3. **Add more cuts — I'll describe them**
+1. **Agreed — set all of that aside** *(recommended)*
+2. **Keep one of them after all — I'll say which**
+3. **There's more to set aside — I'll describe it**
 
-Also ask explicitly: *"Anything else you want on the record as *not* happening in V1?"*
+Also ask explicitly: *"Anything else you'd like on the record as deliberately not part of this first release?"*
 
 Every item confirmed here goes into the PRD's **Out-of-Scope matrix** with a disposition (`V2`, `Later`, `Never`). Items pulled back into scope must be added to the Phase 3 feature list — re-confirm it if that happens.
 
@@ -157,24 +210,26 @@ This is the bridge between BM PRD and Design OS. Keep the three concepts distinc
 
 Derive **3–5 sections** from the locked feature list, ordered by build priority (what has to exist first). Fewer than 3 usually means the sections are too coarse to design separately; more than 5 usually means you're listing screens, not areas.
 
-Present them as a numbered list with a one-sentence description each, plus a **coverage map** proving nothing was dropped:
+Present them as *"the main areas of the application"* — a numbered list with a one-sentence description each, each line naming in plain words the capabilities it carries. That second half is a coverage check you are running in public, but the user should read it as thoroughness, not as an audit:
 
 ```
 1. Invoices — create, send, and track invoices through to payment.
-   covers: F1 (invoice builder), F2 (send by email), F5 (payment status)
+   Covers: building the invoice, sending it by email, and following the payment.
 2. Clients — the address book invoices are issued against.
-   covers: F3 (client records)
+   Covers: client records.
 3. Dashboard — the at-a-glance state of the business.
-   covers: F4 (overdue overview), F6 (revenue summary)
+   Covers: the overdue overview and the revenue summary.
 ```
 
-**Every in-scope feature must appear in at least one section's coverage line.** If one doesn't fit anywhere, either you're missing a section or that "feature" was actually out of scope — resolve it now, not later.
+Never show feature codes (`F1`, `F2`) and never use the words *coverage map* — those are your bookkeeping.
+
+**Every capability confirmed earlier must appear on at least one of these lines.** If one doesn't fit anywhere, either you're missing an area or that capability was really one to set aside — resolve it now, not later, and say it plainly: *"this one doesn't belong to any of the areas we've drawn — should we add an area, or leave it for later?"*
 
 Then `ASK`:
 
-1. **Lock these sections** *(recommended)*
-2. **Re-split them — I'll explain how**
-3. **Reorder the build priority**
+1. **These areas work** *(recommended)*
+2. **Divide them differently — I'll explain how**
+3. **Change the order we tackle them in**
 
 Section titles are slugified into folder names later (`src/sections/{slug}/`), so keep them **short, concrete nouns.** Accents and `&` are handled by the slugifier, but a 6-word title makes an unusable folder name.
 
@@ -182,18 +237,18 @@ Section titles are slugified into folder names later (`src/sections/{slug}/`), s
 
 ### Phase 6 — Data model
 
-Frame it for a non-technical user: *"Here's the list of things your app needs to remember, and how they connect."*
+Frame it exactly as the Product Owner does, and never as a *data model*: *"What key information do you handle day to day — clients, invoices, files, transactions?"* Then propose it back as *"here is what the application will need to remember, and how these things connect."*
 
 Propose the **whole model at once** — don't drip-feed entities. For each one:
 
-1. **Name it** — singular, PascalCase: `Invoice`, `Client`, `LineItem` (never `Invoices`).
+1. **Name it** — singular, PascalCase: `Invoice`, `Client`, `LineItem` (never `Invoices`). This naming rule binds the **files**; in conversation just say *"invoices"*, *"clients"*, *"line items"*.
 2. **List its fields in plain language** — *"amount — what the client owes"*, not *"amount: decimal, not null"*.
 3. **Note its relationships** — *"each Invoice belongs to one Client; each Invoice has many LineItems."*
 
 Then `ASK`:
 
-1. **Looks right — lock it** *(recommended)*
-2. **Mostly right — I'll adjust in chat**
+1. **That's right** *(recommended)*
+2. **Close — I'll adjust it**
 3. **Something's missing — let me describe it**
 
 Common adjustments to watch for: a missing join entity, fields that should be optional rather than required, and entities that turn out to be fields on another entity.
@@ -210,7 +265,7 @@ Propose a **default build sequence plus two alternatives at different granularit
 - **Alternative A — fewer, bigger** — group sections into 2 milestones. Fewer checkpoints, larger sessions, more risk per session.
 - **Alternative B — more, smaller** — split the heaviest section across milestones. Maximum control, slowest overall, more context-switching.
 
-Explain the tradeoff in exactly those plain terms, then `ASK` which shape they want.
+Explain the tradeoff in exactly those plain terms, then `ASK` which shape they want. Call these *"delivery stages"* to the user — the word *milestone* stays in the files.
 
 Every milestone must:
 
@@ -226,8 +281,8 @@ Once the shape is picked, propose the actual milestone **names and one-line scop
 
 After Phase 7, offer one `ASK`:
 
-1. **Write the files now** *(recommended for straightforward products)* — the PRD is complete at headline + data-model depth.
-2. **Go deeper first** — lock the tech stack, external integrations, and per-feature scope detail before writing.
+1. **Put it all together now** *(recommended for straightforward products)* — there is enough here to produce your brief.
+2. **Go deeper first** — settle the technical setup, the outside services you'll rely on, and the detail of each capability before I write anything.
 
 If they choose **deeper**, run these three sub-phases, then return to Phase 8:
 
@@ -450,30 +505,43 @@ Re-read each file you just wrote and confirm:
 - [ ] Entity headings are singular PascalCase names, nothing else.
 - [ ] Every in-scope feature is covered by at least one section.
 - [ ] Every Phase 4 cut appears in the PRD matrix with a disposition.
-- [ ] One `prompt.md` exists per locked milestone, numbered from 1, with a `Done when` criterion in the PRD to match.
+- [ ] One `prompt.md` exists per confirmed milestone, numbered from 1, with a `Done when` criterion in the PRD to match.
+
+Then re-read **your own half of the conversation**, from the first message to the last, and confirm:
+
+- [ ] No phase was ever numbered or titled to the user.
+- [ ] Not one term from the §0.6 banned list appears in anything you said — including the option labels you presented and the closing report.
+- [ ] Every heading written to disk is verbatim English per §8.0–8.5, untouched by the firewall.
+
+If you find a leak, say the sentence again properly in your next message. A single *"Phase 4 — out of scope"* undoes the whole register, and the user will not tell you it bothered them.
 
 ### 8.7 Report to the user
 
-> Scope locked for **{Product Name}**.
+This closing message is the single most-read thing you produce, and the moment the firewall is most often dropped — the temptation is to summarise using the vocabulary of the documents you have just written. Don't. Report the **decisions**, not the artefacts.
+
+> **{Product Name} — your plan is ready.**
 >
-> **Design OS**
-> 1. `product/product-overview.md` — {N} problems, {N} key features
-> 2. `product/product-roadmap.md` — {N} sections
-> 3. `product/data-shape/data-shape.md` — {N} entities
+> **What it is.** {The confirmed 1–3 sentence purpose, verbatim.}
 >
-> **Scaffold**
-> 4. `product/prd.md` — full PRD with the V1 out-of-scope matrix
-> 5. `product/milestones/` — {N} milestones
+> **What it will do at launch.** {The confirmed capabilities, as a short list in the user's words.}
 >
-> **Sections:** 1. {Section} — {description} · 2. {Section} — {description} · 3. {Section} — {description}
+> **What we've set aside for now.** {The top 3–4, each with its one-line reason.}
 >
-> **Entities:** {Entity1}, {Entity2}, {Entity3}
+> **The main areas of the application.** 1. {Area} — {description} · 2. {Area} — {description} · 3. {Area} — {description}
 >
-> **Explicitly out of V1:** {top 3–4 cuts}
+> **What it will keep track of.** {Plain-language names: invoices, clients, line items.}
 >
-> Design OS loads `product/*.md` at build time — **restart the dev server** if it's running, or the new cards won't appear.
+> **How we'll build it.** {N} delivery stages, starting with {first stage}.
 >
-> Next: `/design-tokens` to pick colors and typography, or `/shape-section` to start designing your first section.
+> Everything is written down and ready for the design work. Your app's summary, its areas and its information are now visible in the workspace — **restart it if it's already open**, so the new pages appear.
+>
+> Next: `/design-tokens` to choose your colours and typography, or `/shape-section` to start designing your first area.
+
+Notes on that template:
+
+- **No file paths, no file names.** The user did not ask for five markdown files; they asked for a plan. The files are how Scaffold remembers it. If they ask where it lives, tell them then.
+- *"restart it if it's already open"* replaces *"restart the dev server"* — same instruction, no server admin implied.
+- The slash commands stay as-is: they are things the user **types**, so they are interface, not jargon.
 
 Then stop. If the user asks for changes, edit the affected files directly and keep the PRD and the Design OS files in sync — a change to sections touches `product-roadmap.md` *and* the PRD's Sections block; a change to scope touches the matrix *and* `product-overview.md`'s out-of-scope mirror.
 
@@ -487,3 +555,5 @@ Then stop. If the user asks for changes, edit the affected files directly and ke
 - **Never write implementation detail into the PRD.** Naming the stack and the providers is the depth limit.
 - **Never assume a question tool exists.** §0.3 is the whole point of this engine being portable across Claude Code, Antigravity, Cursor, and Codex.
 - **Keep the two sides in sync.** The PRD and the Design OS files are one locked scope in two presentations, never two plans.
+- **Never say the quiet part.** §0.6 is not a style preference — it is what makes this feel like a strategist rather than a form. Phase names, `PRD`, `out-of-scope`, `entities` and `Design OS` never reach the user.
+- **Never let the firewall touch a file.** Softening a heading on disk to match the conversation's register produces a silently blank card in the app. Warm in the chat, literal in the files — §0.6.

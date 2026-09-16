@@ -2,9 +2,6 @@
   {
     "id": "atmospheric-glass",
     "name": "Atmospheric Glass Design System",
-    "author": "brunopetrovic",
-    "identifier": "brunopetrovic/atmospheric-glass",
-    "url": "https://designmd.ai/brunopetrovic/atmospheric-glass",
     "tags": [
       "glassmorphism",
       "premium",
@@ -25,9 +22,6 @@
   {
     "id": "broadsheet",
     "name": "Broadsheet Design System",
-    "author": "chef",
-    "identifier": "chef/broadsheet",
-    "url": "https://designmd.ai/chef/broadsheet",
     "tags": [
       "editorial",
       "media",
@@ -49,9 +43,6 @@
   {
     "id": "chatbubble",
     "name": "ChatBubble Design System",
-    "author": "chef",
-    "identifier": "chef/chatbubble",
-    "url": "https://designmd.ai/chef/chatbubble",
     "tags": [
       "light",
       "mobile-app",
@@ -73,9 +64,6 @@
   {
     "id": "command-center",
     "name": "Command Center",
-    "author": "frknaykc",
-    "identifier": "frknaykc/command-center",
-    "url": "https://designmd.ai/frknaykc/command-center",
     "tags": [
       "dark",
       "dashboard",
@@ -97,9 +85,6 @@
   {
     "id": "corpscale",
     "name": "CorpScale Design System",
-    "author": "chef",
-    "identifier": "chef/corpscale",
-    "url": "https://designmd.ai/chef/corpscale",
     "tags": [
       "dashboard",
       "enterprise",
@@ -120,9 +105,6 @@
   {
     "id": "createspace",
     "name": "CreateSpace Design System",
-    "author": "chef",
-    "identifier": "chef/createspace",
-    "url": "https://designmd.ai/chef/createspace",
     "tags": [
       "bold",
       "creative",
@@ -143,9 +125,6 @@
   {
     "id": "crypto-blue",
     "name": "Crypto Blue",
-    "author": "chef",
-    "identifier": "chef/crypto-blue",
-    "url": "https://designmd.ai/chef/crypto-blue",
     "tags": [
       "clean",
       "fintech",
@@ -166,9 +145,6 @@
   {
     "id": "docuforge",
     "name": "DocuForge Design System",
-    "author": "chef",
-    "identifier": "chef/docuforge",
-    "url": "https://designmd.ai/chef/docuforge",
     "tags": [
       "clean",
       "devtools",
@@ -190,9 +166,6 @@
   {
     "id": "electric-volt",
     "name": "Electric Volt",
-    "author": "chef",
-    "identifier": "chef/electric-volt",
-    "url": "https://designmd.ai/chef/electric-volt",
     "tags": [
       "dark",
       "luxury",
@@ -213,9 +186,6 @@
   {
     "id": "ember-studio",
     "name": "Ember Studio",
-    "author": "chef",
-    "identifier": "chef/ember-studio",
-    "url": "https://designmd.ai/chef/ember-studio",
     "tags": [
       "dashboard",
       "premium",
@@ -237,9 +207,6 @@
   {
     "id": "flip7-card-game",
     "name": "Flip7 Design System",
-    "author": "yiujc",
-    "identifier": "yiujc/flip7-card-game",
-    "url": "https://designmd.ai/yiujc/flip7-card-game",
     "tags": [
       "bold",
       "gaming",
@@ -261,9 +228,6 @@
   {
     "id": "genesis",
     "name": "Genesis",
-    "author": "chef",
-    "identifier": "chef/genesis",
-    "url": "https://designmd.ai/chef/genesis",
     "tags": [
       "accessible",
       "clean",
@@ -284,9 +248,6 @@
   {
     "id": "green-deck",
     "name": "Green Deck",
-    "author": "chef",
-    "identifier": "chef/green-deck",
-    "url": "https://designmd.ai/chef/green-deck",
     "tags": [
       "bold",
       "dark",
@@ -307,9 +268,6 @@
   {
     "id": "homeui",
     "name": "HomeUI Design System",
-    "author": "young",
-    "identifier": "young/homeui-design-system-v2",
-    "url": "https://designmd.ai/young/homeui-design-system-v2",
     "tags": [
       "design-tokens",
       "glassmorphism",
@@ -330,9 +288,6 @@
   {
     "id": "journey-ui",
     "name": "QuestUI Design System",
-    "author": "chef",
-    "identifier": "chef/questui",
-    "url": "https://designmd.ai/chef/questui",
     "tags": [
       "bold",
       "dark",
@@ -354,9 +309,6 @@
   {
     "id": "longcipher",
     "name": "Vercel Web Interface & Design System Guidelines",
-    "author": "Akagi201",
-    "identifier": "Akagi201/longcipher-design",
-    "url": "https://designmd.ai/Akagi201/longcipher-design",
     "tags": [
       "component-library",
       "design-tokens",
@@ -378,9 +330,6 @@
   {
     "id": "magspread",
     "name": "MagSpread Design System",
-    "author": "chef",
-    "identifier": "chef/magspread",
-    "url": "https://designmd.ai/chef/magspread",
     "tags": [
       "editorial",
       "elegant",
@@ -402,9 +351,6 @@
   {
     "id": "marblecrest",
     "name": "MarbleCrest Design System",
-    "author": "chef",
-    "identifier": "chef/marblecrest",
-    "url": "https://designmd.ai/chef/marblecrest",
     "tags": [
       "elegant",
       "light",
@@ -426,9 +372,6 @@
   {
     "id": "marketnest",
     "name": "MarketNest",
-    "author": "chef",
-    "identifier": "chef/marketnest",
-    "url": "https://designmd.ai/chef/marketnest",
     "tags": [
       "ecommerce",
       "organic",
@@ -449,9 +392,6 @@
   {
     "id": "medicare-plus",
     "name": "MediCare+",
-    "author": "chef",
-    "identifier": "chef/medicare",
-    "url": "https://designmd.ai/chef/medicare",
     "tags": [
       "accessible",
       "healthcare",
@@ -472,9 +412,6 @@
   {
     "id": "midnight-banking",
     "name": "Midnight Banking Dashboard",
-    "author": "nswamy14",
-    "identifier": "nswamy14/midnight-banking-dashboard",
-    "url": "https://designmd.ai/nswamy14/midnight-banking-dashboard",
     "tags": [
       "dark",
       "fintech",
@@ -496,9 +433,6 @@
   {
     "id": "nexus-tech",
     "name": "Nexus - Technical Topologies",
-    "author": "brunopetrovic",
-    "identifier": "brunopetrovic/nexusech",
-    "url": "https://designmd.ai/brunopetrovic/nexusech",
     "tags": [
       "dashboard",
       "glassmorphism",
@@ -519,9 +453,6 @@
   {
     "id": "noirluxe",
     "name": "NoirLuxe Design System",
-    "author": "chef",
-    "identifier": "chef/noirluxe",
-    "url": "https://designmd.ai/chef/noirluxe",
     "tags": [
       "dark",
       "elegant",
@@ -543,9 +474,6 @@
   {
     "id": "nomadkit",
     "name": "NomadKit Design System",
-    "author": "chef",
-    "identifier": "chef/nomadkit",
-    "url": "https://designmd.ai/chef/nomadkit",
     "tags": [
       "minimal",
       "organic",
@@ -567,9 +495,6 @@
   {
     "id": "octo-code",
     "name": "Octo Code",
-    "author": "chef",
-    "identifier": "chef/octo-code",
-    "url": "https://designmd.ai/chef/octo-code",
     "tags": [
       "clean",
       "dark",
@@ -591,9 +516,6 @@
   {
     "id": "open-serif",
     "name": "Open Serif",
-    "author": "chef",
-    "identifier": "chef/open-serif",
-    "url": "https://designmd.ai/chef/open-serif",
     "tags": [
       "editorial",
       "elegant",
@@ -614,9 +536,6 @@
   {
     "id": "panamericana",
     "name": "Design System Specification: The Digital Curator",
-    "author": "matuspambol",
-    "identifier": "matuspambol/design-system-universidad-panamericana",
-    "url": "https://designmd.ai/matuspambol/design-system-universidad-panamericana",
     "tags": [
       "academic",
       "elegant",
@@ -637,9 +556,6 @@
   {
     "id": "prismatic-pay",
     "name": "Prismatic Pay",
-    "author": "chef",
-    "identifier": "chef/prismatic-pay",
-    "url": "https://designmd.ai/chef/prismatic-pay",
     "tags": [
       "devtools",
       "fintech",
@@ -661,9 +577,6 @@
   {
     "id": "pulsepoint",
     "name": "PulsePoint",
-    "author": "chef",
-    "identifier": "chef/pulsepoint",
-    "url": "https://designmd.ai/chef/pulsepoint",
     "tags": [
       "dark",
       "dashboard",
@@ -685,9 +598,6 @@
   {
     "id": "rawblock",
     "name": "RawBlock Design System",
-    "author": "chef",
-    "identifier": "chef/rawblock",
-    "url": "https://designmd.ai/chef/rawblock",
     "tags": [
       "brutalist",
       "experimental",
@@ -709,9 +619,6 @@
   {
     "id": "red-broadcast",
     "name": "Red Broadcast",
-    "author": "chef",
-    "identifier": "chef/red-broadcast",
-    "url": "https://designmd.ai/chef/red-broadcast",
     "tags": [
       "clean",
       "modern",
@@ -732,9 +639,6 @@
   {
     "id": "resortlux",
     "name": "ResortLux Design System",
-    "author": "chef",
-    "identifier": "chef/resortlux",
-    "url": "https://designmd.ai/chef/resortlux",
     "tags": [
       "elegant",
       "light",
@@ -756,9 +660,6 @@
   {
     "id": "shopvibe",
     "name": "ShopVibe",
-    "author": "chef",
-    "identifier": "chef/shopvibe",
-    "url": "https://designmd.ai/chef/shopvibe",
     "tags": [
       "bold",
       "ecommerce",
@@ -780,9 +681,6 @@
   {
     "id": "skylearn",
     "name": "Skylearn",
-    "author": "duanhdan",
-    "identifier": "duanhdan/skylearn",
-    "url": "https://designmd.ai/duanhdan/skylearn",
     "tags": [
       "accessible",
       "education",
@@ -804,9 +702,6 @@
   {
     "id": "studioblank",
     "name": "StudioBlank Design System",
-    "author": "chef",
-    "identifier": "chef/studioblank",
-    "url": "https://designmd.ai/chef/studioblank",
     "tags": [
       "creative",
       "minimal",
@@ -827,9 +722,6 @@
   {
     "id": "tavily",
     "name": "Tavily",
-    "author": "luuphuc6297",
-    "identifier": "luuphuc6297/tavily-web-access-layer-for-ai-agents",
-    "url": "https://designmd.ai/luuphuc6297/tavily-web-access-layer-for-ai-agents",
     "tags": [
       "devtools",
       "editorial",
@@ -851,9 +743,6 @@
   {
     "id": "thoughtstream",
     "name": "ThoughtStream",
-    "author": "chef",
-    "identifier": "chef/thoughtstream",
-    "url": "https://designmd.ai/chef/thoughtstream",
     "tags": [
       "design-tokens",
       "minimal",
@@ -874,9 +763,6 @@
   {
     "id": "trust-blue-pay",
     "name": "Trust Blue Pay",
-    "author": "chef",
-    "identifier": "chef/trust-blue-pay",
-    "url": "https://designmd.ai/chef/trust-blue-pay",
     "tags": [
       "accessible",
       "clean",
@@ -898,9 +784,6 @@
   {
     "id": "verdana-health",
     "name": "Verdana Health Design System",
-    "author": "chef",
-    "identifier": "chef/verdana-health-design-system",
-    "url": "https://designmd.ai/chef/verdana-health-design-system",
     "tags": [
       "accessible",
       "digital-health",
@@ -922,9 +805,6 @@
   {
     "id": "violet-issue",
     "name": "Violet Issue",
-    "author": "chef",
-    "identifier": "chef/violet-issue",
-    "url": "https://designmd.ai/chef/violet-issue",
     "tags": [
       "dark",
       "dense",
@@ -946,9 +826,6 @@
   {
     "id": "voicebox",
     "name": "VoiceBox",
-    "author": "chef",
-    "identifier": "chef/voicebox",
-    "url": "https://designmd.ai/chef/voicebox",
     "tags": [
       "blog",
       "bold",
@@ -970,9 +847,6 @@
   {
     "id": "wattvision",
     "name": "Sistema de Monitoreo Eléctrico WattVision",
-    "author": "groquispe100inf-max",
-    "identifier": "groquispe100inf-max/design-md-sistema-de-monitoreo-el-ctrico-wattvision",
-    "url": "https://designmd.ai/groquispe100inf-max/design-md-sistema-de-monitoreo-el-ctrico-wattvision",
     "tags": [
       "bold",
       "dark",
@@ -994,9 +868,6 @@
   {
     "id": "zalopay",
     "name": "Zalopay",
-    "author": "luuphuc6297",
-    "identifier": "luuphuc6297/zalopay-vietnamese-e-wallet-super-app",
-    "url": "https://designmd.ai/luuphuc6297/zalopay-vietnamese-e-wallet-super-app",
     "tags": [
       "bold",
       "fintech",

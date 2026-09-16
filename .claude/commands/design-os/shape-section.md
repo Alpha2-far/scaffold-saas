@@ -92,12 +92,14 @@ Ask questions one or two at a time, conversationally. Focus on user experience a
 
 If an answer pulls in something on `CUT_LIST`, do not write it into the spec — and do not silently argue it away either. Name the collision on the spot:
 
-"That one is on the V1 out-of-scope list — *[cut item]*, cut because *[the recorded reason]*. I can leave it out of this section, or we treat this as a scope change."
+"That one is on the list we deliberately set aside for this first release — *[item]*, because *[the recorded reason]*. I can keep it out of this area, or we can revisit what we're building."
+
+Per `/product-vision` §0.6: *set aside for now*, never *out of scope* or *cut*.
 
 Then `ASK`:
 
-1. **Leave it out of V1** *(recommended)* — the section ships as locked, and the cut stays cut.
-2. **This is a real scope change** — stop here and re-run `/product-vision`, so the PRD matrix and the overview mirror move together.
+1. **Leave it for later** *(recommended)* — this area ships as agreed, and the decision stands.
+2. **This changes what we're building** — stop here and re-run `/product-vision`, so your brief and your summary move together.
 
 Never take option 2 on your own by quietly widening the spec. A boundary a section spec can cross is not a boundary.
 

@@ -1,4 +1,10 @@
 # Agent OS Standards Index (Scaffold™)
+#
+# 21 standards actifs — 4 css, 8 global, 9 javascript.
+#
+# Une clé YAML dupliquée est silencieusement écrasée par la dernière occurrence :
+# l'index a déjà perdu une entrée de cette façon. Un nom de standard n'apparaît
+# qu'une fois, et chaque entrée correspond à un fichier réellement présent.
 
 css:
   color-vocabulary:
@@ -6,13 +12,19 @@ css:
   icons:
     description: "lucide-react sizes and stroke weights, and storing icon components in config maps"
   motion:
-    description: "LazyMotion strict architecture, motion/react-m components, motion tokens, primitives and ScaffoldLogoLoader"
+    description: "LazyMotion strict architecture, motion/react-m vs motion/react, isolated domAnimation chunk, motion tokens, primitives, transform/opacity-only rule and reduced-motion"
   two-layer-colors:
     description: "Semantic tokens in ui/ primitives, stone/lime literals with dark: pairs everywhere else"
 
 global:
+  executive-register:
+    description: "The vocabulary firewall: internal phase names and framework jargon never reach the user, while file headings stay verbatim English because they are machine contracts"
   exportable-components:
     description: "Props-only section components: no data imports, optional callbacks, intent not routes, no nav chrome"
+  graphify-rules:
+    description: "Graph-first reading contract: the real graphify CLI surface (summary/explain/tree/path), graph.json shape (links not edges), freshness check against HEAD, and the rebuild invariant"
+  mathematical-tokens:
+    description: "The 12 semantic tokens plus on-accent, the AAA contrast gate enforced by npm run presets, and the 43-theme registry with its bundling and scoping rules"
   preview-wrappers:
     description: "The only file importing data.json; default export required, and the @/../product alias crossing"
   scope-lock:
@@ -24,7 +36,7 @@ global:
 
 javascript:
   content-loading:
-    description: "Build-time import.meta.glob rules for product content: root-absolute paths, eager for data, lazy for components"
+    description: "Build-time import.meta.glob rules for product content: root-absolute paths, query/import options, eager for data, lazy for components"
   derived-progress:
     description: "Progress is recomputed from loaded data, never persisted; localStorage holds view preferences only"
   empty-states:
@@ -36,6 +48,8 @@ javascript:
   page-composition:
     description: "Flat routes, AppLayout composed per page, StepIndicator sequence, and local pure get*StepStatuses()"
   preview-iframe:
-    description: "Page/Fullscreen twin routes, iframe isolation, theme sync, and validated lazy components"
+    description: "Page/Fullscreen twin routes, iframe isolation, theme sync, cachedLazy module-level registry and createElement dispatch"
   product-audit:
     description: "Live 4-contract deterministic audit engine: Scope Lock, Overview, Roadmap/Anti-Ghost, and Data Shape"
+  react-19:
+    description: "ref as a prop (no forwardRef), no ElementRef, state read in the initialiser not an effect, and Fast-Refresh-safe module boundaries"
