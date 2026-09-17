@@ -21,8 +21,8 @@ Ce fichier est le pont de communication actif entre **Antigravity** (Architecte)
 > **Message pour Claude Code** :  
 > Tu es le Staff Engineer d'Exécution. Antigravity a conçu l'architecture et les spécifications techniques.  
 > **Documents de référence obligatoires à lire avant d'implémenter** :  
-> - [`_build_plan/prd.md`](_build_plan/prd.md) : PRD officiel de construction (Section 5 : Modèle de données & Milestone 1).  
-> - [`_build_plan/milestones/1-serveur-bun-db/prompt.md`](_build_plan/milestones/1-serveur-bun-db/prompt.md) : Spécification du Jalon 1 et contrat de log.  
+> - [`blueprint/prd.md`](blueprint/prd.md) : PRD officiel de construction (Section 5 : Modèle de données & Milestone 1).  
+> - [`blueprint/milestones/1-serveur-bun-db/prompt.md`](blueprint/milestones/1-serveur-bun-db/prompt.md) : Spécification du Jalon 1 et contrat de log.  
 > - [`docs/server.md`](docs/server.md) : Architecture serveur Bun, routeur et `DbClient`.  
 > - [`docs/architecture.md`](docs/architecture.md) : Topologie globale et flux de données.  
 >  
@@ -38,7 +38,7 @@ Implémenter le Jalon 1 (Socle Serveur Bun & BDD Double Adaptateur) de Scaffold�
 
 **CONTEXTE** :
 - Codebase cible : `design-os/`
-- Spécifications officielles : `@_build_plan/prd.md` et `@_build_plan/milestones/1-serveur-bun-db/prompt.md`
+- Spécifications officielles : `@blueprint/prd.md` et `@blueprint/milestones/1-serveur-bun-db/prompt.md`
 - Architecture serveur et schéma BDD : `@docs/server.md` et `@docs/architecture.md`
 - Fichiers à créer dans `design-os/server/` : `db/client.ts`, `db/migrations/001_initial_schema.sql`, `db/migrate.ts`, `router.ts`, `handlers/health.ts`, `handlers/stacks.ts`, `index.ts`.
 
@@ -51,7 +51,7 @@ Implémenter le Jalon 1 (Socle Serveur Bun & BDD Double Adaptateur) de Scaffold�
 - `bun run server/index.ts` démarre sans erreur sur le port 3001.
 - `curl -s http://localhost:3001/api/health` renvoie HTTP 200 `{ "status": "ok", "db": "connected" }`.
 - `curl -s http://localhost:3001/api/stacks` renvoie la liste des stacks pré-peuplées.
-- Le rapport d'exécution est rédigé dans `_build_plan/milestones/1-serveur-bun-db/milestone-log.md` et consigné dans `milestones.log`.
+- Le rapport d'exécution est rédigé dans `blueprint/milestones/1-serveur-bun-db/milestone-log.md` et consigné dans `milestones.log`.
 - Push sur `origin/main` validé vert par GitHub Actions.
 ```
 *(Alternative ultra-courte : `Lis AGENT_DISPATCH.md et exécute le Jalon 1 en mode plan.`)*
@@ -197,7 +197,7 @@ Tu dois créer l'arborescence `design-os/server/` avec les 6 fichiers suivants :
 1. L'actuel [`design-os/.claude/commands/design-os/product-vision.md`](design-os/.claude/commands/design-os/product-vision.md) est trop superficiel : il pose 3 questions informelles sans bloquer le périmètre ni verrouiller les tables.
 2. Le moteur [`bm-skills/skills/bm-prd-creator/`](bm-skills/skills/bm-prd-creator/) est ultra-robuste mais il a deux défauts :
    * **Lock-in d'outil** : Il impose `AskUserQuestion` en dur partout, ce qui bloque Antigravity, Cursor et Codex.
-   * **Sortie isolée** : Il écrit dans `_build_plan/` au lieu d'alimenter les fichiers que Design OS attend dans `product/`.
+   * **Sortie isolée** : Il écrit dans `_build_plan/` au lieu d'alimenter les fichiers que Design OS attend dans `product/` (désormais unifié dans `blueprint/`).
 
 ### La Solution V1 : Créer la commande unifiée `/product-vision` (ou `/bm-prd`)
 Nous fusionnons le protocole BM PRD directement dans `design-os/.claude/commands/design-os/product-vision.md` (avec sauvegarde de l'original) :

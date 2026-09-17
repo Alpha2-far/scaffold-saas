@@ -4,8 +4,8 @@ You are entering plan mode to plan and then build milestone 6 of the Scaffold™
 
 ## Context
 
-- Read `@_build_plan/prd.md` for admin requirements and defensive security model.
-- Read previous milestone logs: Milestones 1 to 5 in `@_build_plan/milestones/` or `@milestones.log`.
+- Read `@blueprint/prd.md` for admin requirements and defensive security model.
+- Read previous milestone logs: Milestones 1 to 5 in `@blueprint/milestones/` or `@milestones.log`.
 - Codebase: `design-os/` (React 19 + Bun + SQLite / Postgres).
 - Router: `design-os/server/router.ts`.
 
@@ -37,7 +37,7 @@ You are entering plan mode to plan and then build milestone 6 of the Scaffold™
    - Accéder à `/admin` en mode superadmin et visualiser les métriques temps réel.
    - Ouvrir l'observateur de session et vérifier la connexion SSE à la demande.
    - Commit et push vers `Alpha2-far/scaffold-saas.git`, validation par GitHub Actions.
-4. When complete, write `_build_plan/milestones/6-superadmin-antibot/milestone-log.md` and append its content to the root [`milestones.log`](../../milestones.log):
+4. When complete, write `blueprint/milestones/6-superadmin-antibot/milestone-log.md` and append its content to the root [`milestones.log`](../../milestones.log):
    - **`## What's new in the app`** at the top.
    - `## What was built`.
    - `## Decisions made during implementation`.

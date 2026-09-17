@@ -3,7 +3,7 @@
 *Date de révision : 17 septembre 2026*  
 *Méthode : Synthèse BM PRD Creator (Incrémental & Visible) + Standard Instatic (< 600 lignes)*  
 *Suivi d'exécution : `milestones.log`*  
-*Plan de construction & Prompts : `_build_plan/`*  
+*Plan de construction & Prompts : `blueprint/`*  
 *Exécution CI/CD : GitHub Actions Cloud Runner (`.github/workflows/ci.yml`)*  
 *Socle de Code : `design-os/` (React 19 + TypeScript + Tailwind v4 + Bun)*  
 
@@ -30,13 +30,13 @@ Chaque jalon contribue directement aux trois piliers fondamentaux :
 
 ### 🏁 Jalon 1 : Socle Serveur Bun & BDD Double Adaptateur
 
-*Fichier de prompt dédié : [`_build_plan/milestones/1-serveur-bun-db/prompt.md`](../_build_plan/milestones/1-serveur-bun-db/prompt.md)*
+*Fichier de prompt dédié : [`blueprint/milestones/1-serveur-bun-db/prompt.md`](../blueprint/milestones/1-serveur-bun-db/prompt.md)*
 
 #### 📚 Documents de Référence Instatic
 - [`docs/server.md`](server.md) : Spécification complète de l'architecture serveur Bun, de `DbClient`, du schéma SQL et du routeur.
 - [`docs/architecture.md`](architecture.md) : Vue d'ensemble architecturale et modèle de données relationnel.
 - [`docs/CONVENTIONS.md`](CONVENTIONS.md) : Conventions de nommage et standards d'ingénierie TypeScript.
-- [`_build_plan/prd.md`](../_build_plan/prd.md) : PRD officiel de construction (Section 5 : Modèle de données & Milestone 1).
+- [`blueprint/prd.md`](../blueprint/prd.md) : PRD officiel de construction (Section 5 : Modèle de données & Milestone 1).
 
 #### What gets built
 - Serveur HTTP natif `Bun.serve` sur port 3001 avec gestion complète des en-têtes CORS.
@@ -64,7 +64,7 @@ Implémenter le Jalon 1 (Socle Serveur Bun & BDD Double Adaptateur) de Scaffold�
 
 **CONTEXTE** :
 - Codebase cible : `design-os/`
-- Spécifications officielles : `@_build_plan/prd.md` et `@_build_plan/milestones/1-serveur-bun-db/prompt.md`
+- Spécifications officielles : `@blueprint/prd.md` et `@blueprint/milestones/1-serveur-bun-db/prompt.md`
 - Architecture serveur et schéma BDD : `@docs/server.md` et `@docs/architecture.md`
 - Fichiers à créer dans `design-os/server/` : `db/client.ts`, `db/migrations/001_initial_schema.sql`, `db/migrate.ts`, `router.ts`, `handlers/health.ts`, `handlers/stacks.ts`, `index.ts`.
 
@@ -77,7 +77,7 @@ Implémenter le Jalon 1 (Socle Serveur Bun & BDD Double Adaptateur) de Scaffold�
 - `bun run server/index.ts` démarre sans erreur sur le port 3001.
 - `curl -s http://localhost:3001/api/health` renvoie HTTP 200 `{ "status": "ok", "db": "connected" }`.
 - `curl -s http://localhost:3001/api/stacks` renvoie la liste des stacks pré-peuplées.
-- Le rapport d'exécution est rédigé dans `_build_plan/milestones/1-serveur-bun-db/milestone-log.md` et consigné dans `milestones.log`.
+- Le rapport d'exécution est rédigé dans `blueprint/milestones/1-serveur-bun-db/milestone-log.md` et consigné dans `milestones.log`.
 - Push sur `origin/main` validé vert par GitHub Actions.
 ```
 
@@ -85,7 +85,7 @@ Implémenter le Jalon 1 (Socle Serveur Bun & BDD Double Adaptateur) de Scaffold�
 
 ### 🏁 Jalon 2 : Passerelle OpenRouter Cascade & Flux Streaming SSE
 
-*Fichier de prompt dédié : [`_build_plan/milestones/2-openrouter-sse/prompt.md`](../_build_plan/milestones/2-openrouter-sse/prompt.md)*
+*Fichier de prompt dédié : [`blueprint/milestones/2-openrouter-sse/prompt.md`](../blueprint/milestones/2-openrouter-sse/prompt.md)*
 
 #### 📚 Documents de Référence Instatic
 - [`docs/features/openrouter-model-sync.md`](features/openrouter-model-sync.md) : Cascade de modèles LLM et tolérance de panne transparente.
@@ -113,7 +113,7 @@ Connecter l'Agent IA Scaffold au flux OpenRouter en streaming temps réel (SSE) 
 
 **CONTEXTE** :
 - Codebase cible : `design-os/server/`
-- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/2-openrouter-sse/prompt.md`, `@docs/features/openrouter-model-sync.md`, `@docs/features/agent-runtime.md`, `@docs/features/scaffold-agent.md`
+- Spécifications : `@blueprint/prd.md`, `@blueprint/milestones/2-openrouter-sse/prompt.md`, `@docs/features/openrouter-model-sync.md`, `@docs/features/agent-runtime.md`, `@docs/features/scaffold-agent.md`
 - Fichiers à créer : `server/ai/openrouter.ts`, `server/ai/fallbackCascade.ts`, `server/ai/prompts/systemAgent.ts`, `server/handlers/chatStream.ts`
 
 **CONTRAINTES** :
@@ -124,14 +124,14 @@ Connecter l'Agent IA Scaffold au flux OpenRouter en streaming temps réel (SSE) 
 **CRITÈRE DE SUCCÈS** :
 - `curl -N -X POST http://localhost:3001/api/projects/test/chat` délivre les tokens mot par mot sans blocage.
 - Bascule de modèle vérifiée en cas d'erreur simulée sur le modèle primaire.
-- Rapport consigné dans `_build_plan/milestones/2-openrouter-sse/milestone-log.md` et `milestones.log`.
+- Rapport consigné dans `blueprint/milestones/2-openrouter-sse/milestone-log.md` et `milestones.log`.
 ```
 
 ---
 
 ### 🏁 Jalon 3 : Interface Triptyque avec Rail 56px & Live Canvas WYSIWYB
 
-*Fichier de prompt dédié : [`_build_plan/milestones/3-interface-triptyque-canvas/prompt.md`](../_build_plan/milestones/3-interface-triptyque-canvas/prompt.md)*
+*Fichier de prompt dédié : [`blueprint/milestones/3-interface-triptyque-canvas/prompt.md`](../blueprint/milestones/3-interface-triptyque-canvas/prompt.md)*
 
 #### 📚 Documents de Référence Instatic
 - [`docs/interface.md`](interface.md) : Spécification de l'interface triptyque (Rail 56px, Console 40%, Live Canvas 60%).
@@ -159,7 +159,7 @@ Bâtir l'interface visuelle triptyque (Rail 56px + Console Agent 40% + Live Canv
 
 **CONTEXTE** :
 - Codebase cible : `design-os/src/`
-- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/3-interface-triptyque-canvas/prompt.md`, `@docs/interface.md`, `@docs/design.md`, `@docs/ux.md`
+- Spécifications : `@blueprint/prd.md`, `@blueprint/milestones/3-interface-triptyque-canvas/prompt.md`, `@docs/interface.md`, `@docs/design.md`, `@docs/ux.md`
 - Fichiers à créer/adapter : `src/components/NavigationRail.tsx`, `src/components/AgentConsole.tsx`, `src/components/LiveCanvas.tsx`, `src/components/cards/RecommendationCard.tsx`, `src/App.tsx`
 
 **CONTRAINTES** :
@@ -170,14 +170,14 @@ Bâtir l'interface visuelle triptyque (Rail 56px + Console Agent 40% + Live Canv
 **CRITÈRE DE SUCCÈS** :
 - Interface testée et validée à 1280x800 sous Chrome.
 - Changement de thème d'auteur répercuté instantanément sur le Live Canvas.
-- Rapport consigné dans `_build_plan/milestones/3-interface-triptyque-canvas/milestone-log.md` et `milestones.log`.
+- Rapport consigné dans `blueprint/milestones/3-interface-triptyque-canvas/milestone-log.md` et `milestones.log`.
 ```
 
 ---
 
 ### 🏁 Jalon 4 : Moteur de Structuration Déterministe Zod & `milestones.log` Client
 
-*Fichier de prompt dédié : [`_build_plan/milestones/4-compilation-zod-capabilities/prompt.md`](../_build_plan/milestones/4-compilation-zod-capabilities/prompt.md)*
+*Fichier de prompt dédié : [`blueprint/milestones/4-compilation-zod-capabilities/prompt.md`](../blueprint/milestones/4-compilation-zod-capabilities/prompt.md)*
 
 #### 📚 Documents de Référence Instatic
 - [`docs/features/compilation-engine.md`](features/compilation-engine.md) : Compilateur déterministe, schémas Zod et assemblage des 6 documents.
@@ -204,7 +204,7 @@ Implémenter le compilateur déterministe Zod, la résolution des capacités et 
 
 **CONTEXTE** :
 - Codebase cible : `design-os/server/compilation/`
-- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/4-compilation-zod-capabilities/prompt.md`, `@docs/features/compilation-engine.md`, `@docs/features/export-engine.md`, `@docs/features/brownfield-intake.md`
+- Spécifications : `@blueprint/prd.md`, `@blueprint/milestones/4-compilation-zod-capabilities/prompt.md`, `@docs/features/compilation-engine.md`, `@docs/features/export-engine.md`, `@docs/features/brownfield-intake.md`
 - Fichiers à créer : `server/compilation/schema.ts`, `server/compilation/engine.ts`, `server/compilation/generators/clientMilestonesLog.ts`, `server/compilation/capabilities/authGoogle.ts`, `src/lib/product-health.ts`
 
 **CONTRAINTES** :
@@ -215,14 +215,14 @@ Implémenter le compilateur déterministe Zod, la résolution des capacités et 
 **CRITÈRE DE SUCCÈS** :
 - `bun test server/compilation` valide l'assemblage complet des 6 documents et du `milestones.log` client.
 - Score santé `product-health.ts` à 100/100 sur projet test.
-- Rapport consigné dans `_build_plan/milestones/4-compilation-zod-capabilities/milestone-log.md` et `milestones.log`.
+- Rapport consigné dans `blueprint/milestones/4-compilation-zod-capabilities/milestone-log.md` et `milestones.log`.
 ```
 
 ---
 
 ### 🏁 Jalon 5 : Module de Paiement Géolocalisé & Modèle Steve Jobs (9 € / 6 000 FCFA)
 
-*Fichier de prompt dédié : [`_build_plan/milestones/5-billing-geolocalise/prompt.md`](../_build_plan/milestones/5-billing-geolocalise/prompt.md)*
+*Fichier de prompt dédié : [`blueprint/milestones/5-billing-geolocalise/prompt.md`](../blueprint/milestones/5-billing-geolocalise/prompt.md)*
 
 #### 📚 Documents de Référence Instatic
 - [`docs/features/billing.md`](features/billing.md) : Détection Geo-IP, tarification géolocalisée (6 000 FCFA Mobile Money vs 9 € Cartes), contrat `PaymentProviderAdapter`, webhooks.
@@ -248,7 +248,7 @@ Implémenter la facturation géolocalisée découplée (Modèle Steve Jobs : con
 
 **CONTEXTE** :
 - Codebase cible : `design-os/server/billing/` et `src/components/`
-- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/5-billing-geolocalise/prompt.md`, `@docs/features/billing.md`, `@docs/features/export-engine.md`
+- Spécifications : `@blueprint/prd.md`, `@blueprint/milestones/5-billing-geolocalise/prompt.md`, `@docs/features/billing.md`, `@docs/features/export-engine.md`
 - Fichiers à créer : `server/billing/geoIp.ts`, `server/billing/adapters/types.ts`, `server/billing/adapters/africaMobileMoney.ts`, `server/billing/adapters/internationalCards.ts`, `src/components/CheckoutDrawer.tsx`, `server/handlers/billingWebhook.ts`
 
 **CONTRAINTES** :
@@ -259,14 +259,14 @@ Implémenter la facturation géolocalisée découplée (Modèle Steve Jobs : con
 **CRITÈRE DE SUCCÈS** :
 - Simulation IP Afrique renvoie 6 000 FCFA et IP Europe renvoie 9 €.
 - Simulation webhook déclenche immédiatement le téléchargement de `product-plan.zip`.
-- Rapport consigné dans `_build_plan/milestones/5-billing-geolocalise/milestone-log.md` et `milestones.log`.
+- Rapport consigné dans `blueprint/milestones/5-billing-geolocalise/milestone-log.md` et `milestones.log`.
 ```
 
 ---
 
 ### 🏁 Jalon 6 : Dashboard Superadmin (`/admin`), SSE On-Demand & Anti-Bot
 
-*Fichier de prompt dédié : [`_build_plan/milestones/6-superadmin-antibot/prompt.md`](../_build_plan/milestones/6-superadmin-antibot/prompt.md)*
+*Fichier de prompt dédié : [`blueprint/milestones/6-superadmin-antibot/prompt.md`](../blueprint/milestones/6-superadmin-antibot/prompt.md)*
 
 #### 📚 Documents de Référence Instatic
 - [`docs/features/security-anti-bot.md`](features/security-anti-bot.md) : Piège Honeypot, Cloudflare Turnstile, table `security_ip_bans`, limiteur de débit.
@@ -295,7 +295,7 @@ Déployer le Dashboard `/admin` avec observateur SSE On-Demand, le gestionnaire 
 
 **CONTEXTE** :
 - Codebase cible : `design-os/src/pages/admin/` et `server/security/`
-- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/6-superadmin-antibot/prompt.md`, `@docs/features/security-anti-bot.md`, `@docs/features/agent-runtime.md`, `@docs/features/openrouter-model-sync.md`
+- Spécifications : `@blueprint/prd.md`, `@blueprint/milestones/6-superadmin-antibot/prompt.md`, `@docs/features/security-anti-bot.md`, `@docs/features/agent-runtime.md`, `@docs/features/openrouter-model-sync.md`
 - Fichiers à créer : `src/pages/admin/AdminDashboard.tsx`, `src/components/admin/AdminSessionWatcher.tsx`, `src/components/admin/ModelManager.tsx`, `src/components/admin/StackManager.tsx`, `server/security/honeypot.ts`, `server/security/turnstile.ts`, `server/security/rateLimiter.ts`, `server/handlers/admin.ts`
 
 **CONTRAINTES** :
@@ -306,14 +306,14 @@ Déployer le Dashboard `/admin` avec observateur SSE On-Demand, le gestionnaire 
 - Honeypot déclenchant HTTP 403 et écriture dans `security_ip_bans`.
 - Dashboard `/admin` affichant les métriques et session watcher opérationnel.
 - Création d'une nouvelle stack dans `StackManager` immédiatement retournée par `GET /api/stacks`.
-- Rapport consigné dans `_build_plan/milestones/6-superadmin-antibot/milestone-log.md` et `milestones.log`.
+- Rapport consigné dans `blueprint/milestones/6-superadmin-antibot/milestone-log.md` et `milestones.log`.
 ```
 
 ---
 
 ### 🏁 Jalon 7 : Garde-Fous Instatic, CI/CD Cloud & Déploiement Production
 
-*Fichier de prompt dédié : [`_build_plan/milestones/7-garde-fous-prod/prompt.md`](../_build_plan/milestones/7-garde-fous-prod/prompt.md)*
+*Fichier de prompt dédié : [`blueprint/milestones/7-garde-fous-prod/prompt.md`](../blueprint/milestones/7-garde-fous-prod/prompt.md)*
 
 #### 📚 Documents de Référence Instatic
 - [`docs/CONVENTIONS.md`](CONVENTIONS.md) : Standard Instatic (< 600 lignes, zéro blabla, conformité stricte).
@@ -339,7 +339,7 @@ Certifier l'intégrité architecturale par les 6 tests de garde-fous Instatic et
 
 **CONTEXTE** :
 - Codebase cible : `design-os/`
-- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/7-garde-fous-prod/prompt.md`, `@docs/CONVENTIONS.md`, `@.github/workflows/ci.yml`
+- Spécifications : `@blueprint/prd.md`, `@blueprint/milestones/7-garde-fous-prod/prompt.md`, `@docs/CONVENTIONS.md`, `@.github/workflows/ci.yml`
 - Fichiers à créer : `scripts/test-architecture.mjs`, `Dockerfile`, `Caddyfile`, `.github/workflows/ci.yml`
 
 **CONTRAINTES** :

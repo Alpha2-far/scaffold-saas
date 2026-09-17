@@ -4,8 +4,8 @@ You are entering plan mode to plan and then build milestone 2 of the Scaffold™
 
 ## Context
 
-- Read `@_build_plan/prd.md` for the project architecture and engineering standards.
-- Read previous milestone log: `@_build_plan/milestones/1-serveur-bun-db/milestone-log.md` (or `@milestones.log`) to see what was built in Milestone 1.
+- Read `@blueprint/prd.md` for the project architecture and engineering standards.
+- Read previous milestone log: `@blueprint/milestones/1-serveur-bun-db/milestone-log.md` (or `@milestones.log`) to see what was built in Milestone 1.
 - Base codebase: `design-os/` (React 19 + TypeScript + Bun).
 - Server router: `design-os/server/router.ts`.
 
@@ -35,7 +35,7 @@ You are entering plan mode to plan and then build milestone 2 of the Scaffold™
    - Vérifier la réception continue des tokens (`data: {"token": "..."}`).
    - Simuler une erreur sur le modèle primaire et vérifier que la cascade bascule sur le modèle de secours sans rompre la connexion.
    - Commit et push vers `Alpha2-far/scaffold-saas.git`, validation par GitHub Actions.
-4. When complete, write `_build_plan/milestones/2-openrouter-sse/milestone-log.md` and append its content to the root [`milestones.log`](../../milestones.log):
+4. When complete, write `blueprint/milestones/2-openrouter-sse/milestone-log.md` and append its content to the root [`milestones.log`](../../milestones.log):
    - **`## What's new in the app`** at the top.
    - `## What was built`.
    - `## Decisions made during implementation`.

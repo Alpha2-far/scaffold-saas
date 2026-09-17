@@ -65,15 +65,13 @@ Scaffold™ ne vend pas simplement un fichier de mémoire ou un template d'inter
 
 | Indicateur | Statut | Détails |
 |---|---|---|
-| **Phase Active** | 🟢 **Scaffold V1 — JALON 5 VALIDÉ & CLOS** | Socle opérationnel, visuel, audit et thèmes validés. En attente de consigne |
-| **Serveur Local** | 🟢 **Actif (Port 3000)** | [http://localhost:3000/](http://localhost:3000/) (Vite v7.2.4) |
-| **Santé du Build** | 🟢 **100% PASS** | `tsc -b && vite build` ➔ 2289 modules transformés en 20.21s, 0 erreur |
-| **Linting & Code** | 🟢 **0 erreur, 0 warning** | React 19 forwardRef dépréciations purgées, classes Tailwind v4 conformes |
-| **Poids du Bundle** | 🟢 **Optimisé (< 500 kB)** | `index.js` 463,97 kB · `ThemeStudio` 33,01 kB · `motion-features` 37 kB |
-| **Moteur de Thèmes** | 🟢 **43 thèmes d'auteur** | 100% local, contrastes AAA validés, zéro appel réseau à l'exécution |
-| **Graphe Connaissances** | 🟢 **411 nœuds · 943 liens** | Graphify intégré dans `package.json` et standardisé dans Agent OS |
-| **Dialogue Exécutif** | 🟢 **Zéro Jargon (§0.6)** | Pare-feu de vocabulaire actif : dialogue fluide et naturel avec le fondateur |
-| **Dernier Commit GitHub** | [`73a8e9c`](https://github.com/Alpha2-far/scaffold-v1/commit/73a8e9c) | `feat(scaffold-v1): white-labeling presets, context7 audit, graphify rules & executive natural interview` |
+| **Phase Active** | 🚀 **Phase 2 : SaaS Platform — JALON 1 EN COURS** | Socle Serveur Bun & BDD Double Adaptateur (`blueprint/milestones/1-serveur-bun-db/prompt.md`) |
+| **Dépôt Officiel SaaS** | 🔗 [`Alpha2-far/scaffold-saas`](https://github.com/Alpha2-far/scaffold-saas) | Branche `main` synchronisée avec GitHub Actions Cloud CI/CD |
+| **Invariant Matériel** | 🔒 **Décharge Mac ➔ GitHub Actions** | Zéro build lourd local (`tsc -b`, tests lourds déchargés sur cloud runners) |
+| **Arborescence Plan** | 🏛️ **`blueprint/` (ex-_build_plan)** | PRD déterministe + prompts 4 piliers autonomes pour les 7 jalons |
+| **Moteur Template HTML** | 💎 **Blueprint HTML Engine** | Standard autonome `docs/reference/blueprint-html-template.md` (WYSIWYB + 1-clic copy) |
+| **Prompt Non-Dev** | 🗣️ **Héritage BM PRD Vulgarisé** | Spécifié dans `docs/reference/scaffold-agent-prompt.md` avec injection stacks `/api/stacks` |
+| **Dernier Commit GitHub** | [`87e8d83`](https://github.com/Alpha2-far/scaffold-saas/commit/87e8d83) | `docs: track PROJECT_MEMORY.md in scaffold-saas repository` |
 
 ---
 

@@ -4,8 +4,8 @@ You are entering plan mode to plan and then build milestone 7 of the Scaffold™
 
 ## Context
 
-- Read `@_build_plan/prd.md` for production deployment requirements.
-- Read previous milestone logs: Milestones 1 to 6 in `@_build_plan/milestones/` or `@milestones.log`.
+- Read `@blueprint/prd.md` for production deployment requirements.
+- Read previous milestone logs: Milestones 1 to 6 in `@blueprint/milestones/` or `@milestones.log`.
 - Codebase: `design-os/`.
 - Repository: `https://github.com/Alpha2-far/scaffold-saas.git`.
 
@@ -38,7 +38,7 @@ You are entering plan mode to plan and then build milestone 7 of the Scaffold™
    - Exécuter `node scripts/test-architecture.mjs` et constater 100% de tests passants.
    - Effectuer un git commit et push vers `Alpha2-far/scaffold-saas.git`.
    - Constater sur GitHub Actions que le pipeline CI/CD de production s'exécute avec succès (100% vert).
-4. When complete, write `_build_plan/milestones/7-garde-fous-prod/milestone-log.md` and append the final entry to the root [`milestones.log`](../../milestones.log):
+4. When complete, write `blueprint/milestones/7-garde-fous-prod/milestone-log.md` and append the final entry to the root [`milestones.log`](../../milestones.log):
    - **`## What's new in the app`** at the top.
    - `## What was built`.
    - `## Decisions made during implementation`.

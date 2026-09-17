@@ -4,7 +4,7 @@ You are entering plan mode to plan and then build milestone 1 of the Scaffold™
 
 ## Context & Documents de Référence Instatic
 
-- Read `@_build_plan/prd.md` for the full project architecture, data model, and engineering invariants.
+- Read `@blueprint/prd.md` for the full project architecture, data model, and engineering invariants.
 - Read `@docs/server.md` for the Bun server architecture, DbClient specifications, and SQL schema.
 - Read `@docs/architecture.md` for the global platform architecture and data flow.
 - Base codebase: `design-os/` (React 19 + TypeScript + Tailwind v4 + Bun).
@@ -38,7 +38,7 @@ You are entering plan mode to plan and then build milestone 1 of the Scaffold™
    - Lance `bun run server/index.ts` en tâche de fond ou test.
    - Exécute `curl -s http://localhost:3001/api/health` et valide la réponse HTTP 200 `{ status: "ok", db: "connected" }`.
    - Effectue un git commit et push vers `Alpha2-far/scaffold-saas.git` et confirme que GitHub Actions passe au vert.
-4. When complete, write a `milestone-log.md` in this folder (`_build_plan/milestones/1-serveur-bun-db/milestone-log.md`) and append its content to the root [`milestones.log`](../../milestones.log). Structure it as follows:
+4. When complete, write a `milestone-log.md` in this folder (`blueprint/milestones/1-serveur-bun-db/milestone-log.md`) and append its content to the root [`milestones.log`](../../milestones.log). Structure it as follows:
    - **`## What's new in the app`** at the very top (concise, bulleted list of main capabilities added, readable by a non-technical reviewer).
    - `## What was built` (files created, routes, database tables, schema).
    - `## Decisions made during implementation` (architectural decisions, choices made).

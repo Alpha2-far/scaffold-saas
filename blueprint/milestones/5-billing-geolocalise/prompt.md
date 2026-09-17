@@ -4,8 +4,8 @@ You are entering plan mode to plan and then build milestone 5 of the Scaffold™
 
 ## Context
 
-- Read `@_build_plan/prd.md` for the decoupled payment model ("Concevoir gratuitement, payer pour emporter").
-- Read previous milestone logs: Milestones 1, 2, 3, 4 in `@_build_plan/milestones/` or `@milestones.log`.
+- Read `@blueprint/prd.md` for the decoupled payment model ("Concevoir gratuitement, payer pour emporter").
+- Read previous milestone logs: Milestones 1, 2, 3, 4 in `@blueprint/milestones/` or `@milestones.log`.
 - Codebase: `design-os/` (Bun + React 19).
 - Architecture: Provider-Agnostic Adapter Pattern (`PaymentProviderAdapter`).
 
@@ -45,7 +45,7 @@ You are entering plan mode to plan and then build milestone 5 of the Scaffold™
    - Simuler une requête avec IP européenne ➔ Vérifier l'affichage de 9 €.
    - Simuler l'envoi d'un webhook de paiement réussi ➔ Valider le déverrouillage immédiat et le téléchargement de `product-plan.zip`.
    - Commit et push vers `Alpha2-far/scaffold-saas.git`, validation par GitHub Actions.
-4. When complete, write `_build_plan/milestones/5-billing-geolocalise/milestone-log.md` and append its content to the root [`milestones.log`](../../milestones.log):
+4. When complete, write `blueprint/milestones/5-billing-geolocalise/milestone-log.md` and append its content to the root [`milestones.log`](../../milestones.log):
    - **`## What's new in the app`** at the top.
    - `## What was built`.
    - `## Decisions made during implementation`.

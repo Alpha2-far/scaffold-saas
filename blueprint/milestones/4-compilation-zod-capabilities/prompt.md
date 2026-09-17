@@ -4,8 +4,8 @@ You are entering plan mode to plan and then build milestone 4 of the Scaffold™
 
 ## Context
 
-- Read `@_build_plan/prd.md` for compilation contracts and data schemas.
-- Read previous milestone logs: Milestones 1, 2, 3 in `@_build_plan/milestones/` or `@milestones.log`.
+- Read `@blueprint/prd.md` for compilation contracts and data schemas.
+- Read previous milestone logs: Milestones 1, 2, 3 in `@blueprint/milestones/` or `@milestones.log`.
 - Codebase: `design-os/` (TypeScript + Zod).
 - Health engine: `design-os/src/lib/product-health.ts`.
 
@@ -34,7 +34,7 @@ You are entering plan mode to plan and then build milestone 4 of the Scaffold™
    - Vérifier que les 6 documents markdown et le `milestones.log` généré sont 100% valides et non vides.
    - Vérifier que le score de santé produit calculé par `product-health.ts` atteint 100/100.
    - Commit et push vers `Alpha2-far/scaffold-saas.git`, validation par GitHub Actions.
-4. When complete, write `_build_plan/milestones/4-compilation-zod-capabilities/milestone-log.md` and append its content to the root [`milestones.log`](../../milestones.log):
+4. When complete, write `blueprint/milestones/4-compilation-zod-capabilities/milestone-log.md` and append its content to the root [`milestones.log`](../../milestones.log):
    - **`## What's new in the app`** at the top.
    - `## What was built`.
    - `## Decisions made during implementation`.

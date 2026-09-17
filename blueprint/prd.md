@@ -1,7 +1,7 @@
 # Scaffold™ SaaS Platform — Product Requirements Document (PRD)
 
-> **À propos de ces fichiers de plan de construction (`_build_plan/`) :**  
-> Ce document PRD et les dossiers par jalon sous `_build_plan/milestones/` constituent le guide d'ingénierie déterministe pour la construction incrémentale de la plateforme SaaS Scaffold™.  
+> **À propos de ces fichiers Blueprint (`blueprint/`) :**  
+> Ce document PRD et les dossiers par jalon sous `blueprint/milestones/` constituent le guide d'ingénierie déterministe pour la construction incrémentale de la plateforme SaaS Scaffold™.  
 > Chaque jalon est conçu pour être une **session de travail autonome** pour un agent de programmation (Claude Code, Cursor, Codex, Antigravity) produisant une valeur visible et testable, avec son journal `milestone-log.md` consigné dans `milestones.log`.
 
 ---

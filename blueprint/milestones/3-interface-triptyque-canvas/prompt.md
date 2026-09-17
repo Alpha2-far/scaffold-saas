@@ -4,8 +4,8 @@ You are entering plan mode to plan and then build milestone 3 of the Scaffold™
 
 ## Context
 
-- Read `@_build_plan/prd.md` for the visual principles and product invariants.
-- Read previous milestone logs: Milestone 1 & 2 in `@_build_plan/milestones/` or `@milestones.log`.
+- Read `@blueprint/prd.md` for the visual principles and product invariants.
+- Read previous milestone logs: Milestone 1 & 2 in `@blueprint/milestones/` or `@milestones.log`.
 - Codebase: `design-os/` (React 19 + Tailwind v4 + Lucide Icons).
 - Core UI files: `design-os/src/App.tsx`, `design-os/src/components/ThemeStudio.tsx`, `design-os/src/presets/`.
 
@@ -35,7 +35,7 @@ You are entering plan mode to plan and then build milestone 3 of the Scaffold™
    - Vérifier que le rail occupe exactement 56 px et que l'asymétrie 40/60 est respectée sans overflow.
    - Changer de thème sur le Live Canvas et vérifier la mise à jour instantanée des couleurs et typographies.
    - Commit et push vers `Alpha2-far/scaffold-saas.git`, validation par GitHub Actions.
-4. When complete, write `_build_plan/milestones/3-interface-triptyque-canvas/milestone-log.md` and append its content to the root [`milestones.log`](../../milestones.log):
+4. When complete, write `blueprint/milestones/3-interface-triptyque-canvas/milestone-log.md` and append its content to the root [`milestones.log`](../../milestones.log):
    - **`## What's new in the app`** at the top.
    - `## What was built`.
    - `## Decisions made during implementation`.
