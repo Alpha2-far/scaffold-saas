@@ -2,52 +2,40 @@
 
 You are entering plan mode to plan and then build milestone 5 of the Scaffold™ SaaS Platform.
 
-## Context
+---
 
-- Read `@_build_plan/prd.md` for the decoupled payment model ("Concevoir gratuitement, payer pour emporter").
-- Read previous milestone logs: Milestones 1, 2, 3, 4 in `@_build_plan/milestones/` or `@milestones.log`.
-- Codebase: `design-os/` (Bun + React 19).
-- Architecture: Provider-Agnostic Adapter Pattern (`PaymentProviderAdapter`).
+## 🎯 1. OBJECTIF
+Monétiser la plateforme avec l'expérience « Concevoir gratuitement, payer pour emporter », via une détection Geo-IP de devise (6 000 FCFA Mobile Money en Afrique / 9 € Cartes à l'International), le tiroir de checkout `CheckoutDrawer`, et le déverrouillage webhook de l'archive `product-plan.zip`.
 
-## Invariant Matériel & Règles d'Exécution
+---
 
-> [!CRITICAL]
-> **Décharge Matérielle Obligatoire (Mac Local ➔ GitHub Actions)** :
-> - ⛔ **NE JAMAIS exécuter** de builds lourds (`npm run build`, `npx tsc -b`) sur la machine locale.
-> - ✅ **Test local léger autorisé** :
->   ```bash
->   bun test server/billing
->   ```
-> - Toute la validation de sécurité et les signatures de webhooks sont certifiées sur **GitHub Actions**.
+## 📚 2. CONTEXTE & FICHIERS CONCERNÉS
+- **Documents de référence Instatic obligatoires** :
+  - `@_build_plan/prd.md` : PRD officiel (Section 2 & Milestone 5).
+  - `@_build_plan/milestones/4-compilation-zod-capabilities/milestone-log.md` : Moteur de compilation et livrables.
+  - `@docs/features/billing.md` : Détection Geo-IP, Mobile Money, Cartes, webhooks.
+  - `@docs/features/export-engine.md` : Déverrouillage et packaging ZIP.
+- **Fichiers physiques à créer/modifier** :
+  - `server/billing/geoIp.ts` : Détection pays / devise (XOF/XAF vs EUR/USD).
+  - `server/billing/adapters/types.ts` : Interface générique `PaymentProviderAdapter`.
+  - `server/billing/adapters/africaMobileMoney.ts` : Adaptateur Mobile Money (MTN, Moov, Wave, Orange).
+  - `server/billing/adapters/internationalCards.ts` : Adaptateur Cartes bancaires & Apple Pay.
+  - `src/components/CheckoutDrawer.tsx` : Tiroir de paiement instantané réactif.
+  - `server/handlers/billingWebhook.ts` : Gestionnaire idempotent de webhooks.
 
-## Your Task
+---
 
-1. Plan the implementation for **only** milestone 5 as defined in the PRD.
-2. Build the Billing System and Geo-IP detection:
-   - `design-os/server/billing/geoIp.ts` : Détection automatique du pays via les en-têtes réseau (`CF-IPCountry`, `X-Forwarded-For`) sélectionnant la devise appropriée :
-     - Afrique (UEMOA / CEMAC / CEDEAO) : **6 000 FCFA** (ou équivalent local).
-     - Reste du monde : **9 €** (ou $9.99 USD).
-   - `design-os/server/billing/adapters/types.ts` : Contrat d'interface générique `PaymentProviderAdapter` :
-     ```typescript
-     export interface PaymentProviderAdapter {
-       readonly id: string;
-       createCheckoutSession(input: CheckoutSessionInput): Promise<CheckoutSessionResult>;
-       verifyWebhookSignature(req: Request): Promise<WebhookVerificationResult>;
-       handleWebhookEvent(event: WebhookEvent): Promise<PaymentTransactionResult>;
-     }
-     ```
-   - `design-os/server/billing/adapters/africaMobileMoney.ts` : Adaptateur Mobile Money (MTN MoMo, Moov Money, Wave, Orange Money).
-   - `design-os/server/billing/adapters/internationalCards.ts` : Adaptateur Cartes bancaires (Visa, Mastercard) et Apple Pay / Google Pay.
-   - `design-os/src/components/CheckoutDrawer.tsx` : Tiroir de paiement instantané au clic sur « Prendre les clés du logiciel », affichant le montant adapté à la région et les boutons de paiement correspondants.
-   - `design-os/server/handlers/billingWebhook.ts` : Point d'entrée de webhook idempotent (`POST /api/billing/webhook/:provider`) validant l'achat, mettant à jour la table `billing_transactions`, et libérant le téléchargement de l'archive `product-plan.zip`.
-3. Verify your work against the "Done when" criteria:
-   - Simuler une requête avec IP africaine ➔ Vérifier que l'interface et l'API renvoient 6 000 FCFA.
-   - Simuler une requête avec IP européenne ➔ Vérifier l'affichage de 9 €.
-   - Simuler l'envoi d'un webhook de paiement réussi ➔ Valider le déverrouillage immédiat et le téléchargement de `product-plan.zip`.
-   - Commit et push vers `Alpha2-far/scaffold-saas.git`, validation par GitHub Actions.
-4. When complete, write `_build_plan/milestones/5-billing-geolocalise/milestone-log.md` and append its content to the root [`milestones.log`](../../milestones.log):
-   - **`## What's new in the app`** at the top.
-   - `## What was built`.
-   - `## Decisions made during implementation`.
-   - `## Notes for Milestone 6`.
-   - `## Deviations from PRD`.
+## ⛔ 3. CONTRAINTES
+- **Décharge Matérielle Obligatoire** : Ne pas lancer `npm run build` en local. Tester avec `bun test server/billing`.
+- **Agnosticisme de Prestataire** : Ne jamais coder en dur un prestataire unique. Utiliser strictement le contrat d'interface `PaymentProviderAdapter`.
+- **Idempotence Absolue** : Tout webhook rejoué doit produire le même résultat sans doubler de transaction.
+
+---
+
+## ✅ 4. CRITÈRES DE SUCCÈS & VÉRIFICATION
+1. **Simulation Geo-IP** : Requête avec IP africaine ➔ affichage 6 000 FCFA ; IP européenne ➔ affichage 9 €.
+2. **Simulation Webhook** : Envoi d'un webhook de succès ➔ Mise à jour statut BDD et téléchargement instantané du ZIP.
+3. **Consignation & Journalisation** :
+   - Rédiger `_build_plan/milestones/5-billing-geolocalise/milestone-log.md`.
+   - Ajouter l'entrée dans `milestones.log` et mettre à jour `AGENT_DISPATCH.md`.
+4. **Validation CI/CD Cloud** : Push sur `origin/main` validé vert par GitHub Actions.
