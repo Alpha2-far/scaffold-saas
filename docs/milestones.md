@@ -24,7 +24,7 @@ Chaque jalon contribue directement aux trois piliers fondamentaux :
 
 ---
 
-## 2. Les 7 Jalons d'Ingénierie : Spécifications, Liens Instatic & Prompts Copier-Coller
+## 2. Les 7 Jalons d'Ingénierie : Spécifications, Liens Instatic & Invites 4 Piliers
 
 ---
 
@@ -54,28 +54,31 @@ Chaque jalon contribue directement aux trois piliers fondamentaux :
 #### Done when
 - `bun run server/index.ts` démarre en < 50 ms.
 - `curl -s http://localhost:3001/api/health` renvoie HTTP 200 `{ status: "ok", db: "connected" }`.
+- `curl -s http://localhost:3001/api/stacks` renvoie les stacks par défaut pré-peuplées.
 - Commit et push validés 100% verts sur GitHub Actions (`.github/workflows/ci.yml`).
 
-#### 📋 Prompt Copier-Coller pour l'Agent (Claude Code) :
+#### 📋 Invite Modèle pour Claude Code (Structure 4 Piliers) :
 ```markdown
-Tu es le Staff Engineer d'Exécution sur Scaffold™ SaaS.
-Documents de référence obligatoires à lire :
-- @_build_plan/prd.md
-- @_build_plan/milestones/1-serveur-bun-db/prompt.md
-- @docs/server.md
-- @docs/architecture.md
+**OBJECTIF** :
+Implémenter le Jalon 1 (Socle Serveur Bun & BDD Double Adaptateur) de Scaffold™ SaaS pour disposer d'un backend ultra-rapide capable de servir l'API de santé et d'exposer les stacks dynamiques.
 
-Ta mission est d'implémenter le JALON 1 dans design-os/server/ :
-1. Crée design-os/server/db/client.ts avec l'interface unifiée DbClient (SQLite bun:sqlite en local / Postgres Bun.sql en prod).
-2. Crée design-os/server/db/migrations/001_initial_schema.sql (tables users, projects, agent_sessions, chat_messages, project_capabilities, document_snapshots, security_ip_bans, model_configs, stack_configs, coupons, billing_transactions).
-3. Crée design-os/server/db/migrate.ts (exécution automatique des migrations SQL au boot).
-4. Crée design-os/server/router.ts (routeur HTTP premier-match avec CORS).
-5. Crée design-os/server/handlers/health.ts (route GET /api/health).
-6. Crée design-os/server/handlers/stacks.ts (route GET /api/stacks retournant les stacks actives).
-7. Crée design-os/server/index.ts (serveur Bun.serve écoutant sur le port 3001).
-INVARIANT CRITIQUE : Ne lance aucun build lourd (tsc -b, npm run build) sur le Mac local. Teste uniquement avec `bun run server/index.ts` et `curl -s http://localhost:3001/api/health`.
-Pousse ensuite sur GitHub et vérifie que GitHub Actions est vert.
-Quand c'est terminé, écris _build_plan/milestones/1-serveur-bun-db/milestone-log.md et ajoute l'entrée correspondante dans milestones.log avec les sections : ## What's new in the app, ## What was built, ## Decisions made during implementation, ## Notes for Milestone 2.
+**CONTEXTE** :
+- Codebase cible : `design-os/`
+- Spécifications officielles : `@_build_plan/prd.md` et `@_build_plan/milestones/1-serveur-bun-db/prompt.md`
+- Architecture serveur et schéma BDD : `@docs/server.md` et `@docs/architecture.md`
+- Fichiers à créer dans `design-os/server/` : `db/client.ts`, `db/migrations/001_initial_schema.sql`, `db/migrate.ts`, `router.ts`, `handlers/health.ts`, `handlers/stacks.ts`, `index.ts`.
+
+**CONTRAINTES** :
+- ⛔ NE PAS exécuter de builds lourds (`npm run build`, `npx tsc -b`) sur cette machine locale (CPU/RAM limités).
+- ⛔ NE PAS toucher aux fonctionnalités des jalons ultérieurs (chat SSE, UI triptyque, billing, admin).
+- Respecter scrupuleusement les directives de `CLAUDE.md`.
+
+**CRITÈRE DE SUCCÈS** :
+- `bun run server/index.ts` démarre sans erreur sur le port 3001.
+- `curl -s http://localhost:3001/api/health` renvoie HTTP 200 `{ "status": "ok", "db": "connected" }`.
+- `curl -s http://localhost:3001/api/stacks` renvoie la liste des stacks pré-peuplées.
+- Le rapport d'exécution est rédigé dans `_build_plan/milestones/1-serveur-bun-db/milestone-log.md` et consigné dans `milestones.log`.
+- Push sur `origin/main` validé vert par GitHub Actions.
 ```
 
 ---
@@ -93,7 +96,7 @@ Quand c'est terminé, écris _build_plan/milestones/1-serveur-bun-db/milestone-l
 #### What gets built
 - Client OpenRouter avec bascule automatique cascade résiliente (`claude-3.7-sonnet` ➔ `gpt-4o` ➔ `gemini-2.0-flash` ➔ `deepseek-r1`).
 - Route SSE `POST /api/projects/:id/chat` servant le streaming temps réel mot par mot.
-- Prompt d'interview exécutive intégrant le Pare-Feu de Vocabulaire §0.6 (zéro jargon technique, zéro slash command, motif *recommend-then-confirm*).
+- Prompt d'interview exécutive réutilisant le master prompt BM PRD Creator (§0.6, posture non-développeur, motif *recommend-then-confirm*).
 
 #### What it explicitly does NOT include
 - Tiroir de paiement ou monétisation.
@@ -103,24 +106,25 @@ Quand c'est terminé, écris _build_plan/milestones/1-serveur-bun-db/milestone-l
 - Une requête curl streaming sur `/api/projects/test/chat` délivre un flux `data: {"token": "..."}` ininterrompu.
 - La coupure simulée du modèle primaire bascule instantanément sur le modèle de secours sans coupure.
 
-#### 📋 Prompt Copier-Coller pour l'Agent (Claude Code) :
+#### 📋 Invite Modèle pour Claude Code (Structure 4 Piliers) :
 ```markdown
-Tu es le Staff Engineer d'Exécution sur Scaffold™ SaaS.
-Documents de référence obligatoires à lire :
-- @_build_plan/prd.md
-- @_build_plan/milestones/2-openrouter-sse/prompt.md
-- @docs/features/openrouter-model-sync.md
-- @docs/features/agent-runtime.md
-- @docs/features/scaffold-agent.md
+**OBJECTIF** :
+Connecter l'Agent IA Scaffold au flux OpenRouter en streaming temps réel (SSE) avec tolérance de panne totale via cascade de modèles.
 
-Ta mission est d'implémenter le JALON 2 dans design-os/server/ :
-1. Crée design-os/server/ai/openrouter.ts (client streaming OpenRouter).
-2. Crée design-os/server/ai/fallbackCascade.ts (cascade ordonnée Claude 3.7 -> GPT-4o -> Gemini 2.0 Flash -> DeepSeek R1).
-3. Crée design-os/server/ai/prompts/systemAgent.ts (prompt d'interview exécutive naturelle, zéro jargon).
-4. Crée design-os/server/handlers/chatStream.ts (endpoint POST /api/projects/:id/chat en SSE).
-5. Branche la route dans design-os/server/router.ts.
-INVARIANT : Zéro build lourd local. Teste avec curl streaming. Pousse sur GitHub pour validation CI/CD.
-Quand c'est terminé, écris _build_plan/milestones/2-openrouter-sse/milestone-log.md et consigne dans milestones.log.
+**CONTEXTE** :
+- Codebase cible : `design-os/server/`
+- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/2-openrouter-sse/prompt.md`, `@docs/features/openrouter-model-sync.md`, `@docs/features/agent-runtime.md`, `@docs/features/scaffold-agent.md`
+- Fichiers à créer : `server/ai/openrouter.ts`, `server/ai/fallbackCascade.ts`, `server/ai/prompts/systemAgent.ts`, `server/handlers/chatStream.ts`
+
+**CONTRAINTES** :
+- ⛔ Zéro build lourd local.
+- Pare-feu de vocabulaire strict (§0.6) : aucun jargon robotique ni commande slash dans les prompts.
+- Ne pas toucher aux paiements ni au dashboard superadmin.
+
+**CRITÈRE DE SUCCÈS** :
+- `curl -N -X POST http://localhost:3001/api/projects/test/chat` délivre les tokens mot par mot sans blocage.
+- Bascule de modèle vérifiée en cas d'erreur simulée sur le modèle primaire.
+- Rapport consigné dans `_build_plan/milestones/2-openrouter-sse/milestone-log.md` et `milestones.log`.
 ```
 
 ---
@@ -148,24 +152,25 @@ Quand c'est terminé, écris _build_plan/milestones/2-openrouter-sse/milestone-l
 - L'interface s'affiche parfaitement à 1280x800 sur Chrome sans défilement horizontal.
 - Le changement de thème sur le Live Canvas applique instantanément les 12 tokens sémantiques.
 
-#### 📋 Prompt Copier-Coller pour l'Agent (Claude Code) :
+#### 📋 Invite Modèle pour Claude Code (Structure 4 Piliers) :
 ```markdown
-Tu es le Staff Engineer d'Exécution sur Scaffold™ SaaS.
-Documents de référence obligatoires à lire :
-- @_build_plan/prd.md
-- @_build_plan/milestones/3-interface-triptyque-canvas/prompt.md
-- @docs/interface.md
-- @docs/design.md
-- @docs/ux.md
+**OBJECTIF** :
+Bâtir l'interface visuelle triptyque (Rail 56px + Console Agent 40% + Live Canvas 60%) et connecter les 43 thèmes d'auteur locaux.
 
-Ta mission est d'implémenter le JALON 3 dans design-os/src/ :
-1. Crée design-os/src/components/NavigationRail.tsx (rail escamotable 56px).
-2. Crée design-os/src/components/AgentConsole.tsx (console 40% reliée au stream SSE).
-3. Crée design-os/src/components/LiveCanvas.tsx (pare-brise WYSIWYB 60% avec les 43 thèmes locaux).
-4. Crée design-os/src/components/cards/RecommendationCard.tsx (cartes interactives recommend-then-confirm).
-5. Orchestre le triptyque dans design-os/src/App.tsx en mode responsive 1280x800.
-INVARIANT : Ne lance pas npm run build en local. Teste visuellement avec npm run dev sous Chrome. Pousse sur GitHub pour validation CI/CD.
-Quand c'est terminé, écris _build_plan/milestones/3-interface-triptyque-canvas/milestone-log.md et consigne dans milestones.log.
+**CONTEXTE** :
+- Codebase cible : `design-os/src/`
+- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/3-interface-triptyque-canvas/prompt.md`, `@docs/interface.md`, `@docs/design.md`, `@docs/ux.md`
+- Fichiers à créer/adapter : `src/components/NavigationRail.tsx`, `src/components/AgentConsole.tsx`, `src/components/LiveCanvas.tsx`, `src/components/cards/RecommendationCard.tsx`, `src/App.tsx`
+
+**CONTRAINTES** :
+- ⛔ NE PAS exécuter `npm run build` ou `tsc -b` en local (utiliser `npm run dev` pour tester visuellement).
+- Aucun défilement horizontal toléré à 1280x800.
+- Zéro commande slash affichée à l'utilisateur.
+
+**CRITÈRE DE SUCCÈS** :
+- Interface testée et validée à 1280x800 sous Chrome.
+- Changement de thème d'auteur répercuté instantanément sur le Live Canvas.
+- Rapport consigné dans `_build_plan/milestones/3-interface-triptyque-canvas/milestone-log.md` et `milestones.log`.
 ```
 
 ---
@@ -192,24 +197,25 @@ Quand c'est terminé, écris _build_plan/milestones/3-interface-triptyque-canvas
 #### Done when
 - La compilation d'un projet test produit les 6 documents et le `milestones.log` client sans erreur avec score 100/100.
 
-#### 📋 Prompt Copier-Coller pour l'Agent (Claude Code) :
+#### 📋 Invite Modèle pour Claude Code (Structure 4 Piliers) :
 ```markdown
-Tu es le Staff Engineer d'Exécution sur Scaffold™ SaaS.
-Documents de référence obligatoires à lire :
-- @_build_plan/prd.md
-- @_build_plan/milestones/4-compilation-zod-capabilities/prompt.md
-- @docs/features/compilation-engine.md
-- @docs/features/export-engine.md
-- @docs/features/brownfield-intake.md
+**OBJECTIF** :
+Implémenter le compilateur déterministe Zod, la résolution des capacités et le générateur de `milestones.log` client avec audit 100/100.
 
-Ta mission est d'implémenter le JALON 4 dans design-os/server/compilation/ :
-1. Crée design-os/server/compilation/schema.ts (schémas Zod stricts entités et capacités).
-2. Crée design-os/server/compilation/engine.ts (compilateur déterministe des 6 documents).
-3. Crée design-os/server/compilation/generators/clientMilestonesLog.ts (générateur milestones.log client).
-4. Implémente la capacité auth Google dans capabilities/authGoogle.ts.
-5. Connecte design-os/src/lib/product-health.ts pour certifier le score 100/100.
-INVARIANT : Zéro build lourd local. Teste avec bun test server/compilation. Pousse sur GitHub pour validation CI/CD.
-Quand c'est terminé, écris _build_plan/milestones/4-compilation-zod-capabilities/milestone-log.md et consigne dans milestones.log.
+**CONTEXTE** :
+- Codebase cible : `design-os/server/compilation/`
+- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/4-compilation-zod-capabilities/prompt.md`, `@docs/features/compilation-engine.md`, `@docs/features/export-engine.md`, `@docs/features/brownfield-intake.md`
+- Fichiers à créer : `server/compilation/schema.ts`, `server/compilation/engine.ts`, `server/compilation/generators/clientMilestonesLog.ts`, `server/compilation/capabilities/authGoogle.ts`, `src/lib/product-health.ts`
+
+**CONTRAINTES** :
+- ⛔ Zéro build lourd local (tester avec `bun test server/compilation`).
+- Zéro hallucination tolérée dans l'assemblage markdown des 6 documents.
+- Ne pas brancher le module de paiement dans ce jalon.
+
+**CRITÈRE DE SUCCÈS** :
+- `bun test server/compilation` valide l'assemblage complet des 6 documents et du `milestones.log` client.
+- Score santé `product-health.ts` à 100/100 sur projet test.
+- Rapport consigné dans `_build_plan/milestones/4-compilation-zod-capabilities/milestone-log.md` et `milestones.log`.
 ```
 
 ---
@@ -235,23 +241,25 @@ Quand c'est terminé, écris _build_plan/milestones/4-compilation-zod-capabiliti
 - Une IP africaine affiche 6 000 FCFA et une IP occidentale affiche 9 €.
 - La simulation de webhook libère instantanément le téléchargement de `product-plan.zip`.
 
-#### 📋 Prompt Copier-Coller pour l'Agent (Claude Code) :
+#### 📋 Invite Modèle pour Claude Code (Structure 4 Piliers) :
 ```markdown
-Tu es le Staff Engineer d'Exécution sur Scaffold™ SaaS.
-Documents de référence obligatoires à lire :
-- @_build_plan/prd.md
-- @_build_plan/milestones/5-billing-geolocalise/prompt.md
-- @docs/features/billing.md
-- @docs/features/export-engine.md
+**OBJECTIF** :
+Implémenter la facturation géolocalisée découplée (Modèle Steve Jobs : conception gratuite, paiement au clic pour emporter) et la libération de `product-plan.zip`.
 
-Ta mission est d'implémenter le JALON 5 dans design-os/server/billing/ et src/components/ :
-1. Crée design-os/server/billing/geoIp.ts (détection 6 000 FCFA vs 9 €).
-2. Crée design-os/server/billing/adapters/types.ts (interface PaymentProviderAdapter).
-3. Crée design-os/server/billing/adapters/africaMobileMoney.ts et internationalCards.ts.
-4. Crée design-os/src/components/CheckoutDrawer.tsx.
-5. Crée design-os/server/handlers/billingWebhook.ts (libération idempotente de product-plan.zip).
-INVARIANT : Zéro build lourd local. Teste avec bun test server/billing. Pousse sur GitHub pour validation CI/CD.
-Quand c'est terminé, écris _build_plan/milestones/5-billing-geolocalise/milestone-log.md et consigne dans milestones.log.
+**CONTEXTE** :
+- Codebase cible : `design-os/server/billing/` et `src/components/`
+- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/5-billing-geolocalise/prompt.md`, `@docs/features/billing.md`, `@docs/features/export-engine.md`
+- Fichiers à créer : `server/billing/geoIp.ts`, `server/billing/adapters/types.ts`, `server/billing/adapters/africaMobileMoney.ts`, `server/billing/adapters/internationalCards.ts`, `src/components/CheckoutDrawer.tsx`, `server/handlers/billingWebhook.ts`
+
+**CONTRAINTES** :
+- ⛔ Zéro build lourd local (tester avec `bun test server/billing`).
+- Les adaptateurs de paiement doivent être strictement découplés et agnostiques.
+- Idempotence absolue des webhooks (zéro double-facturation).
+
+**CRITÈRE DE SUCCÈS** :
+- Simulation IP Afrique renvoie 6 000 FCFA et IP Europe renvoie 9 €.
+- Simulation webhook déclenche immédiatement le téléchargement de `product-plan.zip`.
+- Rapport consigné dans `_build_plan/milestones/5-billing-geolocalise/milestone-log.md` et `milestones.log`.
 ```
 
 ---
@@ -280,24 +288,25 @@ Quand c'est terminé, écris _build_plan/milestones/5-billing-geolocalise/milest
 - L'administrateur visualise et écoute une session en streaming à la demande sans latence.
 - L'administrateur peut créer une nouvelle stack dans `/admin` et la voir immédiatement listée dans `GET /api/stacks`.
 
-#### 📋 Prompt Copier-Coller pour l'Agent (Claude Code) :
+#### 📋 Invite Modèle pour Claude Code (Structure 4 Piliers) :
 ```markdown
-Tu es le Staff Engineer d'Exécution sur Scaffold™ SaaS.
-Documents de référence obligatoires à lire :
-- @_build_plan/prd.md
-- @_build_plan/milestones/6-superadmin-antibot/prompt.md
-- @docs/features/security-anti-bot.md
-- @docs/features/agent-runtime.md
-- @docs/features/openrouter-model-sync.md
+**OBJECTIF** :
+Déployer le Dashboard `/admin` avec observateur SSE On-Demand, le gestionnaire dynamique des stacks (`StackManager.tsx`) et la sécurité anti-bot défensive.
 
-Ta mission est d'implémenter le JALON 6 dans design-os/src/pages/admin/ et server/security/ :
-1. Crée design-os/src/pages/admin/AdminDashboard.tsx et components/admin/AdminSessionWatcher.tsx (SSE On-Demand).
-2. Crée design-os/src/components/admin/ModelManager.tsx (réordonnancement LLM à chaud).
-3. Crée design-os/src/components/admin/StackManager.tsx (ajout et édition dynamique des stacks modernes).
-4. Crée design-os/server/security/honeypot.ts, turnstile.ts et rateLimiter.ts.
-5. Crée design-os/server/handlers/admin.ts (endpoints admin metrics, models, sessions, stacks).
-INVARIANT : Zéro build lourd local. Teste avec bun test server/security. Pousse sur GitHub pour validation CI/CD.
-Quand c'est terminé, écris _build_plan/milestones/6-superadmin-antibot/milestone-log.md et consigne dans milestones.log.
+**CONTEXTE** :
+- Codebase cible : `design-os/src/pages/admin/` et `server/security/`
+- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/6-superadmin-antibot/prompt.md`, `@docs/features/security-anti-bot.md`, `@docs/features/agent-runtime.md`, `@docs/features/openrouter-model-sync.md`
+- Fichiers à créer : `src/pages/admin/AdminDashboard.tsx`, `src/components/admin/AdminSessionWatcher.tsx`, `src/components/admin/ModelManager.tsx`, `src/components/admin/StackManager.tsx`, `server/security/honeypot.ts`, `server/security/turnstile.ts`, `server/security/rateLimiter.ts`, `server/handlers/admin.ts`
+
+**CONTRAINTES** :
+- ⛔ Zéro build lourd local (tester avec `bun test server/security`).
+- L'observateur SSE doit être strictement On-Demand (jamais de broadcast continu passif).
+
+**CRITÈRE DE SUCCÈS** :
+- Honeypot déclenchant HTTP 403 et écriture dans `security_ip_bans`.
+- Dashboard `/admin` affichant les métriques et session watcher opérationnel.
+- Création d'une nouvelle stack dans `StackManager` immédiatement retournée par `GET /api/stacks`.
+- Rapport consigné dans `_build_plan/milestones/6-superadmin-antibot/milestone-log.md` et `milestones.log`.
 ```
 
 ---
@@ -323,19 +332,24 @@ Quand c'est terminé, écris _build_plan/milestones/6-superadmin-antibot/milesto
 - 100 % des tests passent au vert sur GitHub Actions (`tsc -b`, bundling Vite, ESLint, `bun test`, garde-fous Instatic).
 - L'application est déployée et accessible en HTTPS.
 
-#### 📋 Prompt Copier-Coller pour l'Agent (Claude Code) :
+#### 📋 Invite Modèle pour Claude Code (Structure 4 Piliers) :
 ```markdown
-Tu es le Staff Engineer d'Exécution sur Scaffold™ SaaS.
-Documents de référence obligatoires à lire :
-- @_build_plan/prd.md
-- @_build_plan/milestones/7-garde-fous-prod/prompt.md
-- @docs/CONVENTIONS.md
-- @.github/workflows/ci.yml
+**OBJECTIF** :
+Certifier l'intégrité architecturale par les 6 tests de garde-fous Instatic et configurer le déploiement cloud de production en conteneur sécurisé HTTPS.
 
-Ta mission est d'implémenter le JALON 7 dans design-os/ :
-1. Crée design-os/scripts/test-architecture.mjs (les 6 tests de conformité Instatic).
-2. Crée design-os/Dockerfile et Caddyfile (packaging de production).
-3. Finalise design-os/.github/workflows/ci.yml pour le déploiement cloud.
-INVARIANT : Exécute node scripts/test-architecture.mjs en local. Pousse sur GitHub pour le déploiement.
-Quand c'est terminé, écris _build_plan/milestones/7-garde-fous-prod/milestone-log.md et clôture milestones.log.
+**CONTEXTE** :
+- Codebase cible : `design-os/`
+- Spécifications : `@_build_plan/prd.md`, `@_build_plan/milestones/7-garde-fous-prod/prompt.md`, `@docs/CONVENTIONS.md`, `@.github/workflows/ci.yml`
+- Fichiers à créer : `scripts/test-architecture.mjs`, `Dockerfile`, `Caddyfile`, `.github/workflows/ci.yml`
+
+**CONTRAINTES** :
+- ⛔ Ne pas tenter de builder le Docker lourd sur le Mac local.
+- Exécuter localement uniquement `node scripts/test-architecture.mjs`.
+- Laisser GitHub Actions opérer le build et déploiement de production.
+
+**CRITÈRE DE SUCCÈS** :
+- 6/6 tests de garde-fous Instatic passants.
+- Pipeline CI/CD GitHub Actions 100% vert.
+- Déploiement opérationnel en HTTPS.
+- Clôture finale de `milestones.log`.
 ```

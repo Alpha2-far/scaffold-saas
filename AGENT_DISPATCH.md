@@ -25,45 +25,36 @@ Ce fichier est le pont de communication actif entre **Antigravity** (Architecte)
 > - [`_build_plan/milestones/1-serveur-bun-db/prompt.md`](_build_plan/milestones/1-serveur-bun-db/prompt.md) : Spécification du Jalon 1 et contrat de log.  
 > - [`docs/server.md`](docs/server.md) : Architecture serveur Bun, routeur et `DbClient`.  
 > - [`docs/architecture.md`](docs/architecture.md) : Topologie globale et flux de données.  
-### ⚡ Invite Modèle pour Claude Code (Structure Canonique : Objectif / Contexte / Contraintes / Critères de Succès)
+>  
+> Ton ordre de mission est d'implémenter le **Jalon 1 de la plateforme SaaS** dans le dossier `design-os/server/`.
 
-> Copie ce bloc dans ton terminal Claude Code pour exécuter le Jalon 1 :
+### ⚡ Invite Modèle pour Claude Code (Structure Canonique à 4 Piliers)
+
+> **À copier-coller dans ton terminal Claude Code pour lancer le Jalon 1** :
 
 ```markdown
-### 🎯 OBJECTIF
-Mettre en place le socle serveur backend ultra-rapide sous Bun (`design-os/server/`) avec double adaptateur de base de données (SQLite en local / PostgreSQL en production), le schéma SQL relationnel initial incluant la table des stacks dynamiques pré-peuplées, et les points d'accès `/api/health` et `/api/stacks`.
+**OBJECTIF** :
+Implémenter le Jalon 1 (Socle Serveur Bun & BDD Double Adaptateur) de Scaffold™ SaaS pour disposer d'un backend ultra-rapide capable de servir l'API de santé et d'exposer les stacks dynamiques.
 
-### 📚 CONTEXTE
-- **Fichiers de référence Instatic & Spécifications** :
-  - `@_build_plan/prd.md` (Spécification globale & Section 5 : Modèle de données).
-  - `@_build_plan/milestones/1-serveur-bun-db/prompt.md` (Détails du Jalon 1).
-  - `@docs/server.md` (Architecture du serveur Bun, schéma SQL complet et routeur).
-  - `@docs/architecture.md` (Topologie globale et flux de données).
-- **Fichiers concernés à créer** dans `design-os/server/` :
-  - `server/index.ts` (Point d'entrée serveur `Bun.serve` sur port 3001 avec CORS).
-  - `server/db/client.ts` (Interface unifiée `DbClient` pour SQLite `bun:sqlite` et Postgres `Bun.sql`).
-  - `server/db/migrations/001_initial_schema.sql` (Tables SQL + `stack_configs` pré-peuplée).
-  - `server/db/migrate.ts` (Runner synchrone des migrations au boot).
-  - `server/router.ts` (Routeur premier-match séquentiel).
-  - `server/handlers/health.ts` (Route `GET /api/health`).
-  - `server/handlers/stacks.ts` (Route `GET /api/stacks`).
+**CONTEXTE** :
+- Codebase cible : `design-os/`
+- Spécifications officielles : `@_build_plan/prd.md` et `@_build_plan/milestones/1-serveur-bun-db/prompt.md`
+- Architecture serveur et schéma BDD : `@docs/server.md` et `@docs/architecture.md`
+- Fichiers à créer dans `design-os/server/` : `db/client.ts`, `db/migrations/001_initial_schema.sql`, `db/migrate.ts`, `router.ts`, `handlers/health.ts`, `handlers/stacks.ts`, `index.ts`.
 
-### ⛔ CONTRAINTES
-- **Décharge Matérielle Obligatoire** : Ne JAMAIS exécuter de builds lourds (`npm run build`, `npx tsc -b`) ni de tests de charge sur ce Mac local (ressources limitées).
-- **Isolation de Périmètre** : Ne pas toucher aux composants React frontend existants (`src/App.tsx`, `src/components/ThemeStudio.tsx`), ni implémenter le chat OpenRouter (réservé au Jalon 2).
-- **Respect du Graphe** : Préserver l'intégrité de `.graphify/` et ne pas installer de dépendances npm lourdes non requises (utiliser les primitives natives de Bun).
+**CONTRAINTES** :
+- ⛔ NE PAS exécuter de builds lourds (`npm run build`, `npx tsc -b`) sur cette machine locale (CPU/RAM limités).
+- ⛔ NE PAS toucher aux fonctionnalités des jalons ultérieurs (chat SSE, UI triptyque, billing, admin).
+- Respecter scrupuleusement les directives de `CLAUDE.md`.
 
-### ✅ CRITÈRES DE SUCCÈS
-1. **Lancement local léger** : `bun run server/index.ts` démarre en < 50 ms sans erreur.
-2. **Vérification HTTP 200** :
-   - `curl -s http://localhost:3001/api/health` renvoie `{"status":"ok","db":"connected","engine":"bun",...}`.
-   - `curl -s http://localhost:3001/api/stacks` renvoie le tableau JSON des stacks par défaut pré-peuplées.
-3. **Mise à jour du Graphe** : `npm run graphify` indexe `server/`.
-4. **Consignation & Journalisation** :
-   - Écrire `_build_plan/milestones/1-serveur-bun-db/milestone-log.md` avec les 4 sections canoniques (`## What's new in the app`, `## What was built`, `## Decisions made during implementation`, `## Notes for Milestone 2`).
-   - Ajouter l'entrée dans `milestones.log` et mettre à jour `AGENT_DISPATCH.md`.
-5. **Validation CI/CD Cloud** : Commit et push sur `main` (`Alpha2-far/scaffold-saas.git`) avec pipeline GitHub Actions 100% vert.
+**CRITÈRE DE SUCCÈS** :
+- `bun run server/index.ts` démarre sans erreur sur le port 3001.
+- `curl -s http://localhost:3001/api/health` renvoie HTTP 200 `{ "status": "ok", "db": "connected" }`.
+- `curl -s http://localhost:3001/api/stacks` renvoie la liste des stacks pré-peuplées.
+- Le rapport d'exécution est rédigé dans `_build_plan/milestones/1-serveur-bun-db/milestone-log.md` et consigné dans `milestones.log`.
+- Push sur `origin/main` validé vert par GitHub Actions.
 ```
+*(Alternative ultra-courte : `Lis AGENT_DISPATCH.md et exécute le Jalon 1 en mode plan.`)*
 
 ### 1. Invariants & Directives d'Ingénierie Inviolables
 
