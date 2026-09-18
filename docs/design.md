@@ -79,3 +79,19 @@ Scaffold intègre un moteur propriétaire de 43 presets de styles complets compi
    - Les cartes imbriquées adaptent leurs arrondis : conteneur externe `rounded-2xl` (16px), carte interne `rounded-xl` (12px), bouton interne `rounded-lg` (8px).
 4. **Surfaces Glassmorphism** :
    - Flou d'arrière-plan haute fidélité : `backdrop-blur-md bg-white/5 border border-white/10`.
+
+---
+
+## 6. L'Artisanat Visuel des Designers Experts (Éradication du Rendu Fade)
+
+Scaffold™ applique les standards visuels de **Linear, Stripe, Apple et Raycast** pour interdire tout rendu générique ou terne :
+
+1. **Lumière Zénithale & Micro-Biseaux** : Biseau supérieur blanc 1px (`border-t border-t-white/15`), structure intérieure (`ring-1 ring-inset ring-white/5`), et ombre soyeuse multi-étages.
+2. **Surfaces Concentriques & Dégradés Invisibles** : Voile translucide `bg-gradient-to-b from-white/[0.05] to-transparent` et emboîtement parfait des arrondis (`rounded-2xl` ➔ `rounded-xl` ➔ `rounded-lg`).
+3. **Typographie Optique** : Chiffres de métriques denses (`tracking-tight tabular-nums`) et micro-labels en capitales discrètes (`text-[11px] uppercase tracking-wider`).
+4. **Micro-Textures de Données** : Sparklines SVG translucides intégrées en filigrane sous les KPIs et balises de statut pulsantes (`animate-pulse`).
+5. **Asymétrie Dynamique du Squelette** : Métrique maîtresse (Hero Metric) occupant 2 colonnes avec sparkline large, flanquée de métriques satellites à 1 colonne.
+6. **Tables Métier Rigoureuses** : Alignement gauche pour les entités (avec avatars), alignement droit monospacé pour montants et dates (`font-mono text-right`).
+
+*Manuel complet des 6 lois : [`docs/reference/expert-designer-rules.md`](reference/expert-designer-rules.md).*
+

@@ -312,5 +312,26 @@ flowchart LR
   - [`docs/features/code-synthesizer.md`](docs/features/code-synthesizer.md) (Compilateur d'Exportation React 19).
   - [`docs/ux.md`](docs/ux.md) (Contrat des 3 à 5 Minutes Chrono).
 
+---
+
+## 13. 🎨 L'Artisanat Visuel des Designers Experts : Éradication du Rendu Fade (18 Septembre 2026)
+
+* **Le Problème Résolu** : Élimination des interfaces IA ternes, génériques et plates (boîtes grises plates, chiffres sans vie, données factices "Lorem Ipsum").
+* **Le Standard Esthétique des Designers Experts (Apple, Linear, Stripe Grade)** :
+  1. **Lumière Zénithale & Micro-Biseaux** : Arête supérieure lumineuse (`border-t-white/15`), micro-biseau et ombre soyeuse multi-étages sur chaque carte.
+  2. **Surfaces Concentriques & Dégradés Subtils** : Dégradé invisible `bg-gradient-to-b from-white/[0.05] to-transparent` et emboîtement parfait des rayons (`rounded-2xl` ➔ `rounded-xl` ➔ `rounded-lg`).
+  3. **Typographie Optique** : Chiffres denses en `tracking-tight tabular-nums` et micro-labels en capitales d'artisanat (`text-[11px] uppercase tracking-wider text-muted`).
+  4. **Micro-Textures de Données Vivantes** :
+     - Sparklines SVG translucides en filigrane sous les KPIs pour raconter l'histoire des données.
+     - Balises de statut vivantes avec halo pulsant (`animate-pulse`).
+     - Tables rigoureuses avec montants et dates alignés à droite en monospacé (`tabular-nums font-mono text-right`).
+  5. **Asymétrie Dynamique du Squelette** : Métrique maîtresse (Hero Metric) occupant 2 colonnes avec sparkline large, flanquée de 2 métriques satellites à 1 colonne.
+  6. **Interdiction Formelle du Générique** : Obligation formelle pour l'Agent d'injecter des données métier réelles, contextualisées au secteur et à la devise du projet (EUR, FCFA, USD).
+* **Documents de Référence** :
+  - [`docs/reference/expert-designer-rules.md`](docs/reference/expert-designer-rules.md) (Manuel des 6 Lois de l'Artisanat Visuel).
+  - [`docs/design.md`](docs/design.md) (Section 6 : L'Artisanat Visuel des Designers Experts).
+  - [`docs/reference/scaffold-agent-prompt.md`](docs/reference/scaffold-agent-prompt.md) (Section 5 : Règles de Composition du Designer Expert).
+
+
 
 
