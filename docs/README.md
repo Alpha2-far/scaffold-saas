@@ -38,7 +38,8 @@ docs/
 │   ├── billing.md              ← Modèle de monétisation iTunes (9€/6000 FCFA), Adapters Mobile Money (MTN/Moov/Wave) + Cartes & Apple Pay
 │   ├── jobs.md                 ← Machine d'état des jobs asynchrones (compilation, export ZIP)
 │   ├── soul.md                 ← Standard soul.md (Âme de l'Agent vs Âme du Produit client)
-│   ├── deterministic-ui-engine.md ← Moteur UI Déterministe : Zéro-compilation live & synthèse React 19
+│   ├── deterministic-ui-engine.md ← Moteur UI Déterministe : Zéro-compilation live & registre de primitives
+│   ├── code-synthesizer.md     ← Compilateur de code d'export : Gabarits déterministes React 19 propres
 │   ├── brownfield-intake.md    ← Pont Zéro-Install & Rétro-ingénierie Scaffold × Agent OS
 │   └── export-engine.md        ← Compilateur du package d'export product-plan/
 │
