@@ -116,6 +116,8 @@ export const MetricItemSchema = z.object({
   value: z.string().max(40),
   delta: z.string().max(30).optional(),
   trend: z.enum(['up', 'down', 'neutral']).default('neutral'),
+  span: z.union([z.literal(1), z.literal(2), z.literal(3)]).default(1),
+  dataPoints: z.array(z.number()).min(2).max(30).optional(),
 });
 
 export const MetricGridPrimitiveSchema = z.object({

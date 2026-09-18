@@ -82,16 +82,17 @@ Scaffold intègre un moteur propriétaire de 43 presets de styles complets compi
 
 ---
 
-## 6. L'Artisanat Visuel des Designers Experts (Éradication du Rendu Fade)
+## 6. Design Intelligence & Standards Visuels des Primitives
 
-Scaffold™ applique les standards visuels de **Linear, Stripe, Apple et Raycast** pour interdire tout rendu générique ou terne :
+Pour garantir des interfaces de niveau professionnel adaptées à chaque métier sans tomber dans le piège des recettes uniformes :
 
-1. **Lumière Zénithale & Micro-Biseaux** : Biseau supérieur blanc 1px (`border-t border-t-white/15`), structure intérieure (`ring-1 ring-inset ring-white/5`), et ombre soyeuse multi-étages.
-2. **Surfaces Concentriques & Dégradés Invisibles** : Voile translucide `bg-gradient-to-b from-white/[0.05] to-transparent` et emboîtement parfait des arrondis (`rounded-2xl` ➔ `rounded-xl` ➔ `rounded-lg`).
+1. **Lumière Zénithale & Micro-Biseaux** : Biseau supérieur discret (`border-t border-t-white/15` en dark, `border-t-stone-100` en light), structure intérieure (`ring-1 ring-inset ring-white/5`), et ombre portée douce.
+2. **Surfaces Concentriques & Dégradés Subtils** : Voile translucide `bg-gradient-to-b from-white/[0.05] to-transparent` et emboîtement parfait des arrondis (`rounded-2xl` ➔ `rounded-xl` ➔ `rounded-lg`).
 3. **Typographie Optique** : Chiffres de métriques denses (`tracking-tight tabular-nums`) et micro-labels en capitales discrètes (`text-[11px] uppercase tracking-wider`).
-4. **Micro-Textures de Données** : Sparklines SVG translucides intégrées en filigrane sous les KPIs et balises de statut pulsantes (`animate-pulse`).
-5. **Asymétrie Dynamique du Squelette** : Métrique maîtresse (Hero Metric) occupant 2 colonnes avec sparkline large, flanquée de métriques satellites à 1 colonne.
-6. **Tables Métier Rigoureuses** : Alignement gauche pour les entités (avec avatars), alignement droit monospacé pour montants et dates (`font-mono text-right`).
+4. **Visualisation Pertinente & Rigueur Numérique** : Sparklines affichées uniquement si des `dataPoints` réels sont fournis (anti-cargo cult) et balises conformes WCAG (`motion-safe:animate-pulse`, max 2 par écran).
+5. **Asymétrie Dynamique Supportée** : Métrique maîtresse (`span: 2`) flanquée de satellites (`span: 1`), avec repli automatique sur mobile.
+6. **Tables Métier Rigoureuses** : Alignement gauche pour les entités, alignement droit monospacé pour montants et dates (`font-mono text-right`).
+7. **Règle Fondamentale : Le Design Sert le Produit** : Clarté ➔ Hiérarchie ➔ Utilité ➔ Cohérence ➔ Esthétique.
 
-*Manuel complet des 6 lois : [`docs/reference/expert-designer-rules.md`](reference/expert-designer-rules.md).*
+*Document normatif complet : [`docs/reference/design-intelligence.md`](reference/design-intelligence.md).*
 

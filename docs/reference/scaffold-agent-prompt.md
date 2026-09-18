@@ -81,11 +81,12 @@ Tu mènes la danse pas à pas, une seule décision majeure à la fois :
 
 ---
 
-### 🎨 5. RÈGLES DE COMPOSITION DU DESIGNER EXPERT (ZÉRO RENDU FADE)
-Conformément au standard d'artisanat visuel (`docs/reference/expert-designer-rules.md`) :
-- **Interdiction Formelle du Générique ("Lorem Ipsum", "Test 1", "0000")** : Tu dois injecter des données métier réelles et palpables, contextualisées au secteur du fondateur et à sa devise (ex: EUR ou FCFA, noms de clients crédibles, statuts opérationnels précis).
-- **Asymétrie Dynamique du Squelette** : Ne propose jamais une grille terne et plate. Mets toujours en valeur une **Métrique Vedette (Hero Metric)** avec son delta d'évolution et sa tendance, flanquée de 2 métriques secondaires.
-- **Atmosphère & Thème** : Choisis le thème parmi les 43 presets (`presetId`) qui sublime le cas d'usage (ex: *midnight-neon* pour la finance/tech, *warm-ivory* pour l'éditorial/luxe, *emerald-clean* pour l'impact/SaaS B2B).
+### 🎨 5. RÈGLES DE COMPOSITION DESIGN INTELLIGENCE (ZÉRO RENDU FADE)
+Conformément au standard normatif (`docs/reference/design-intelligence.md`) :
+- **Interdiction Formelle du Générique ("Lorem Ipsum", "Test 1", "0000")** : Tu dois injecter des données de démonstration crédibles et contextualisées au secteur du fondateur et à sa devise (ex: EUR ou FCFA, noms réels de dossiers/clients, statuts précis).
+- **Asymétrie Dynamique avec `span`** : Si pertinent pour le domaine, mets en valeur une **Hero Metric** avec `span: 2`, delta et tendance, flanquée de 2 métriques secondaires (`span: 1`). Si une série temporelle existe, fournis un tableau `dataPoints: [number]`.
+- **Atmosphère & Thème** : Choisis le thème parmi les 43 presets (`presetId`) adapté au domaine (ex: *midnight-neon* pour la finance/tech, *warm-ivory* pour l'éditorial/luxe, *emerald-clean* pour le B2B).
+- **Règle d'Or** : Le design sert le produit. Clarté ➔ Hiérarchie ➔ Utilité ➔ Cohérence ➔ Esthétique.
 
 ---
 

@@ -314,23 +314,29 @@ flowchart LR
 
 ---
 
-## 13. 🎨 L'Artisanat Visuel des Designers Experts : Éradication du Rendu Fade (18 Septembre 2026)
+## 13. 🎨 Design Intelligence & Standards Visuels des Primitives (18 Septembre 2026)
 
-* **Le Problème Résolu** : Élimination des interfaces IA ternes, génériques et plates (boîtes grises plates, chiffres sans vie, données factices "Lorem Ipsum").
-* **Le Standard Esthétique des Designers Experts (Apple, Linear, Stripe Grade)** :
-  1. **Lumière Zénithale & Micro-Biseaux** : Arête supérieure lumineuse (`border-t-white/15`), micro-biseau et ombre soyeuse multi-étages sur chaque carte.
-  2. **Surfaces Concentriques & Dégradés Subtils** : Dégradé invisible `bg-gradient-to-b from-white/[0.05] to-transparent` et emboîtement parfait des rayons (`rounded-2xl` ➔ `rounded-xl` ➔ `rounded-lg`).
-  3. **Typographie Optique** : Chiffres denses en `tracking-tight tabular-nums` et micro-labels en capitales d'artisanat (`text-[11px] uppercase tracking-wider text-muted`).
-  4. **Micro-Textures de Données Vivantes** :
-     - Sparklines SVG translucides en filigrane sous les KPIs pour raconter l'histoire des données.
-     - Balises de statut vivantes avec halo pulsant (`animate-pulse`).
-     - Tables rigoureuses avec montants et dates alignés à droite en monospacé (`tabular-nums font-mono text-right`).
-  5. **Asymétrie Dynamique du Squelette** : Métrique maîtresse (Hero Metric) occupant 2 colonnes avec sparkline large, flanquée de 2 métriques satellites à 1 colonne.
-  6. **Interdiction Formelle du Générique** : Obligation formelle pour l'Agent d'injecter des données métier réelles, contextualisées au secteur et à la devise du projet (EUR, FCFA, USD).
+* **Le Problème Résolu** : Élimination des interfaces IA ternes et génériques sans tomber dans le piège inverse de recettes CSS uniformes ou déconnectées de l'ADR.
+* **Architecture en 5 Niveaux de Design Intelligence** :
+  - *Niveau 1 (Principes Universels)* : Hiérarchie, contraste, espacement, rythme, typographie optique.
+  - *Niveau 2 (Modèles de Domaine)* : Fintech, SaaS B2B, Logistique, CRM, E-commerce, Santé.
+  - *Niveau 3 (Direction Visuelle & Thèmes)* : 43 presets d'auteur (Dark, Light, Warm, Technical, Swiss).
+  - *Niveau 4 (Standards des Primitives)* :
+    1. Lumière zénithale et micro-biseaux (`border-t` discret, `ring-1 ring-inset ring-white/5` en dark, surface nette en light).
+    2. Rayons concentriques (`rounded-2xl` ➔ `rounded-xl` ➔ `rounded-lg`).
+    3. Typographie optique (`tracking-tight tabular-nums` pour les chiffres, micro-labels en capitales d'artisanat).
+    4. Données et séries temporelles réelles : sparklines conditionnées à `MetricItem.dataPoints` (zéro courbe décorative mensongère).
+    5. Asymétrie spatiale intentionnelle : `span: 1 | 2 | 3` sur `MetricItem` pour créer des Hero Metrics pertinentes sans casser le responsive mobile.
+    6. Tables métier : montants alignés à droite en monospacé (`font-mono text-right`).
+    7. Accessibilité WCAG 2.3.3 : `motion-safe:animate-pulse`, max 2 animations simultanées, contrastes AA/AAA, double encodage couleur + icône.
+  - *Niveau 5 (Données de Démonstration Contextualisées)* : Hydratation métier cohérente (devises locales EUR/FCFA/USD, statuts réels, zéro "Lorem Ipsum").
+* **Règle Fondamentale** : Le design sert le produit (Clarté ➔ Hiérarchie ➔ Utilité ➔ Cohérence ➔ Esthétique).
 * **Documents de Référence** :
-  - [`docs/reference/expert-designer-rules.md`](docs/reference/expert-designer-rules.md) (Manuel des 6 Lois de l'Artisanat Visuel).
-  - [`docs/design.md`](docs/design.md) (Section 6 : L'Artisanat Visuel des Designers Experts).
-  - [`docs/reference/scaffold-agent-prompt.md`](docs/reference/scaffold-agent-prompt.md) (Section 5 : Règles de Composition du Designer Expert).
+  - [`docs/reference/design-intelligence.md`](docs/reference/design-intelligence.md) (Standard normatif complet).
+  - [`docs/design.md`](docs/design.md) (Section 6 : Design Intelligence & Standards Visuels).
+  - [`docs/features/deterministic-ui-engine.md`](docs/features/deterministic-ui-engine.md) (ADR-004 : Schéma UI-IR enrichi avec `span` et `dataPoints`).
+  - [`docs/reference/scaffold-agent-prompt.md`](docs/reference/scaffold-agent-prompt.md) (Section 5 : Directives de composition pour l'Agent).
+
 
 
 
