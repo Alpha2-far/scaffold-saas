@@ -44,6 +44,8 @@ docs/
 │   └── export-engine.md        ← Compilateur du package d'export product-plan/
 │
 └── reference/                  ← Cookbooks courts pour primitives et patterns réutilisables
+    ├── golden-trajectories.md  ← Les 3 Trajectoires Golden (Spécification comportementale vivante de l'Agent)
+    ├── scaffold-agent-prompt.md← Spécification du Prompt Système, Machine à États et Tools Zod
     ├── design-intelligence.md  ← Design Intelligence & Standards Visuels des Primitives (5 niveaux, a11y, responsive)
     ├── capability-catalog.md   ← Catalogue de capacités techniques & étude de cas exhaustive Google Auth
     ├── architecture-tests.md   ← Catalogue de tous les tests de garde-fous structurels (méthode Instatic)

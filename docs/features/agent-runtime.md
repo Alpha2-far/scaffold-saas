@@ -97,3 +97,18 @@ Si l'utilisateur clique deux fois rapidement sur le bouton de validation, le ser
 1. **Timeout Réseau (15 secondes sans chunk)** : Le client déclenche un avertissement doux et le serveur réessaie avec le modèle suivant de la chaîne.
 2. **Erreur HTTP 429 ou 503** : OpenRouter gère la bascule transparente native vers le modèle suivant (`claude-3.7-sonnet` ➔ `gpt-4o` ➔ `gemini-2.0-flash`).
 3. **Notification Admin Silencieuse** : Toute bascule de modèle incrémente `fallback_count` dans la table `agent_sessions` et journalise l'événement dans `admin_audit_logs`.
+
+---
+
+## 7. Pipeline Tool Use, Validation Sémantique & Contrat UX de Streaming
+
+Le runtime sépare strictement le flux de communication en deux canaux :
+
+1. **Canal Texte (Streaming SSE)** :  
+   Les mots de l'Agent sont streamés en continu vers l'interface sans aucun délai d'attente (latence perçue < 200 ms).
+2. **Canal Actions (Function Calling / Tool Use Zod)** :  
+   Les 4 outils natifs (`update_ui_manifest`, `lock_project_scope`, `update_data_shape`, `generate_milestones_log`) sont interceptés par le serveur Bun :
+   - *Validation de Forme* : Schémas Zod stricts (99,7 % de conformité).
+   - *Validation Sémantique* : Le middleware vérifie les règles métier (ex: 4-6 features max en V1, zéro fausse sparkline sans `dataPoints`). Si une règle est enfreinte, le serveur émet un re-prompt silencieux vers le modèle sans interrompre l'utilisateur.
+   - *Contrat Visuel* : Pendant l'émission du Tool Call par le LLM, le Live Canvas affiche un `SkeletonSlot` discret, puis bascule à chaud sur la vue hydratée dès réception du payload complet.
+

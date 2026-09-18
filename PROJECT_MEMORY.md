@@ -337,6 +337,27 @@ flowchart LR
   - [`docs/features/deterministic-ui-engine.md`](docs/features/deterministic-ui-engine.md) (ADR-004 : Schéma UI-IR enrichi avec `span` et `dataPoints`).
   - [`docs/reference/scaffold-agent-prompt.md`](docs/reference/scaffold-agent-prompt.md) (Section 5 : Directives de composition pour l'Agent).
 
+---
+
+## 14. 🤖 Architecture Prompt de l'Agent : Trajectoires Golden (J0) & Machine à États (J1) — 18 Septembre 2026
+
+* **Le Problème Résolu** : Élimination de la dégradation d'instructions sur prompt monolithique (> 1 500 tokens), fin du JSON inline fragile (85-92%) et suppression des listes noires de vocabulaire inefficaces.
+* **Jalon 0 Bloquant Achevée : Les 3 Trajectoires Golden (`docs/reference/golden-trajectories.md`)** :
+  - *Dialogue A (Nominal)* : Fondatrice SaaS B2B, cadrage en 4 minutes chrono, FCFA, stack Supabase + PWA mobile.
+  - *Dialogue B (Hésitation & Backtrack)* : Retrait propre d'une fonctionnalité à l'étape 5 sans panique ni réécriture.
+  - *Dialogue C (Contradiction & Usine à Gaz)* : Recadrage bienveillant d'une super-app vers un MVP tranchant (V1 chirurgicale vs V2+ reportée).
+* **Jalon 1 Achevé : Spécification Prompt & Machine à États (`docs/reference/scaffold-agent-prompt.md`)** :
+  - *Core Prompt Invariable (< 350 mots)* : 4 règles de persona comportementale, plafond de 150 mots/message, 1 question à la fois.
+  - *Machine à États (Step Modules)* : Injection dynamique de l'étape courante (`currentStep: 1..7`) réduisant la fenêtre de tokens par 3.
+  - *Tool Use Natif Zod (99,7%)* : 4 outils (`update_ui_manifest`, `lock_project_scope`, `update_data_shape`, `generate_milestones_log`) avec middleware de validation sémantique et re-prompt silencieux.
+  - *Fonction d'Adaptation Continue* : Vulgarisation des décisions produit, alignement sur le niveau de langage de l'utilisateur.
+  - *Tagging de Version* : `promptVersion: string` intégré dès la signature TypeScript pour l'A/B testing.
+* **Documents de Référence** :
+  - [`docs/reference/golden-trajectories.md`](docs/reference/golden-trajectories.md) (Spécification comportementale fondatrice).
+  - [`docs/reference/scaffold-agent-prompt.md`](docs/reference/scaffold-agent-prompt.md) (Spécification du prompt exécutable).
+  - [`docs/features/agent-runtime.md`](docs/features/agent-runtime.md) (Section 7 : Pipeline Tool Use & Streaming UX).
+
+
 
 
 
