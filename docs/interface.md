@@ -61,6 +61,14 @@ La console centrale est le cœur de l'interaction humaine. Elle bannit toute syn
 
 Le panneau droit est le « pare-brise » interactif de Scaffold. Ce que l'utilisateur voit est le reflet immédiat de son état de projet (`project-model.json`).
 
+> [!CRITICAL]
+> **Invariant Steve Jobs : « L'Appareil Doit Parler » (Zéro Compilation Runtime)**  
+> Le Live Canvas **ne compile aucun fichier TSX à la volée**. Il consomme directement un AST JSON validé par Zod (`UIManifest`) projeté dans un **Registre de Primitives Pré-Compilées** (`AppShell`, `MetricGrid`, `DataTable`, `HeroHeader`, `FormDrawer`).  
+> - **0% erreur de compilation** (aucun bundler à chaud).  
+> - **0% collision visuelle** (slots CSS Grid isolés `minmax(0, 1fr)`).  
+> - **Rendu instantané à 60 FPS (< 16 ms)**.  
+> Détails complets dans [`docs/features/deterministic-ui-engine.md`](features/deterministic-ui-engine.md).
+
 ### Onglets Supérieurs du Canvas :
 1. **Écrans & Shell (`/design`)** :
    - Rendu en direct de la maquette interactive avec le shell sélectionné (Sidebar, Header, Stacked layout).
@@ -76,7 +84,7 @@ Le panneau droit est le « pare-brise » interactif de Scaffold. Ce que l'utilis
 
 ### Barre d'Action Inférieure (Audit & Export) :
 * **Widget de Santé Produit** : Affiche le score en direct (`Product Health : 100/100`) et les 4 contrats d'audit vérifiés.
-* **Bouton d'Exportation Haptique** : Déclenché uniquement lorsque le score est à 100/100, génère et télécharge le package ZIP `product-plan/`.
+* **Bouton d'Exportation Haptique** : Déclenché uniquement lorsque le score est à 100/100, synthétise les vrais composants React 19 propres et télécharge le package ZIP `product-plan/`.
 
 ---
 

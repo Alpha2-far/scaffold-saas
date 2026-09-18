@@ -286,3 +286,22 @@ flowchart LR
   - Chaque jalon livre obligatoirement une interface **visible et testable dans le navigateur**.
   - L'archive `product-plan.zip` exporte un **`milestones.log` pré-configuré pour le client**, permettant à Claude Code ou Cursor d'exécuter chaque jalon avec ses critères de validation sans dériver.
 
+---
+
+## 12. 🍏 Doctrine Steve Jobs (1984) : « L'Appareil Doit Parler » & Moteur UI Déterministe (18 Septembre 2026)
+
+* **Le Problème Résolu** : Élimination définitive des bogues de compilation à chaud (Vite HMR cassé, imports hallucines) et des chevauchements de texte constatés sur le prototype initial.
+* **Invariant Inviolable : « L'Appareil Doit Parler »** :
+  - En 1984, Steve Jobs a exigé que le Macintosh parle à la seconde 1. Les ingénieurs n'ont pas pris le risque d'un calcul instable sur scène : les phonèmes étaient pré-compilés en mémoire vive (`MacinTalk`).
+  - **Scaffold™ applique cette même rigueur absolue** :
+    1. **Étage 1 (Live Canvas — 100% Contrôlé & Zéro Compilation)** :
+       - Le Live Canvas **ne compile aucun fichier TSX à la volée**.
+       - L'Agent émet un **AST JSON validé par Zod (`UIManifest`)**.
+       - Ce schéma est directement projeté dans un **Registre de Primitives Pré-Compilées** (`AppShell`, `MetricGrid`, `DataTable`, `HeroHeader`, `FormDrawer`) chargées en mémoire.
+       - **0% d'erreur de compilation**, **0% de collision de texte** (slots CSS Grid `minmax(0, 1fr)` étanches), rendu fluide à **60 FPS (< 16 ms)**.
+    2. **Étage 2 (Export Compiler — Synthétiseur Statique React 19)** :
+       - Lorsque le client clique sur "Exporter pour Claude Code / Cursor", le compilateur synthétise de **vrais composants React 19 propres, typés et modulaires**.
+       - Le code exporté respecte scrupuleusement Tailwind v4, les 12 tokens du thème et les 4 contrats d'audit (Score 100/100).
+* **Document de Référence** : [`docs/features/deterministic-ui-engine.md`](docs/features/deterministic-ui-engine.md).
+
+

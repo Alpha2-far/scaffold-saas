@@ -27,7 +27,8 @@ You are entering plan mode to plan and then build milestone 3 of the Scaffold™
 2. Build the visual triptych interface:
    - `design-os/src/components/NavigationRail.tsx` : Rail vertical escamotable de 56 px de large (`w-14`), contenant les icônes de navigation (Projets, Conception, Données, Thèmes, Export) avec infobulles contextuelles.
    - `design-os/src/components/AgentConsole.tsx` : Console de dialogue centrale (40% de largeur sur desktop 13"-14"), connectée au flux SSE du serveur Bun. Intègre les cartes de sélection et confirmation interactives (*recommend-then-confirm*).
-   - `design-os/src/components/LiveCanvas.tsx` : Pare-brise WYSIWYB interactif (60% de largeur), affichant en temps réel le Shell de l'application cliente et le maquettage d'écrans. Connecté au sélecteur des 43 thèmes locaux compilés.
+   - `design-os/src/components/LiveCanvas.tsx` : Pare-brise WYSIWYB interactif (60% de largeur), affichant en temps réel le Shell de l'application cliente et le maquettage d'écrans via le **Registre de Primitives Pré-Compilées** (`src/components/primitives/` : `MetricGrid`, `DataTable`, `HeroHeader`, `FormDrawer`). Consomme directement l'AST UI en mémoire (Zéro compilation TSX à la volée, zéro crash). Connecté au sélecteur des 43 thèmes locaux compilés.
+   - `design-os/src/components/primitives/` : Primitives d'interface certifiées AAA encapsulées dans des slots CSS Grid rigides (`minmax(0, 1fr)`) interdisant tout débordement ou chevauchement de texte.
    - `design-os/src/components/cards/RecommendationCard.tsx` : Carte d'option interactive permettant au créateur de valider ou modifier un choix sans jamais taper de commande slash.
    - Mettre à jour `design-os/src/App.tsx` pour orchestrer le triptyque (Rail 56px + Console 40% + Canvas 60%) sans aucun défilement horizontal.
 3. Verify your work against the "Done when" criteria:
