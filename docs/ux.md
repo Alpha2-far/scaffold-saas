@@ -27,24 +27,25 @@ Scaffold™ applique cette philosophie à l'extrême :
 
 ---
 
-## 2. Le Protocole Serré : Rythme & Élimination du Bavardage
+## 2. Le Protocole Serré : Le Contrat des 3 à 5 Minutes Chrono (Steve Jobs Speed Contract)
 
-Jobs détestait les réunions sans fin et le bavardage technique stérile. L'Agent Scaffold est configuré pour maintenir un **rythme soutenu et percutant** :
-* **Posture Proactive** : L'Agent ne reste jamais passif à attendre une invite. Il mène l'entretien d'une main de maître.
-* **Format *Recommend-then-Confirm*** : Chaque étape apporte une réponse recommandée clé en main. L'utilisateur clique pour valider ou oriente en une phrase.
-* **Plafond de Coût d'API (< 0,80 €)** : En concentrant l'interview sur les 11 arbitrages essentiels, le volume de tokens consommés reste strictement borné sous 0,80 €, assurant une marge brute supérieure à 90 % même sur une vente à 9 €.
+Jobs détestait les réunions sans fin, les temps de chargement et le bavardage technique stérile.  
+L'invariant d'expérience Scaffold™ est formel : **un utilisateur doit accomplir 100 % de son cadrage et voir son application fonctionner en 3 à 5 minutes maximum**.
+
+* **Zéro Boucle d'Erreur de Build** : Grâce au rendu par Primitives Pré-Compilées (`docs/features/deterministic-ui-engine.md`), chaque écran s'affiche en **2 secondes chrono**, sans aucun temps mort de compilation ni retry loop.
+* **Posture Proactive & Format *Recommend-then-Confirm*** : L'Agent propose directement les bons arbitrages. L'utilisateur valide en un clic ou oriente en une phrase.
+* **Plafond de Coût d'API (< 0,40 €)** : L'échange ciblé consomme moins de 25 000 tokens rapides, assurant une latence minimale et une marge brute supérieure à 95 % sur une vente à 9 €.
 
 ---
 
-## 3. L'Arc Émotionnel du Créateur
+## 3. L'Arc Émotionnel en 5 Minutes Chrono
 
-L'interface orchestre 5 étapes émotionnelles successives :
+L'interface orchestre 4 étapes émotionnelles fulgurantes :
 
-1. **Le Soulagement (0 - 2 min)** : Le créateur dépose son idée en vrac. L'Agent synthétise immédiatement le problème et la solution sans jargon.
-2. **La Clarté (2 - 6 min)** : Les fonctionnalités secondaires sont poliment écartées en *Out-of-Scope (V2)* pour protéger le lancement. L'utilisateur sent le poids de la complexité disparaître.
-3. **L'Émerveillement Visuel (6 - 10 min)** : Le Live Canvas s'illumine. Les données s'organisent, les cartes s'animent avec les 43 thèmes d'auteur. Ce n'est plus une idée, c'est un produit palpable.
-4. **La Fierté du Cadrage (10 min)** : L'audit de santé valide les 4 contrats avec un score éclatant de 100/100 (`Product Health: 100/100`).
-5. **L'Impulsion de Possession (10+ min)** : Le bouton haptique émeraude apparaît : **« Prendre les clés du logiciel — 9 € / 6 000 FCFA »**.
+1. **Le Soulagement (Minute 1)** : Le créateur dépose son idée brute. L'Agent synthétise immédiatement le problème et la mission (*Core Purpose*) en langage clair.
+2. **La Clarté & Le Choix de Stack (Minute 2)** : Le superflu est immédiatement élagué (*Out-of-Scope V2*). L'Agent recommande la Stack d'Auteur idéale (ex: Supabase ou Bun) validable en 1 clic.
+3. **L'Émerveillement Visuel Instantané (Minutes 3 - 4)** : Le Live Canvas projette immédiatement le Shell, les KPIs et les tables grâce aux Primitives Pré-compilées (< 16 ms). L'utilisateur bascule entre les 43 thèmes d'auteur.
+4. **La Fierté & La Possession (Minute 5)** : L'audit de santé affiche `Product Health: 100/100`. Le bouton haptique émeraude apparaît : **« Prendre les clés du logiciel — 9 € / 6 000 FCFA »**.
 
 ---
 
