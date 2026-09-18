@@ -348,14 +348,17 @@ flowchart LR
   - *Dialogue C (Contradiction & Usine à Gaz)* : Recadrage bienveillant d'une super-app vers un MVP tranchant (V1 chirurgicale vs V2+ reportée).
 * **Jalon 1 Achevé : Spécification Prompt & Machine à États (`docs/reference/scaffold-agent-prompt.md`)** :
   - *Core Prompt Invariable (< 350 mots)* : 4 règles de persona comportementale, plafond de 150 mots/message, 1 question à la fois.
+  - *Pare-feu Sémantique Harmonisé (Option 1 + 3)* : Autorisation des services et formats visibles par l'utilisateur (Supabase, Stripe, Neon, Cloudflare, PWA) ; interdiction absolue du jargon de plomberie interne (ORM, driver, endpoint, websocket, worker, schéma relationnel). Spécifications techniques isolées dans le tiroir technique UI (Drawer).
+  - *Gestion Développeur Senior* : L'utilisateur doit formuler une question technique explicite avant que l'agent ne réponde brièvement sur le plan technique puis recentre immédiatement sur le produit.
+  - *Politique de Re-Prompt Bornée* : Maximum 1 re-prompt silencieux, timeout de 15 secondes, fallback déterministe côté serveur sans blocage utilisateur, journalisation télémétrique `agent_tool_reprompt_failed`.
   - *Machine à États (Step Modules)* : Injection dynamique de l'étape courante (`currentStep: 1..7`) réduisant la fenêtre de tokens par 3.
-  - *Tool Use Natif Zod (99,7%)* : 4 outils (`update_ui_manifest`, `lock_project_scope`, `update_data_shape`, `generate_milestones_log`) avec middleware de validation sémantique et re-prompt silencieux.
-  - *Fonction d'Adaptation Continue* : Vulgarisation des décisions produit, alignement sur le niveau de langage de l'utilisateur.
+  - *Tool Use Natif Zod (99,7%)* : 4 outils (`update_ui_manifest`, `lock_project_scope`, `update_data_shape`, `generate_milestones_log`) avec validation Zod et vérification sémantique métier.
+  - *Synchronisation Runtime Complète* : `agent-runtime.md` aligné sur 7 étapes, cascade de modèles résiliente et matrice de mutation à 4 outils.
   - *Tagging de Version* : `promptVersion: string` intégré dès la signature TypeScript pour l'A/B testing.
 * **Documents de Référence** :
   - [`docs/reference/golden-trajectories.md`](docs/reference/golden-trajectories.md) (Spécification comportementale fondatrice).
   - [`docs/reference/scaffold-agent-prompt.md`](docs/reference/scaffold-agent-prompt.md) (Spécification du prompt exécutable).
-  - [`docs/features/agent-runtime.md`](docs/features/agent-runtime.md) (Section 7 : Pipeline Tool Use & Streaming UX).
+  - [`docs/features/agent-runtime.md`](docs/features/agent-runtime.md) (Section 7 : Pipeline Tool Use borné & Streaming UX).
 
 
 

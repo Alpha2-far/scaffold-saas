@@ -51,7 +51,7 @@ Lorsqu'un utilisateur ouvre un projet ou envoie un message :
    - *Règles invariables* : Pare-feu de vocabulaire §0.6 (zéro jargon d'ingénieur, pas de mention de commandes slash).
    - *État actuel du projet* : Titre, description, capacités déjà sélectionnées, entités de données existantes.
    - *Historique glissant* : Les derniers échanges pertinents résumés pour respecter la fenêtre de contexte.
-   - *Objectif de l'étape courante* : L'une des 11 questions exécutives restant à arbitrer.
+    - *Objectif de l'étape courante* : L'une des 7 étapes exécutives de cadrage (Intake, Mission, Périmètre, Ruthless Scoping, Stacks, Ambiance & Canvas, Données & Jalons).
 
 ---
 
@@ -59,14 +59,14 @@ Lorsqu'un utilisateur ouvre un projet ou envoie un message :
 
 L'Agent distingue strictement ce qu'il peut faire de manière autonome de ce qui requiert un consentement explicite de l'utilisateur :
 
-| Type d'Action | Autorisation de l'Agent | Nécessite Validation Humaine ? |
+| Type d'Action & Tool Call Associé | Rôle de l'Agent | Nécessite Validation Humaine ? |
 |---|---|---|
-| **Reformulation & Clarification** | Autonome | Non |
-| **Génération de Recommandation** | Autonome | Non (présenté sous forme de carte) |
-| **Ajout d'une Capacité Technique (ex: Auth Google)** | Propose | **OUI (Clic sur Adopter ou choix alternatif)** |
-| **Modification du Schéma de Données (Entités)** | Propose | **OUI (Validation obligatoire)** |
-| **Sélection du Thème d'Auteur (Theme Studio)** | Recommande | **OUI (Choix direct dans le carrousel)** |
-| **Verrouillage du Cadrage (*Scope Lock*)** | Analyse | **OUI (Confirmation solennelle de clôture)** |
+| **Reformulation & Synthèse (Étapes 1 & 2)** | Autonome | Non (Simple accord de cadrage) |
+| **Verrouillage du Périmètre (`lock_project_scope`, Étapes 3 & 4)** | Propose & élague | **OUI (Validation In-Scope V1 et Cut List V2+)** |
+| **Recommandation Stack d'Auteur (Étape 5)** | Recommande | **OUI (Validation du tiers et du format d'usage)** |
+| **Projection du Live Canvas (`update_ui_manifest`, Étape 6)** | Autonome (ADR-004) | Non (Mise à jour visuelle réactive du pare-brise) |
+| **Modèle de Données (`update_data_shape`, Étape 7)** | Propose | **OUI (Validation des 2 à 4 entités clés)** |
+| **Découpage en Jalons (`generate_milestones_log`, Étape 7)** | Génère | **OUI (Validation du plan d'ingénierie 100/100)** |
 
 ---
 
@@ -84,7 +84,7 @@ Chaque proposition envoyée au client porte un identifiant cryptographique uniqu
 interface StateMutationPayload {
   projectId: string;
   proposalId: string;
-  mutationType: 'ACTIVATE_CAPABILITY' | 'SET_DATA_ENTITY' | 'SELECT_THEME';
+  mutationType: 'LOCK_SCOPE' | 'UPDATE_UI' | 'UPDATE_DATA_SHAPE' | 'GENERATE_MILESTONES';
   data: unknown;
 }
 ```
@@ -95,7 +95,7 @@ Si l'utilisateur clique deux fois rapidement sur le bouton de validation, le ser
 ## 6. Gestion des Erreurs, Timeouts & Failover OpenRouter
 
 1. **Timeout Réseau (15 secondes sans chunk)** : Le client déclenche un avertissement doux et le serveur réessaie avec le modèle suivant de la chaîne.
-2. **Erreur HTTP 429 ou 503** : OpenRouter gère la bascule transparente native vers le modèle suivant (`claude-3.7-sonnet` ➔ `gpt-4o` ➔ `gemini-2.0-flash`).
+2. **Erreur HTTP 429 ou 503** : OpenRouter gère la bascule transparente native vers le modèle suivant (`claude-3-7-sonnet` ➔ `deepseek-chat` ➔ `gemini-2.0-flash`).
 3. **Notification Admin Silencieuse** : Toute bascule de modèle incrémente `fallback_count` dans la table `agent_sessions` et journalise l'événement dans `admin_audit_logs`.
 
 ---
@@ -109,6 +109,7 @@ Le runtime sépare strictement le flux de communication en deux canaux :
 2. **Canal Actions (Function Calling / Tool Use Zod)** :  
    Les 4 outils natifs (`update_ui_manifest`, `lock_project_scope`, `update_data_shape`, `generate_milestones_log`) sont interceptés par le serveur Bun :
    - *Validation de Forme* : Schémas Zod stricts (99,7 % de conformité).
-   - *Validation Sémantique* : Le middleware vérifie les règles métier (ex: 4-6 features max en V1, zéro fausse sparkline sans `dataPoints`). Si une règle est enfreinte, le serveur émet un re-prompt silencieux vers le modèle sans interrompre l'utilisateur.
+   - *Validation Sémantique* : Le middleware vérifie les règles métier (ex: 4-6 features max en V1, zéro fausse sparkline sans `dataPoints`).
+   - *Politique de Re-Prompt Bornée (Max 1 Retry, Timeout 15s)* : Si une règle est enfreinte, le serveur émet au maximum un seul re-prompt silencieux. Si la seconde tentative échoue ou dépasse 15s, le serveur applique un repli déterministe (fallback propre), journalise l'événement `agent_tool_reprompt_failed` et poursuit la session sans bloquer l'utilisateur.
    - *Contrat Visuel* : Pendant l'émission du Tool Call par le LLM, le Live Canvas affiche un `SkeletonSlot` discret, puis bascule à chaud sur la vue hydratée dès réception du payload complet.
 

@@ -98,7 +98,7 @@ Avant d'écrire la moindre ligne de code dans `server/ai/prompts/systemAgent.ts`
 > 
 > Pour faire tourner votre plateforme, je vous recommande notre architecture **SaaS Standard Mobile First** :
 > - **Connexion sécurisée par téléphone ou email** : Pratique et sans mot de passe complexe pour vos revendeuses.
-> - **Base de données cloud managée (Supabase)** : Vos stocks et commandes sont synchronisés instantanément sans serveur technique à administrer.
+> - **Espace cloud sécurisé (Supabase)** : Vos stocks et commandes sont synchronisés instantanément sans aucun serveur technique à gérer.
 > - **Application Web Mobile (PWA)** : Vos revendeuses peuvent l'installer sur l'écran d'accueil de leur smartphone en un clic, sans passer par les contraintes d'Apple ou Google.
 > 
 > Adoptons-nous cette recommandation technique ?
@@ -254,7 +254,7 @@ Avant d'écrire la moindre ligne de code dans `server/ai/prompts/systemAgent.ts`
 > - **Retirée de la V1** : La carte interactive avec géolocalisation en direct (classée dans vos évolutions V2).
 > - **Ajoutée en V1** : Un filtre fluide par quartier et arrondissement parisien.
 > 
-> Grâce à cet allègement, nous pouvons retenir une architecture ultra-légère et rapide : **React 19 avec base de données SQLite/PostgreSQL managée**. Vos ateliers se chargeront en moins de 100 millisecondes.
+> Grâce à cet allègement, nous pouvons retenir une architecture moderne ultra-légère avec espace cloud managé (Supabase ou Neon). Vos ateliers se chargeront en moins de 100 millisecondes.
 > 
 > Est-ce que cela vous convient ?
 
@@ -296,7 +296,7 @@ Avant d'écrire la moindre ligne de code dans `server/ai/prompts/systemAgent.ts`
 > 
 > En revanche, je dois jouer pleinement mon rôle de conseiller produit auprès de vous : **vouloir lancer ces 5 métiers différents en même temps dans un délai de 3 semaines mènera inévitablement votre projet à l'échec.** Vos développeurs seront débordés, le budget explosera, et surtout, vos premiers utilisateurs seront complètement perdus devant une application trop complexe.
 > 
-> Steve Jobs disait souvent qu'innover consiste à dire non à 1 000 bonnes idées pour se concentrer sur celle qui change tout.
+> Innover avec succès, c'est savoir dire non à dix bonnes idées pour concentrer toute votre énergie sur celle qui change tout pour vos clients.
 > 
 > Si vos clients ne devaient pouvoir faire **qu'une seule action salvatrice** sur votre application au jour 1, quelle serait-elle ? Est-ce de trouver un vétérinaire d'urgence à domicile en moins de 10 minutes, ou d'acheter des croquettes ?
 
